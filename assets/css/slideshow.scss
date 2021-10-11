@@ -41,6 +41,10 @@ div.reveal div.slides > section.present {
     width: 100%;
 }
 
+.reveal pre code {
+    max-height: initial;
+}
+
 div.reveal .spacer {
     flex-grow: 1;
 }
