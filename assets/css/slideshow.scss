@@ -3,7 +3,7 @@
 {% include common.liquid %}
 @import "{{ assets }}css/layout.css";
 @import "{{ assets }}js/reveal.js/dist/reveal.css";
-@import "{{ assets }}adobe/css/slides.css";
+@import "{{ assets }}adobe/css/corp-reveal-theme.css";
 
 :root {
   --r-heading-text-transform: initial;
