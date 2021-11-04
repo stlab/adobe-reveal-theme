@@ -1,9 +1,9 @@
 ---
 ---
 {% include common.liquid %}
-@import "{{ assets }}/css/layout.css";
-@import "{{ assets }}/js/reveal.js/dist/reveal.css";
-@import "{{ assets }}/js/reveal.js/dist/theme/white.css";
+@import "{{ assets }}css/layout.css";
+@import "{{ assets }}js/reveal.js/dist/reveal.css";
+@import "{{ assets }}adobe/css/slides.css";
 
 :root {
   --r-heading-text-transform: initial;
@@ -47,4 +47,8 @@ div.reveal div.slides > section.present {
 
 div.reveal .spacer {
     flex-grow: 1;
+}
+
+.reveal figure img {
+    width: 100%;
 }
