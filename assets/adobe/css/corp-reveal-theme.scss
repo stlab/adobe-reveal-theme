@@ -121,18 +121,27 @@ section.has-dark-background h6 {
   color: var(--r-corporate-red);
 }
 
-.reveal .slides section .layout-bullet h2 {
-  position: absolute;
-  top: 49px;
-  left: 49px;
-  width: 1810px;
-  height: 102px;
-}
+.reveal .slides section .layout-bullet {
+  h2 {
+    position: absolute;
+    top: 49px;
+    left: 49px;
+    width: 1810px;
+    height: 102px;
+  }
 
-.reveal .slides section .layout-bullet h2 + * {
-  position: absolute;
-  top: 220px;
-  left: 46px;
+  .body {
+    position: absolute;
+    top: 220px;
+    left: 46px;
+    width: 1814px;
+    height: 730px;
+  }
+
+  .body p {
+    text-align: left;
+    margin-top: 36px;
+  }
 }
 
 .reveal h3 {
@@ -196,13 +205,15 @@ section.has-dark-background h6 {
 }
 
 .reveal ul {
-  list-style-type: none;
+  list-style-type: "•   ";
   font-size: 44px;
 }
 
+.reveal li {
+  margin-top: 36px;
+}
+
 .reveal ul ul {
-  list-style-type: "•";
-  text-indent: 0px;
   font-size: 40px;
 }
 
@@ -215,7 +226,7 @@ section.has-dark-background h6 {
 .reveal ol ol,
 .reveal ol ul {
   display: block;
-  margin-left: 40px;
+  margin-left: 0px;
 }
 
 .reveal dt {
