@@ -197,7 +197,6 @@ section.has-dark-background h6 {
   display: inline-block;
   width: 100%;
   text-align: left;
-  margin: 0 0 0 1em;
 }
 
 .reveal ol {
@@ -205,12 +204,23 @@ section.has-dark-background h6 {
 }
 
 .reveal ul {
-  list-style-type: "•   ";
   font-size: 44px;
+  padding: 0;
 }
 
 .reveal li {
   margin-top: 36px;
+  margin-left: 37px;
+  list-style-type: none;
+  position: relative;
+}
+
+.reveal li::before {
+  content: "•";
+  position: absolute;
+  left: -37px;
+  top: .2em;
+  font-size: 0.7em;
 }
 
 .reveal ul ul {
