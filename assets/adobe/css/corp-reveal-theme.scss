@@ -229,14 +229,15 @@ section.has-dark-background h6 {
   padding: 0;
 }
 
-.reveal li {
+// Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
+.reveal ul li {
   margin-top: 36px;
   margin-left: 37px;
   list-style-type: none;
   position: relative;
 }
 
-.reveal li::before {
+.reveal ul li::before {
   content: "•";
   position: absolute;
   left: -37px;
