@@ -121,6 +121,7 @@ section.has-dark-background h6 {
   color: var(--r-corporate-red);
 }
 
+.reveal .slides section .layout-default,
 .reveal .slides section .layout-bullet {
   h2 {
     position: absolute;
@@ -141,6 +142,26 @@ section.has-dark-background h6 {
   .body p {
     text-align: left;
     margin-top: 36px;
+  }
+
+  .footer::before {
+    position: absolute;
+    left: 61px; top: 1036px;
+    background-size: 89px 23px;
+    width: 89px; height: 23px;
+    background-image: url("../img/Adobe_Corporate_Horizontal_Lockup_NEW-Red_RGB-1894.png");
+    content: "";
+  }
+
+  .footer::after {
+    position: absolute;
+    left: 1472px; top: 1033px;
+    width: 395px; height: 34px;
+    content: "©2021 Adobe. All Rights Reserved. Adobe Confidential.";
+    font: adobe-clean, sans-serif;
+    font-size: 16px;
+    text-align: right;
+    color: #6E6E6E;
   }
 }
 
