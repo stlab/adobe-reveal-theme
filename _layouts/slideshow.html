@@ -84,10 +84,14 @@ Adobe Fonts
           transition: 'fade',
           backgroundTransition: 'fade',
           transitionSpeed: 'slow',
-          hash: 'true',
-          hashOneBasedIndex: 'true',
-          fragmentInURL: 'true',
-          slideNumber: 'true',
+          hash: true,
+          hashOneBasedIndex: true,
+          fragmentInURL: true,
+          slideNumber: true,
+          // We use absolute positioning, which is apparently overridden by
+          // “center” until transitions finish, so this needs to be disabled to
+          // avoid an apparent bounce.
+          center: false,
 
           // This is standard Keynote widescreen (also Adobe)
           width: 1920, height: 1080,
