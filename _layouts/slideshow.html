@@ -76,7 +76,8 @@ Adobe Fonts
     </div>
     {{ site.livereload_script }}
     <script type="module">
-      import RevealMark from "{{ assets }}/js/reveal-mark-plugin/mark-plugin.js";
+      import RevealMark from "{{ assets }}js/reveal-mark-plugin/mark-plugin.js";
+      import RevealSweetJekyll from "{{ assets }}js/sweet-jekyll.js";
       Reveal.initialize({
           controls: false,
           progress: true,
@@ -113,7 +114,7 @@ Adobe Fonts
                   '<a href="{{ "/" | absolute_url }}">course home</a>' },
               ]
           },
-          plugins: [ /*RevealMarkdown, */RevealNotes, RevealMenu, RevealMark/*, RevealFullscreen*/ ],
+          plugins: [ RevealSweetJekyll, RevealNotes, RevealMenu, RevealMark/*, RevealFullscreen*/ ],
       });
     </script>
   </body>
