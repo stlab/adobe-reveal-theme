@@ -69,6 +69,15 @@ section.has-dark-background h6 {
   color: var(--r-main-color);
 }
 
+.reveal div.slides {
+  text-align: left;
+  p {
+      margin-bottom: 36px;
+  }
+
+  p > img { margin-bottom: 0; }
+}
+
 .reveal ::selection {
   color: var(--r-selection-color);
   background: var(--r-selection-background-color);
@@ -121,10 +130,18 @@ section.has-dark-background h6 {
   color: var(--r-corporate-red);
 }
 
+// All things at the top level of the layout div are given absolute position.
+.reveal .slides section > div > * {
+    position: absolute;
+}
+
+.reveal .slides section {
+    .footer { left: 0px; top: 0px }
+}
+
 .reveal .slides section .layout-default,
 .reveal .slides section .layout-bullet {
   h2 {
-    position: absolute;
     top: 49px;
     left: 49px;
     width: 1810px;
@@ -132,16 +149,10 @@ section.has-dark-background h6 {
   }
 
   .body {
-    position: absolute;
     top: 220px;
     left: 46px;
     width: 1814px;
     height: 730px;
-  }
-
-  .body p {
-    text-align: left;
-    margin-top: 36px;
   }
 
   .footer::before {
@@ -195,14 +206,6 @@ section.has-dark-background h6 {
   margin-bottom: 0;
 }
 
-/* Ensure certain elements are never larger than the slide itself */
-.reveal img,
-.reveal video,
-.reveal iframe {
-  max-width: 95%;
-  max-height: 95%;
-}
-
 .reveal strong,
 .reveal b {
   font-weight: bold;
@@ -226,15 +229,18 @@ section.has-dark-background h6 {
 
 .reveal ul {
   font-size: 44px;
+  margin-top: 0;
   padding: 0;
 }
 
 // Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
 .reveal ul li {
-  margin-top: 36px;
   margin-left: 37px;
   list-style-type: none;
   position: relative;
+  :not(:first-child) {
+      margin-top: 36px;
+  }
 }
 
 .reveal ul li::before {
@@ -247,6 +253,7 @@ section.has-dark-background h6 {
 
 .reveal ul ul {
   font-size: 40px;
+  margin-top: 36px;
 }
 
 .reveal ul ul ul {
