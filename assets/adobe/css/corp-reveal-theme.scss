@@ -21,6 +21,13 @@ section.has-dark-background h6 {
  *********************************************/
 :root {
   --r-corporate-red: #EB1000;
+  --r-community-title-artwork-left: 1128px;
+  --r-community-title-artwork-width: 783px;
+  --r-community-title-artwork-height: 1080px;
+  --r-community-title-logo-left: 138px;
+  --r-community-title-logo-top: 457px;
+  --r-community-title-logo-width: 112px;
+  --r-community-title-logo-height: 154px;
   --r-canvas-color: #E5E5E5; // Color of area around slide.
 
   --r-background-color: #fff;
@@ -119,6 +126,7 @@ section.has-dark-background h6 {
   text-transform: var(--r-heading-text-transform);
   text-shadow: var(--r-heading-text-shadow);
   word-wrap: break-word;
+  color: var(--r-corporate-red);
 }
 
 .reveal h1 {
@@ -127,7 +135,6 @@ section.has-dark-background h6 {
 
 .reveal h2 {
   font-size: var(--r-heading2-size);
-  color: var(--r-corporate-red);
 }
 
 // All things at the top level of the layout div are given absolute position.
@@ -136,23 +143,14 @@ section.has-dark-background h6 {
 }
 
 .reveal .slides section {
-    .footer { left: 0px; top: 0px }
-}
-
-.reveal .slides section .layout-default,
-.reveal .slides section .layout-bullet {
   h2 {
-    top: 49px;
-    left: 49px;
-    width: 1810px;
-    height: 102px;
+    left: 49px; top: 49px;
+    width: 1810px; height: 102px;
   }
 
   .body {
-    top: 220px;
-    left: 46px;
-    width: 1814px;
-    height: 730px;
+    left: 46px; top: 220px;
+    width: 1814px; height: 730px;
   }
 
   .footer::before {
@@ -173,6 +171,40 @@ section.has-dark-background h6 {
     font-size: 16px;
     text-align: right;
     color: #6E6E6E;
+  }
+
+  div.layout-community-title {
+    h1 {
+      left: 348px; top: 441px;
+      width: 932px; height: 192px;
+      line-height: 1.0;
+      font-size: 72px;
+    }
+    h2 {
+      left: 348px; top: 649px;
+      width: 930px; height: 170px;
+      line-height: 1.0;
+      font-size: 40px;
+    }
+    .footer::before {
+      left: var(--r-community-title-logo-left);
+      top: var(--r-community-title-logo-top);
+      background-size:
+        var(--r-community-title-logo-width) var(--r-community-title-logo-height);
+      width: var(--r-community-title-logo-width);
+      height: var(--r-community-title-logo-height);;
+      background-image: url("../img/image13-22.tif");
+      content: "";
+    }
+    .footer::after {
+      left: var(--r-community-title-artwork-left); top: 0;
+//      background-size:
+//        var(--r-community-title-logo-width) var(--r-community-title-logo-height);
+//      width: var(--r-community-title-artwork-width);
+//      height: var(--r-community-title-artwork-height);;
+//      background-image: url("../img/image13-22.tif");
+      content: "";
+    }
   }
 }
 
