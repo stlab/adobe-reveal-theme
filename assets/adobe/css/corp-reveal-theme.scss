@@ -17,13 +17,10 @@ section.has-dark-background h6 {
 }
 
 $corporate-red: #EB1000;
-$community-art-bevel-left: 1128;
-$community-art-bevel-right: 1574;
+$art-bevel-left: 1128;
+$art-bevel-right: 1574;
 $slide-width: 1920px;
 $slide-height: 1080px;
-
-$evans-art-left: 627px; $evans-art-top: -149px;
-$evans-art-width: 1304px; $evans-art-height: 1301px;
 
 $community-title-logo-left: 138px;
 $community-title-logo-top: 457px;
@@ -198,12 +195,20 @@ $selection-color: #fff;
       content: "";
     }
     .footer::after {
-      left: 627px; top: -149px;
-      background-size: 1304px 1301px;
-      width: 1304px; height: 1301px;
+      $evans-art-left: 627px; $evans-art-top: -149px;
+      $evans-art-width: 1304px; $evans-art-height: 1301px;
+      left: $evans-art-left; top: $evans-art-top;
+      background-size: $evans-art-width $evans-art-height;
+      width: $evans-art-width; height: $evans-art-height;
       background-image: url("../img/image12-20.jpeg");
       content: "";
-//      clip-path: polygon(80% 0% )
+      //clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+      clip-path: polygon(
+          $art-bevel-right - $evans-art-left 0 - $evans-art-top,
+          $slide-width - $evans-art-left 0 - $evans-art-top,
+          $slide-width - $evans-art-left $slide-height - $evans-art-top,
+          $art-bevel-left - $evans-art-left $slide-height - $evans-art-top);
     }
   }
 }
