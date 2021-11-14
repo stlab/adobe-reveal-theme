@@ -171,6 +171,23 @@ $selection-color: #fff;
     color: #6E6E6E;
   }
 
+  $community-title-credit-right: 1889px;
+  $community-title-credit-top: 1019px;
+  $community-title-credit-height: 39px;
+
+  @mixin title-art($image-url, $left, $top, $width, $height, $artist, $country) {
+      left: $left; top: $top;
+      background-size: $width $height;
+      width: $width; height: $height;
+      background-image: url($image-url);
+      clip-path: polygon(
+          ($art-bevel-right - $left) (0 - $top),
+          ($slide-width - $left) (0 - $top),
+          ($slide-width - $left) ($slide-height - $top),
+          ($art-bevel-left - $left) ($slide-height - $top));
+      content: "";
+  }
+
   div.layout-community-title {
     h1 {
       left: 348px; top: 441px;
@@ -194,23 +211,33 @@ $selection-color: #fff;
       background-image: url("../img/image13-22.tif");
       content: "";
     }
+  }
 
-    @mixin title-art($image-url, $left, $top, $width, $height) {
-      left: $left; top: $top;
-      background-size: $width $height;
-      width: $width; height: $height;
-      background-image: url($image-url);
-      content: "";
-      clip-path: polygon(
-          ($art-bevel-right - $left) (0 - $top),
-          ($slide-width - $left) (0 - $top),
-          ($slide-width - $left) ($slide-height - $top),
-          ($art-bevel-left - $left) ($slide-height - $top));
-    }
-
+  div.layout-community-title.evans {
     .footer::after {
       @include title-art(
-        "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px);
+        "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px, "UV Zhu", "China");
+    }
+  }
+
+  div.layout-community-title.swopes {
+    .footer::after {
+      @include title-art(
+        "../img/image14-23.jpeg", 975px, 0px, 1080px, 1080px, "UV Zhu", "China");
+    }
+  }
+
+  div.layout-community-title.sato {
+    .footer::after {
+      @include title-art(
+        "../img/image15-25.jpeg", 960px, -14px, 1110px, 1109px, "UV Zhu", "China");
+    }
+  }
+
+  div.layout-community-title.zhu {
+    .footer::after {
+      @include title-art(
+        "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px, "UV Zhu", "China");
     }
   }
 }
