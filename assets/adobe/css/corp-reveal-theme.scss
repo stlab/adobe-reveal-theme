@@ -354,7 +354,8 @@ $selection-color: #fff;
 
 .reveal strong,
 .reveal b {
-  font-weight: bold;
+  font-family: $adobe-clean-extrabold-font;
+  font-weight: $adobe-clean-extrabold-weight;
 }
 
 .reveal em {
