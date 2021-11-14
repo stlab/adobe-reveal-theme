@@ -76,6 +76,7 @@ $selection-color: #fff;
 
 .reveal {
   @include adobe-clean-semilight;
+  font-size: 44px;
   color: $main-color;
 }
 
