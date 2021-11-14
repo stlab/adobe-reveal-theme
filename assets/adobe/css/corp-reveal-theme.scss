@@ -87,11 +87,20 @@ $selection-color: #fff;
 .reveal div.slides {
   text-align: left;
   p {
-      margin-bottom: 36px;
-  }
+    line-height: 1.3em; // appears to match single-line spacing per keynote.
+    margin-block-end: 36px;
+    margin-block-start: 36px;
+    &:first-child { margin-block-start: 0px; }
+    &:last-child { margin-block-end: 0px; }
 
-  p > img { margin-bottom: 0; }
+    // DWA TODO: apply to other textual elements, like headers.
+    // Corresponds to "Text Inset" in Keynote.
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  p > img { margin-block-end: 0; }
 }
+
 
 .reveal ::selection {
   color: $selection-color;
@@ -171,7 +180,7 @@ $selection-color: #fff;
 
     ul ul {
       font-size: 40px;
-      margin-top: 36px;
+      margin-block-start: 36px;
     }
 
     ul ul ul {
@@ -337,10 +346,6 @@ $selection-color: #fff;
 /*********************************************
  * OTHER
  *********************************************/
-.reveal p {
-  margin: $block-margin 0;
-  line-height: 1.3;
-}
 
 /* Remove trailing margins after titles */
 .reveal h1:last-child,
@@ -349,7 +354,7 @@ $selection-color: #fff;
 .reveal h4:last-child,
 .reveal h5:last-child,
 .reveal h6:last-child {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .reveal strong,
@@ -376,7 +381,7 @@ $selection-color: #fff;
 
 .reveal ul {
   font-size: 44px;
-  margin-top: 0;
+  margin-block-start: 0;
   padding: 0;
 }
 
@@ -386,7 +391,7 @@ $selection-color: #fff;
   list-style-type: none;
   position: relative;
   :not(:first-child) {
-      margin-top: 36px;
+      margin-block-start: 36px;
   }
 }
 
