@@ -30,40 +30,37 @@ $canvas-color: #E5E5E5; // Color of area around slide.
 
 $background-color: #fff;
 
-$adobe-clean-semilight-font: adobe-clean-semilight, sans-serif;
-$adobe-clean-semilight-weight: 300;
+@mixin standard-text {
+  line-height: 1.3em; // Appears to correspond to Keynote's 1 line height
+  letter-spacing: normal;
+  text-shadow: none;
+  text-transform: none;
+}
 
-$adobe-clean-regular-font: adobe-clean, sans-serif;
-$adobe-clean-regular-weight: 400;
+@mixin adobe-clean-semilight {
+  @include standard-text;
+  font-family: adobe-clean-semilight, sans-serif;
+  font-weight: 300;
+}
 
-$adobe-clean-extrabold-weight: 800;
-$adobe-clean-extrabold-font: adobe-clean, sans-serif;
+@mixin adobe-clean-regular {
+  @include standard-text;
+  font-family: adobe-clean, sans-serif;
+  font-weight: 400;
+}
 
-$main-font: $adobe-clean-semilight-font;
-$main-font-weight: $adobe-clean-semilight-weight;
-$main-font-size: 44px;
-
-$main-font-small: $adobe-clean-regular-font;
-$main-font-small-weight: $adobe-clean-regular-weight;
-$main-font-small-size: 28px;
-
-$heading-font: $adobe-clean-extrabold-font;
-$heading-font-weight: $adobe-clean-extrabold-weight;
-
-$large-font-size: 72px;
-$title-font-size: 56px;
+@mixin adobe-clean-extrabold {
+  @include standard-text;
+  font-family: adobe-clean, sans-serif;
+  font-weight: 800;
+}
 
 $main-color: #000;
 $block-margin: 20px;
 $heading-margin: 0 0 20px 0;
-$heading-color: #000;
 $heading-line-height: 0.9em;
-$heading-letter-spacing: normal;
-$heading-text-shadow: none;
-$heading-text-transform: none;
-$heading1-text-shadow: none;
-$heading1-size: $large-font-size;
-$heading2-size: $title-font-size;
+$heading1-size: 72px;
+$heading2-size: 56px;
 $heading3-size: 1.3em;
 $heading4-size: 1em;
 $code-font: source-sans-pro, monospace;
@@ -78,9 +75,7 @@ $selection-color: #fff;
 }
 
 .reveal {
-  font-family: $main-font;
-  font-size: $main-font-size;
-  font-weight: $main-font-weight;
+  @include adobe-clean-semilight;
   color: $main-color;
 }
 
@@ -135,13 +130,7 @@ $selection-color: #fff;
 .reveal h5,
 .reveal h6 {
   margin: $heading-margin;
-  color: $heading-color;
-  font-family: $heading-font;
-  font-weight: $heading-font-weight;
-  line-height: $heading-line-height;
-  letter-spacing: $heading-letter-spacing;
-  text-transform: $heading-text-transform;
-  text-shadow: $heading-text-shadow;
+  @include adobe-clean-extrabold;
   word-wrap: break-word;
   color: $corporate-red;
 }
@@ -256,8 +245,7 @@ $selection-color: #fff;
         width: 1889px;
         top: 1019px;
         height: 39px;
-        font-family: $adobe-clean-regular-font;
-        font-weight: $adobe-clean-regular-weight;
+        @include adobe-clean-regular;
         font-size: 20px;
         > span {
           // DWA FIXME: it is a mystery why this font-size can't be moved up to
@@ -265,8 +253,7 @@ $selection-color: #fff;
           &:nth-child(1) {
             &::before { content: "Artwork by "; }
             &::after {
-              font-family: $adobe-clean-extrabold-font;
-              font-weight: $adobe-clean-extrabold-weight;
+              @include adobe-clean-extrabold;
               content: $artist;
             }
           }
@@ -280,6 +267,7 @@ $selection-color: #fff;
   }
 
   div.layout-community-title {
+    @include no-footer;
     h1 {
       left: 348px; top: 441px;
       width: 932px; height: 192px;
@@ -292,7 +280,6 @@ $selection-color: #fff;
       line-height: 1.0em;
       font-size: 40px;
     }
-    @include no-footer;
 
     .background::before {
       left: $community-title-logo-left;
@@ -329,6 +316,30 @@ $selection-color: #fff;
         "UV Zhu", "China");
     }
   }
+
+  div.layout-agenda {
+    @include no-footer;
+    .body { left:0; top: 0; width: $slide-width; height: $slide-height }
+    table {
+      position: absolute; left: 126px; top: 303px; width: 1261px; height: 594px;
+      font-size: 42px;
+    }
+    h2 {
+      left: 126px; top: 144px;
+      width: 1261px; height: 92px;
+      line-height: 1.0em;
+      font-size: 72px;
+    }
+    .background::after {
+      left: 0;
+      top: 0;
+      background-size: $slide-width $slide-height;
+      width: $slide-width;
+      height: $slide-height;;
+      background-image: url("../img/image5-13.png");
+      content: "";
+    }
+  }
 }
 
 .reveal h3 {
@@ -337,10 +348,6 @@ $selection-color: #fff;
 
 .reveal h4 {
   font-size: $heading4-size;
-}
-
-.reveal h1 {
-  text-shadow: $heading1-text-shadow;
 }
 
 /*********************************************
@@ -359,8 +366,7 @@ $selection-color: #fff;
 
 .reveal strong,
 .reveal b {
-  font-family: $adobe-clean-extrabold-font;
-  font-weight: $adobe-clean-extrabold-weight;
+  @include adobe-clean-extrabold;
 }
 
 .reveal em {
@@ -396,7 +402,7 @@ $selection-color: #fff;
 }
 
 .reveal dt {
-  font-weight: bold;
+  @include adobe-clean-extrabold;
 }
 
 .reveal dd {
@@ -465,7 +471,7 @@ $selection-color: #fff;
 }
 
 .reveal table th {
-  font-weight: bold;
+  @include adobe-clean-extrabold;
 }
 
 .reveal table th,
