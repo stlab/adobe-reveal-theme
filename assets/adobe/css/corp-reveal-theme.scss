@@ -16,64 +16,65 @@ section.has-dark-background h6 {
   color: #fff;
 }
 
-/*********************************************
- * GLOBAL STYLES
- *********************************************/
-:root {
-  --r-corporate-red: #EB1000;
-  --r-community-title-artwork-left: 1128px;
-  --r-community-title-artwork-width: 783px;
-  --r-community-title-artwork-height: 1080px;
-  --r-community-title-logo-left: 138px;
-  --r-community-title-logo-top: 457px;
-  --r-community-title-logo-width: 112px;
-  --r-community-title-logo-height: 154px;
-  --r-canvas-color: #E5E5E5; // Color of area around slide.
+$corporate-red: #EB1000;
+$community-art-bevel-left: 1128;
+$community-art-bevel-right: 1574;
+$slide-width: 1920px;
+$slide-height: 1080px;
 
-  --r-background-color: #fff;
-  --r-main-font: adobe-clean-semilight, sans-serif;
-  --r-main-font-weight: 300;
-  --r-main-font-size: 44px;
+$evans-art-left: 627px; $evans-art-top: -149px;
+$evans-art-width: 1304px; $evans-art-height: 1301px;
 
-  --r-main-font-small: adobe-clean, sans-serif;
-  --r-main-font-small-weight: 300;
-  --r-main-font-small-size: 28px;
+$community-title-logo-left: 138px;
+$community-title-logo-top: 457px;
+$community-title-logo-width: 112px;
+$community-title-logo-height: 154px;
+$canvas-color: #E5E5E5; // Color of area around slide.
 
-  --r-heading-font: adobe-clean, sans-serif;
-  --r-heading-font-weight: 800;
+$background-color: #fff;
+$main-font: adobe-clean-semilight, sans-serif;
+$main-font-weight: 300;
+$main-font-size: 44px;
 
-  --r-large-font-size: 72px;
-  --r-title-font-size: 56px;
+$main-font-small: adobe-clean, sans-serif;
+$main-font-small-weight: 300;
+$main-font-small-size: 28px;
 
-  --r-main-color: #000;
-  //--r-block-margin: 20px;
-  //--r-heading-margin: 0 0 20px 0;
-  --r-heading-color: #000;
-  --r-heading-line-height: 0.9;
-  --r-heading-letter-spacing: normal;
-  --r-heading-text-shadow: none;
-  --r-heading1-text-shadow: none;
-  --r-heading1-size: var(--r-large-font-size);
-  --r-heading2-size: var(--r-title-font-size);
-  //--r-heading3-size: 1.3em;
-  //--r-heading4-size: 1em;
-  --r-code-font: source-sans-pro, monospace;
-  --r-link-color: #5F5F5F;
-//  --r-link-color-dark: #1a53a1;
-//  --r-link-color-hover: #6ca0e8;
-  --r-selection-background-color: #98bdef;
-  --r-selection-color: #fff;
-}
+$heading-font: adobe-clean, sans-serif;
+$heading-font-weight: 800;
+
+$large-font-size: 72px;
+$title-font-size: 56px;
+
+$main-color: #000;
+$block-margin: 20px;
+$heading-margin: 0 0 20px 0;
+$heading-color: #000;
+$heading-line-height: 0.9;
+$heading-letter-spacing: normal;
+$heading-text-shadow: none;
+$heading-text-transform: none;
+$heading1-text-shadow: none;
+$heading1-size: $large-font-size;
+$heading2-size: $title-font-size;
+$heading3-size: 1.3em;
+$heading4-size: 1em;
+$code-font: source-sans-pro, monospace;
+$link-color: #5F5F5F;
+$link-color-dark: #1a53a1;
+$link-color-hover: #6ca0e8;
+$selection-background-color: #98bdef;
+$selection-color: #fff;
 
 .reveal-viewport {
-  background-color: var(--r-canvas-color);
+  background-color: $canvas-color;
 }
 
 .reveal {
-  font-family: var(--r-main-font);
-  font-size: var(--r-main-font-size);
-  font-weight: var(--r-main-font-weight);
-  color: var(--r-main-color);
+  font-family: $main-font;
+  font-size: $main-font-size;
+  font-weight: $main-font-weight;
+  color: $main-color;
 }
 
 .reveal div.slides {
@@ -86,20 +87,20 @@ section.has-dark-background h6 {
 }
 
 .reveal ::selection {
-  color: var(--r-selection-color);
-  background: var(--r-selection-background-color);
+  color: $selection-color;
+  background: $selection-background-color;
   text-shadow: none;
 }
 
 .reveal ::-moz-selection {
-  color: var(--r-selection-color);
-  background: var(--r-selection-background-color);
+  color: $selection-color;
+  background: $selection-background-color;
   text-shadow: none;
 }
 
 .reveal .slides {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: var(--r-background-color);
+  background-color: $background-color;
 }
 
 .reveal .slides section,
@@ -117,24 +118,24 @@ section.has-dark-background h6 {
 .reveal h4,
 .reveal h5,
 .reveal h6 {
-  margin: var(--r-heading-margin);
-  color: var(--r-heading-color);
-  font-family: var(--r-heading-font);
-  font-weight: var(--r-heading-font-weight);
-  line-height: var(--r-heading-line-height);
-  letter-spacing: var(--r-heading-letter-spacing);
-  text-transform: var(--r-heading-text-transform);
-  text-shadow: var(--r-heading-text-shadow);
+  margin: $heading-margin;
+  color: $heading-color;
+  font-family: $heading-font;
+  font-weight: $heading-font-weight;
+  line-height: $heading-line-height;
+  letter-spacing: $heading-letter-spacing;
+  text-transform: $heading-text-transform;
+  text-shadow: $heading-text-shadow;
   word-wrap: break-word;
-  color: var(--r-corporate-red);
+  color: $corporate-red;
 }
 
 .reveal h1 {
-  font-size: var(--r-heading1-size);
+  font-size: $heading1-size;
 }
 
 .reveal h2 {
-  font-size: var(--r-heading2-size);
+  font-size: $heading2-size;
 }
 
 // All things at the top level of the layout div are given absolute position.
@@ -187,44 +188,43 @@ section.has-dark-background h6 {
       font-size: 40px;
     }
     .footer::before {
-      left: var(--r-community-title-logo-left);
-      top: var(--r-community-title-logo-top);
+      left: $community-title-logo-left;
+      top: $community-title-logo-top;
       background-size:
-        var(--r-community-title-logo-width) var(--r-community-title-logo-height);
-      width: var(--r-community-title-logo-width);
-      height: var(--r-community-title-logo-height);;
+        $community-title-logo-width $community-title-logo-height;
+      width: $community-title-logo-width;
+      height: $community-title-logo-height;;
       background-image: url("../img/image13-22.tif");
       content: "";
     }
     .footer::after {
-      left: var(--r-community-title-artwork-left); top: 0;
-//      background-size:
-//        var(--r-community-title-logo-width) var(--r-community-title-logo-height);
-//      width: var(--r-community-title-artwork-width);
-//      height: var(--r-community-title-artwork-height);;
-//      background-image: url("../img/image13-22.tif");
+      left: 627px; top: -149px;
+      background-size: 1304px 1301px;
+      width: 1304px; height: 1301px;
+      background-image: url("../img/image12-20.jpeg");
       content: "";
+//      clip-path: polygon(80% 0% )
     }
   }
 }
 
 .reveal h3 {
-  font-size: var(--r-heading3-size);
+  font-size: $heading3-size;
 }
 
 .reveal h4 {
-  font-size: var(--r-heading4-size);
+  font-size: $heading4-size;
 }
 
 .reveal h1 {
-  text-shadow: var(--r-heading1-text-shadow);
+  text-shadow: $heading1-text-shadow;
 }
 
 /*********************************************
  * OTHER
  *********************************************/
 .reveal p {
-  margin: var(--r-block-margin) 0;
+  margin: $block-margin 0;
   line-height: 1.3;
 }
 
@@ -312,7 +312,7 @@ section.has-dark-background h6 {
   display: block;
   position: relative;
   width: 70%;
-  margin: var(--r-block-margin) auto;
+  margin: $block-margin auto;
   padding: 5px;
   font-style: italic;
   background: rgba(255, 255, 255, 0.05);
@@ -332,17 +332,17 @@ section.has-dark-background h6 {
   display: block;
   position: relative;
   width: 90%;
-  margin: var(--r-block-margin) auto;
+  margin: $block-margin auto;
   text-align: left;
   font-size: 0.55em;
-  font-family: var(--r-code-font);
+  font-family: $code-font;
   line-height: 1.2em;
   word-wrap: break-word;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .reveal code {
-  font-family: var(--r-code-font);
+  font-family: $code-font;
   text-transform: none;
   tab-size: 2;
 }
@@ -417,34 +417,34 @@ section.has-dark-background h6 {
 }
 
 .reveal img {
-  margin: var(--r-block-margin) 0;
+  margin: $block-margin 0;
 }
 
 /*********************************************
  * LINKS
  *********************************************/
 .reveal a {
-  color: var(--r-link-color);
+  color: $link-color;
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 .reveal a:hover {
-  color: var(--r-link-color-hover);
+  color: $link-color-hover;
   text-shadow: none;
   border: none;
 }
 
 .reveal .roll span:after {
   color: #fff;
-  background: var(--r-link-color-dark);
+  background: $link-color-dark;
 }
 
 /*********************************************
  * Frame helper
  *********************************************/
 .reveal .r-frame {
-  border: 4px solid var(--r-main-color);
+  border: 4px solid $main-color;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -453,7 +453,7 @@ section.has-dark-background h6 {
 }
 
 .reveal a:hover .r-frame {
-  border-color: var(--r-link-color);
+  border-color: $link-color;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 
@@ -461,7 +461,7 @@ section.has-dark-background h6 {
  * NAVIGATION CONTROLS
  *********************************************/
 .reveal .controls {
-  color: var(--r-link-color);
+  color: $link-color;
 }
 
 /*********************************************
@@ -469,7 +469,7 @@ section.has-dark-background h6 {
  *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
-  color: var(--r-link-color);
+  color: $link-color;
 }
 
 /*********************************************
@@ -477,7 +477,7 @@ section.has-dark-background h6 {
  *********************************************/
 @media print {
   .backgrounds {
-    background-color: var(--r-background-color);
+    background-color: $background-color;
   }
 }
 
