@@ -149,9 +149,43 @@ $selection-color: #fff;
   .body {
     left: 46px; top: 220px;
     width: 1814px; height: 730px;
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: -37px;
+      top: .2em;
+      font-size: 0.7em;
+    }
+
+    ul ul {
+      font-size: 40px;
+      margin-top: 36px;
+    }
+
+    ul ul ul {
+      font-size: 36px;
+    }
+
+    ul ul,
+    ul ol,
+    ol ol,
+    ol ul {
+      display: block;
+      margin-left: 0px;
+    }
   }
 
-  .footer::before {
+  .background ul {
+    list-style: none;
+    > li {
+      //margin: 0;
+      display: inline;
+      padding-inline-start: 0;
+    }
+  }
+
+  .background::before {
     position: absolute;
     left: 61px; top: 1036px;
     background-size: 89px 23px;
@@ -160,7 +194,7 @@ $selection-color: #fff;
     content: "";
   }
 
-  .footer::after {
+  .background::after {
     position: absolute;
     left: 1472px; top: 1033px;
     width: 395px; height: 34px;
@@ -201,7 +235,7 @@ $selection-color: #fff;
       line-height: 1.0;
       font-size: 40px;
     }
-    .footer::before {
+    .background::before {
       left: $community-title-logo-left;
       top: $community-title-logo-top;
       background-size:
@@ -214,28 +248,28 @@ $selection-color: #fff;
   }
 
   div.layout-community-title.evans {
-    .footer::after {
+    .background::after {
       @include title-art(
         "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px, "UV Zhu", "China");
     }
   }
 
   div.layout-community-title.swopes {
-    .footer::after {
+    .background::after {
       @include title-art(
         "../img/image14-23.jpeg", 975px, 0px, 1080px, 1080px, "UV Zhu", "China");
     }
   }
 
   div.layout-community-title.sato {
-    .footer::after {
+    .background::after {
       @include title-art(
         "../img/image15-25.jpeg", 960px, -14px, 1110px, 1109px, "UV Zhu", "China");
     }
   }
 
   div.layout-community-title.zhu {
-    .footer::after {
+    .background::after {
       @include title-art(
         "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px, "UV Zhu", "China");
     }
@@ -307,31 +341,6 @@ $selection-color: #fff;
   :not(:first-child) {
       margin-top: 36px;
   }
-}
-
-.reveal ul li::before {
-  content: "•";
-  position: absolute;
-  left: -37px;
-  top: .2em;
-  font-size: 0.7em;
-}
-
-.reveal ul ul {
-  font-size: 40px;
-  margin-top: 36px;
-}
-
-.reveal ul ul ul {
-  font-size: 36px;
-}
-
-.reveal ul ul,
-.reveal ul ol,
-.reveal ol ol,
-.reveal ol ul {
-  display: block;
-  margin-left: 0px;
 }
 
 .reveal dt {
