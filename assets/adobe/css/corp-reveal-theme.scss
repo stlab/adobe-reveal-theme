@@ -57,7 +57,7 @@ $main-color: #000;
 $block-margin: 20px;
 $heading-margin: 0 0 20px 0;
 $heading-color: #000;
-$heading-line-height: 0.9;
+$heading-line-height: 0.9em;
 $heading-letter-spacing: normal;
 $heading-text-shadow: none;
 $heading-text-transform: none;
@@ -112,7 +112,7 @@ $selection-color: #fff;
 
 .reveal .slides section,
 .reveal .slides section > section {
-  line-height: 1.0;
+  line-height: 1.0em;
   font-weight: inherit;
 }
 
@@ -274,13 +274,13 @@ $selection-color: #fff;
     h1 {
       left: 348px; top: 441px;
       width: 932px; height: 192px;
-      line-height: 1.0;
+      line-height: 1.0em;
       font-size: 72px;
     }
     h2 {
       left: 348px; top: 649px;
       width: 930px; height: 170px;
-      line-height: 1.0;
+      line-height: 1.0em;
       font-size: 40px;
     }
     @include no-footer;
