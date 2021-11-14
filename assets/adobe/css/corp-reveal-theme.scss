@@ -296,30 +296,29 @@ $selection-color: #fff;
       content: "";
     }
 
-  }
+    &.evans {
+      @include title-art(
+        "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px,
+        "Davy Evans", "UK");
+    }
 
-  div.layout-community-title.evans {
-    @include title-art(
-      "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px,
-      "Davy Evans", "UK");
-  }
+    &.swopes {
+      @include title-art(
+        "../img/image14-23.jpeg", 975px, 0px, 1080px, 1080px,
+        "Elise Swopes", "USA");
+    }
 
-  div.layout-community-title.swopes {
-    @include title-art(
-      "../img/image14-23.jpeg", 975px, 0px, 1080px, 1080px,
-      "Elise Swopes", "USA");
-  }
+    &.sato {
+      @include title-art(
+        "../img/image15-25.jpeg", 960px, -14px, 1110px, 1109px,
+        "Momomi Sato", "Japan");
+    }
 
-  div.layout-community-title.sato {
-    @include title-art(
-      "../img/image15-25.jpeg", 960px, -14px, 1110px, 1109px,
-      "Momomi Sato", "Japan");
-  }
-
-  div.layout-community-title.zhu {
-    @include title-art(
-      "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px,
-      "UV Zhu", "China");
+    &.zhu {
+      @include title-art(
+        "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px,
+        "UV Zhu", "China");
+    }
   }
 }
 
