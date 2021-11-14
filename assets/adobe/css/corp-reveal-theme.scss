@@ -29,16 +29,26 @@ $community-title-logo-height: 154px;
 $canvas-color: #E5E5E5; // Color of area around slide.
 
 $background-color: #fff;
-$main-font: adobe-clean-semilight, sans-serif;
-$main-font-weight: 300;
+
+$adobe-clean-semilight-font: adobe-clean-semilight, sans-serif;
+$adobe-clean-semilight-weight: 300;
+
+$adobe-clean-regular-font: adobe-clean, sans-serif;
+$adobe-clean-regular-weight: 400;
+
+$adobe-clean-extrabold-weight: 800;
+$adobe-clean-extrabold-font: adobe-clean, sans-serif;
+
+$main-font: $adobe-clean-semilight-font;
+$main-font-weight: $adobe-clean-semilight-weight;
 $main-font-size: 44px;
 
-$main-font-small: adobe-clean, sans-serif;
-$main-font-small-weight: 300;
+$main-font-small: $adobe-clean-regular-font;
+$main-font-small-weight: $adobe-clean-regular-weight;
 $main-font-small-size: 28px;
 
-$heading-font: adobe-clean, sans-serif;
-$heading-font-weight: 800;
+$heading-font: $adobe-clean-extrabold-font;
+$heading-font-weight: $adobe-clean-extrabold-weight;
 
 $large-font-size: 72px;
 $title-font-size: 56px;
@@ -150,6 +160,7 @@ $selection-color: #fff;
     left: 46px; top: 220px;
     width: 1814px; height: 730px;
 
+    // Bullet lists.
     ul li::before {
       content: "•";
       position: absolute;
@@ -176,12 +187,12 @@ $selection-color: #fff;
     }
   }
 
-  .background ul {
-    list-style: none;
-    > li {
-      //margin: 0;
-      display: inline;
-      padding-inline-start: 0;
+  .background {
+    left: 0px; top: 0px;
+    width: $slide-width; height: $slide-height;
+    > * {
+      width: $slide-width; height: $slide-height;
+      position: absolute;
     }
   }
 
@@ -191,7 +202,7 @@ $selection-color: #fff;
     background-size: 89px 23px;
     width: 89px; height: 23px;
     background-image: url("../img/Adobe_Corporate_Horizontal_Lockup_NEW-Red_RGB-1894.png");
-    content: "";
+    content: none;
   }
 
   .background::after {
@@ -199,27 +210,62 @@ $selection-color: #fff;
     left: 1472px; top: 1033px;
     width: 395px; height: 34px;
     content: "©2021 Adobe. All Rights Reserved. Adobe Confidential.";
-    font: adobe-clean, sans-serif;
+    font-family: adobe-clean, sans-serif;
     font-size: 16px;
     text-align: right;
     color: #6E6E6E;
   }
 
-  $community-title-credit-right: 1889px;
-  $community-title-credit-top: 1019px;
-  $community-title-credit-height: 39px;
+  @mixin no-footer {
+    .background::before .background::after {
+      content: none;
+      background-image: none;
+    }
+  }
 
   @mixin title-art($image-url, $left, $top, $width, $height, $artist, $country) {
-      left: $left; top: $top;
-      background-size: $width $height;
-      width: $width; height: $height;
-      background-image: url($image-url);
-      clip-path: polygon(
+    .background {
+      &::after {
+        left: $left; top: $top;
+        background-size: $width $height;
+        width: $width; height: $height;
+        background-image: url($image-url);
+        clip-path: polygon(
           ($art-bevel-right - $left) (0 - $top),
           ($slide-width - $left) (0 - $top),
           ($slide-width - $left) ($slide-height - $top),
           ($art-bevel-left - $left) ($slide-height - $top));
-      content: "";
+        content: "";
+        z-index: -1;
+      }
+
+      // Credits
+      > div:nth-child(1) {
+        text-align: right;
+        color: white;
+        left: 0px;
+        width: 1889px;
+        top: 1019px;
+        height: 39px;
+        > span {
+          font-size: 20px;
+          font-family: $adobe-clean-regular-font;
+          font-weight: $adobe-clean-regular-weight;
+          &:nth-child(1) {
+            &::before { content: "Artwork by "; }
+            &::after {
+              font-family: $adobe-clean-extrabold-font;
+              font-weight: $adobe-clean-extrabold-weight;
+              content: $artist;
+            }
+          }
+          &:nth-child(2) {
+            &::before { content: " / "; }
+            &::after { content: $country; }
+          }
+        }
+      }
+    }
   }
 
   div.layout-community-title {
@@ -235,6 +281,8 @@ $selection-color: #fff;
       line-height: 1.0;
       font-size: 40px;
     }
+    @include no-footer;
+
     .background::before {
       left: $community-title-logo-left;
       top: $community-title-logo-top;
@@ -245,34 +293,31 @@ $selection-color: #fff;
       background-image: url("../img/image13-22.tif");
       content: "";
     }
+
   }
 
   div.layout-community-title.evans {
-    .background::after {
-      @include title-art(
-        "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px, "UV Zhu", "China");
-    }
+    @include title-art(
+      "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px,
+      "Davy Evans", "UK");
   }
 
   div.layout-community-title.swopes {
-    .background::after {
-      @include title-art(
-        "../img/image14-23.jpeg", 975px, 0px, 1080px, 1080px, "UV Zhu", "China");
-    }
+    @include title-art(
+      "../img/image14-23.jpeg", 975px, 0px, 1080px, 1080px,
+      "Elise Swopes", "USA");
   }
 
   div.layout-community-title.sato {
-    .background::after {
-      @include title-art(
-        "../img/image15-25.jpeg", 960px, -14px, 1110px, 1109px, "UV Zhu", "China");
-    }
+    @include title-art(
+      "../img/image15-25.jpeg", 960px, -14px, 1110px, 1109px,
+      "Momomi Sato", "Japan");
   }
 
   div.layout-community-title.zhu {
-    .background::after {
-      @include title-art(
-        "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px, "UV Zhu", "China");
-    }
+    @include title-art(
+      "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px,
+      "UV Zhu", "China");
   }
 }
 
