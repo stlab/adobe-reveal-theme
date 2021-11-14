@@ -215,9 +215,22 @@ $selection-color: #fff;
   }
 
   @mixin no-footer {
-    .background::before .background::after {
+    .background::before, .background::after {
       content: none;
       background-image: none;
+    }
+  }
+
+  @mixin section-divider-alt-background {
+    @include no-footer;
+    .background::before {
+      left: 0;
+      top: 0;
+      background-size: $slide-width $slide-height;
+      width: $slide-width;
+      height: $slide-height;;
+      background-image: url("../img/image5-13.png");
+      content: "";
     }
   }
 
@@ -319,6 +332,7 @@ $selection-color: #fff;
 
   div.layout-agenda {
     @include no-footer;
+    @include section-divider-alt-background;
     .body { left:0; top: 0; width: $slide-width; height: $slide-height }
     table {
       position: absolute; left: 126px; top: 303px; width: 1261px; height: 594px;
@@ -329,15 +343,6 @@ $selection-color: #fff;
       width: 1261px; height: 92px;
       line-height: 1.0em;
       font-size: 72px;
-    }
-    .background::after {
-      left: 0;
-      top: 0;
-      background-size: $slide-width $slide-height;
-      width: $slide-width;
-      height: $slide-height;;
-      background-image: url("../img/image5-13.png");
-      content: "";
     }
   }
 }
