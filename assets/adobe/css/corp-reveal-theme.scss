@@ -346,6 +346,44 @@ $selection-color: #fff;
       font-size: 72px;
     }
   }
+
+  div.layout-title-standard {
+    @include no-footer;
+    * { color: white; }
+    h1 {
+      left: 347px; top: 440px;
+      width: 932px; height: 191px;
+      line-height: 0.9em;
+      font-size: 72px;
+    }
+    h2 {
+      left: 347px; top: 649px;
+      width: 931px; height: 542px;
+      line-height: 1.0em;
+      font-size: 40px;
+    }
+
+    .background::before {
+      left: 0;
+      top: 0;
+      background-size: $slide-width $slide-height;
+      width: $slide-width;
+      height: $slide-height;;
+      background-image: url("../img/title-standard-1521.png");
+      content: "";
+    }
+
+    .background::after {
+      left: $community-title-logo-left;
+      top: $community-title-logo-top;
+      background-size:
+        $community-title-logo-width $community-title-logo-height;
+      width: $community-title-logo-width;
+      height: $community-title-logo-height;;
+      background-image: url("../img/image9-23.pdf");
+      content: "";
+    }
+  }
 }
 
 .reveal h3 {
