@@ -262,8 +262,6 @@ $selection-color: #fff;
         @include adobe-clean-regular;
         font-size: 20px;
         > span {
-          // DWA FIXME: it is a mystery why this font-size can't be moved up to
-          // the parent div without causing the credit to shift upward.
           &:nth-child(1) {
             &::before { content: "Artwork by "; }
             &::after {
