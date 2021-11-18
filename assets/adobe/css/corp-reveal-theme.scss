@@ -17,8 +17,12 @@ section.has-dark-background h6 {
 }
 
 $corporate-red: #EB1000;
-$art-bevel-left: 1128;
-$art-bevel-right: 1574;
+$title-bevel-left: 1128;
+$title-bevel-right: 1574;
+$about-bevel-left: 433;
+$about-bevel-width: 453;
+$about-bevel-right: $about-bevel-left + $about-bevel-width;
+
 $slide-width: 1920px;
 $slide-height: 1080px;
 
@@ -243,10 +247,10 @@ $selection-color: #fff;
         width: $width; height: $height;
         background-image: url($image-url);
         clip-path: polygon(
-          ($art-bevel-right - $left) (0 - $top),
+          ($title-bevel-right - $left) (0 - $top),
           ($slide-width - $left) (0 - $top),
           ($slide-width - $left) ($slide-height - $top),
-          ($art-bevel-left - $left) ($slide-height - $top));
+          ($title-bevel-left - $left) ($slide-height - $top));
         content: "";
         z-index: -1;
       }
