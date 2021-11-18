@@ -148,9 +148,16 @@ $selection-color: #fff;
   font-size: $heading2-size;
 }
 
+@mixin text-box {
+    position: absolute;
+    box-sizing: border-box;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
 // All things at the top level of the layout div are given absolute position.
 .reveal .slides section > div > * {
-    position: absolute;
+    @include text-box;
 }
 
 .reveal .slides section {
@@ -200,7 +207,7 @@ $selection-color: #fff;
   }
 
   .background::before {
-    position: absolute;
+    @include text-box;
     left: 61px; top: 1036px;
     background-size: 89px 23px;
     width: 89px; height: 23px;
@@ -209,7 +216,7 @@ $selection-color: #fff;
   }
 
   .background::after {
-    position: absolute;
+    @include text-box;
     left: 1472px; top: 1033px;
     width: 395px; height: 34px;
     content: "©2021 Adobe. All Rights Reserved. Adobe Confidential.";
@@ -330,6 +337,79 @@ $selection-color: #fff;
       @include title-art(
         "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px,
         "UV Zhu", "China");
+    }
+  }
+
+  @mixin about-art($image-url, $left, $top, $width, $height, $artist, $story) {
+    .background {
+      &::before {
+        left: $left; top: $top;
+        background-size: $width $height;
+        width: $width; height: $height;
+        background-image: url($image-url);
+        clip-path: polygon(
+          ($about-bevel-left - $left) (0 - $top),
+          ($slide-width - $left) (0 - $top),
+          ($slide-width - $left) ($slide-height - $top),
+          ($about-bevel-right - $left) ($slide-height - $top));
+        content: "";
+
+      }
+
+      > div:nth-child(1) {
+          @include text-box;
+          left: 42px; top: 438px;
+          width: 540px; height: 574px;
+          line-height: 1.1em;
+          > span {
+              &:nth-child(1) {
+                  &::before {
+                      display: block;
+                      margin-block-end: 16px;
+                      @include adobe-clean-extrabold;
+                      font-size: 28px;
+                      content: $artist;
+                  }
+                  &::after {
+                      display: block;
+                      @include adobe-clean-regular;
+                      font-size: 24px;
+                      content: $story;
+                  }
+              }
+              &:nth-child(2) {
+              }
+          }
+      }
+    }
+  }
+
+  div.layout-community-about {
+    @include no-footer;
+    h2 {
+      left: 52px; top: 51px;
+      width: 1920px; height: 46px;
+      line-height: 1.0em;
+      font-size: 26px;
+    }
+
+    &.evans {
+      @include about-art(
+        "../img/image12-20.jpeg", 249px, -433px, 1711px, 1711px, "Davy Evans","UK-based digital artist and motion designer Davy Evans fuses analog and digital techniques to create ethereal, abstract imagery inspired by nature. Experimenting with photography, light, and liquid, he uses Adobe Photoshop and Adobe After Effects to compose otherworldly scenes. As communities faced the isolation of 2020, Evans saw the importance of maintaining a connection to natural phenomena in this piece. He used Adobe Camera Raw and Adobe Photoshop to create beautiful floral compositions that represent the separation we all felt from the world outside our windows.");
+    }
+    &.swopes {
+      @include about-art(
+        "../img/image14-23.jpeg", 431px, -143px, 1489px, 1489px, "Elise Swopes", "New York City-based photographer and graphic designer Elise Swopes manipulates the everyday into unexpected works of art. With her mobile phone, Adobe Photoshop, and Adobe Photoshop Lightroom, she creates whimsical, weird, dreamlike scenes. This piece was inspired from a recent visit to Copenhagen, where the bold colors and shapes of Danish architecture made quite an impression. A brilliant yellow apartment building inspired Swopes to create another entry in her surrealistic series featuring giraffes in unusual settings.");
+    }
+
+    &.sato {
+      @include about-art(
+        "../img/image15-25.jpeg", 431px, -182px, 1658px, 1658px, "Momomi Sato", "Tokyo-based artist Momomi Sato meticulously applies paint using toothpicks to create fanciful, pointillistic works of animals, patterns, and other colorful subjects. With a style that ranges from abstract to kawaii, Sato’s paintings are as charming as they are beautiful. For this piece, a train ride prompted an exploration of systems that influence daily life. As she stared intently at the pattern on the seats, the lines and shapes seemed to move and draw Sato into another dimension. She recreated the sensation by hand with acrylic paint on canvas.");
+    }
+
+    &.zhu {
+      @include about-art(
+        "../img/image16-27.jpeg", 386px, -40px, 1535px, 1206px, "UV Zhu", "With an eye for the abstract, Chinese artist UV Zhu remixes patterns, textures, and colors to explore the future of fashion. Using Adobe Photoshop, Adobe Illustrator, and Maxon Cinema 4D, he blends surreal settings, organic shapes, and even favorite foods to challenge convention. Inspired by his travels—around the Internet and in real life—for this piece, UV fantasized about characters moving through an imaginary world, the things they might do, and what they might wear. The result is a bright, colorful expression of joy and positivity.");
     }
   }
 
