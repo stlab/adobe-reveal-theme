@@ -226,6 +226,14 @@ $selection-color: #fff;
     color: #6E6E6E;
   }
 
+  div.layout-manual {
+    .body {
+      left: 0px; top: 0px;
+      width: $slide-width; height: $slide-height;
+      > * { position: absolute; }
+    }
+  }
+
   @mixin no-footer {
     .background::before, .background::after {
       content: none;
@@ -645,6 +653,7 @@ $selection-color: #fff;
 
 .reveal img {
   margin: 0;
+  object-fit: cover;
 }
 
 /*********************************************
