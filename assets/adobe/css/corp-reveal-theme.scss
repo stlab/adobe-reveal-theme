@@ -53,6 +53,12 @@ $background-color: #fff;
   font-weight: 400;
 }
 
+@mixin adobe-clean-bold {
+  @include standard-text;
+  font-family: adobe-clean, sans-serif;
+  font-weight: 700;
+}
+
 @mixin adobe-clean-extrabold {
   @include standard-text;
   font-family: adobe-clean, sans-serif;
@@ -393,6 +399,38 @@ $selection-color: #fff;
     }
   }
 
+  @mixin made-with($image1-url, $image1-width, $image2-url, $image2-width) {
+    .background > div:nth-child(2) {
+      &::before {
+        @include text-box;
+        left: 52px; top: 946px;
+        width: 69px; height: 29px;
+        @include adobe-clean-bold;
+        font-size: 12px;
+        content: "Made with"
+      }
+
+      > span:first-child {
+        &::before {
+          position:absolute;
+          left: 59px; top: 978px;
+          width: $image1-width; height: 35px;
+          background-size: $image1-width 35px;
+          background-image: url($image1-url);
+          content: "";
+        }
+        &::after {
+          position:absolute;
+          left: 310px; top: 978px;
+          width: $image2-width; height: 35px;
+          background-size: $image2-width 35px;
+          background-image: url($image2-url);
+          content: "";
+        }
+      }
+    }
+  }
+
   div.layout-community-about {
     @include no-footer;
     h2 {
@@ -414,6 +452,9 @@ $selection-color: #fff;
           " phenomena in this piece. He used Adobe Camera Raw and Adobe"
           " Photoshop to create beautiful floral compositions that represent"
           " the separation we all felt from the world outside our windows.");
+
+      @include made-with(
+        "../img/image20-38.tif", 220px, "../img/image21-40.tif", 234px);
     }
     &.swopes {
       @include about-art(
@@ -427,6 +468,8 @@ $selection-color: #fff;
           " brilliant yellow apartment building inspired Swopes to create"
           " another entry in her surrealistic series featuring giraffes in"
           " unusual settings.");
+      @include made-with(
+        "../img/image20-38.tif", 220px, "../img/image25-45.tif", 332px);
     }
 
     &.sato {
@@ -455,6 +498,8 @@ $selection-color: #fff;
           " moving through an imaginary world, the things they might do, and"
           " what they might wear. The result is a bright, colorful expression"
           " of joy and positivity.");
+      @include made-with(
+        "../img/image20-38.tif", 220px, "../img/image27-48.tif", 214px);
     }
   }
 
