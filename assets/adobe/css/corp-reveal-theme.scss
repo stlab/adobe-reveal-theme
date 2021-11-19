@@ -1,10 +1,5 @@
 ---
 ---
-/**
- * White theme for reveal.js. This is the opposite of the 'black' theme.
- *
- * By Hakim El Hattab, http://hakim.se
- */
 @import url(../../fonts/source-sans-pro/source-sans-pro.css);
 section.has-dark-background,
 section.has-dark-background h1,
@@ -25,11 +20,12 @@ $about-bevel-right: $about-bevel-left + $about-bevel-width;
 
 $slide-width: 1920px;
 $slide-height: 1080px;
+$slide-left-inset: 52px;
 
-$community-title-logo-left: 138px;
-$community-title-logo-top: 457px;
-$community-title-logo-width: 112px;
-$community-title-logo-height: 154px;
+$title-logo-left: 138px;
+$title-logo-top: 457px;
+$title-logo-width: 112px;
+$title-logo-height: 154px;
 $canvas-color: #E5E5E5; // Color of area around slide.
 
 $background-color: #fff;
@@ -63,6 +59,16 @@ $background-color: #fff;
   @include standard-text;
   font-family: adobe-clean, sans-serif;
   font-weight: 800;
+}
+
+@mixin layout-image($url, $left, $top, $width, $height) {
+  position:absolute;
+  padding: 0px;
+  left: px($left); top: px($top);
+  width: px($width); height: px($height);
+  background-size: px($width); height: px($height);
+  background-image: url($url);
+  content: "";
 }
 
 $main-color: #000;
@@ -155,10 +161,15 @@ $selection-color: #fff;
 }
 
 @mixin text-box {
-    position: absolute;
-    box-sizing: border-box;
-    padding-left: 7px;
-    padding-right: 7px;
+  position: absolute;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+// Returns $n if it has units, and $n * 1px otherwise.
+@function px($n) {
+  @if unitless($n) { @return $n * 1px; }
+  @return $n;
 }
 
 // All things at the top level of the layout div are given absolute position.
@@ -205,6 +216,7 @@ $selection-color: #fff;
 
   .background {
     left: 0px; top: 0px;
+    padding: 0;
     width: $slide-width; height: $slide-height;
     > * {
       width: $slide-width; height: $slide-height;
@@ -213,13 +225,9 @@ $selection-color: #fff;
   }
 
   .background::before {
-    @include text-box;
-    left: 61px; top: 1036px;
-    background-size: 89px 23px;
-    width: 89px; height: 23px;
-    background-image: url(
-      "../img/Adobe_Corporate_Horizontal_Lockup_NEW-Red_RGB-1894.png");
-    content: "";
+    @include layout-image(
+      "../img/Adobe_Corporate_Horizontal_Lockup_NEW-Red_RGB-1894.png",
+      61, 1036, 89, 23);
   }
 
   .background::after {
@@ -235,6 +243,8 @@ $selection-color: #fff;
 
   div.layout-manual {
     .body {
+      padding-left: 0px;
+      padding-right: 0px;
       left: 0px; top: 0px;
       width: $slide-width; height: $slide-height;
       > * { position: absolute; }
@@ -251,29 +261,22 @@ $selection-color: #fff;
   @mixin section-divider-alt-background {
     @include no-footer;
     .background::before {
-      left: 0;
-      top: 0;
-      background-size: $slide-width $slide-height;
-      width: $slide-width;
-      height: $slide-height;;
-      background-image: url("../img/image5-13.png");
-      content: "";
+      @include layout-image(
+        "../img/image5-13.png", 0, 0, $slide-width, $slide-height);
     }
   }
 
   @mixin title-art($image-url, $left, $top, $width, $height, $artist, $country) {
+    $left: px($left); $top: px($top);
+    $width: px($width); $height: px($height);
     .background {
       &::after {
-        left: $left; top: $top;
-        background-size: $width $height;
-        width: $width; height: $height;
-        background-image: url($image-url);
+        @include layout-image($image-url, $left, $top, $width, $height);
         clip-path: polygon(
-          ($title-bevel-right - $left) (0 - $top),
-          ($slide-width - $left) (0 - $top),
+          ($title-bevel-right - $left) (0px - $top),
+          ($slide-width - $left) (0px - $top),
           ($slide-width - $left) ($slide-height - $top),
           ($title-bevel-left - $left) ($slide-height - $top));
-        content: "";
         z-index: -1;
       }
 
@@ -320,60 +323,54 @@ $selection-color: #fff;
     }
 
     .background::before {
-      left: $community-title-logo-left;
-      top: $community-title-logo-top;
-      background-size:
-        $community-title-logo-width $community-title-logo-height;
-      width: $community-title-logo-width;
-      height: $community-title-logo-height;;
-      background-image: url("../img/image13-22.tif");
-      content: "";
+      @include layout-image(
+        "../img/image13-22.tif",
+        $title-logo-left, $title-logo-top,
+        $title-logo-width, $title-logo-height);
     }
 
     &.evans {
       @include title-art(
-        "../img/image12-20.jpeg", 627px, -149px, 1304px, 1301px,
+        "../img/image12-20.jpeg", 627, -149, 1304, 1301,
         "Davy Evans", "UK");
     }
 
     &.swopes {
       @include title-art(
-        "../img/image14-23.jpeg", 975px, 0px, 1080px, 1080px,
+        "../img/image14-23.jpeg", 975, 0, 1080, 1080,
         "Elise Swopes", "USA");
     }
 
     &.sato {
       @include title-art(
-        "../img/image15-25.jpeg", 960px, -14px, 1110px, 1109px,
+        "../img/image15-25.jpeg", 960, -14, 1110, 1109,
         "Momomi Sato", "Japan");
     }
 
     &.zhu {
       @include title-art(
-        "../img/image16-27.jpeg", 544px, 0px, 1378px, 1080px,
+        "../img/image16-27.jpeg", 544, 0, 1378, 1080,
         "UV Zhu", "China");
     }
   }
 
   @mixin about-art($image-url, $left, $top, $width, $height, $artist, $story) {
+    $left: px($left); $top: px($top);
+    $width: px($width); $height: px($height);
+
     .background {
       &::before {
-        left: $left; top: $top;
-        background-size: $width $height;
-        width: $width; height: $height;
-        background-image: url($image-url);
+        @include layout-image($image-url, $left, $top, $width, $height);
         clip-path: polygon(
           ($about-bevel-left - $left) (0 - $top),
           ($slide-width - $left) (0 - $top),
           ($slide-width - $left) ($slide-height - $top),
           ($about-bevel-right - $left) ($slide-height - $top));
-        content: "";
-
       }
 
       > div:nth-child(1) {
           @include text-box;
-          left: 42px; top: 438px;
+          left: $slide-left-inset; top: 438px;
           width: 540px; height: 574px;
           line-height: 1.1em;
           > span {
@@ -402,8 +399,9 @@ $selection-color: #fff;
   @mixin made-with($image1-url, $image1-width, $image2-url, $image2-width) {
     .background > div:nth-child(2) {
       &::before {
+        position: absolute;
         @include text-box;
-        left: 52px; top: 946px;
+        left: $slide-left-inset; top: 946px;
         width: 69px; height: 29px;
         @include adobe-clean-bold;
         font-size: 12px;
@@ -412,20 +410,10 @@ $selection-color: #fff;
 
       > span:first-child {
         &::before {
-          position:absolute;
-          left: 59px; top: 978px;
-          width: $image1-width; height: 35px;
-          background-size: $image1-width 35px;
-          background-image: url($image1-url);
-          content: "";
+          @include layout-image($image1-url, 59, 978, $image1-width, 35);
         }
         &::after {
-          position:absolute;
-          left: 310px; top: 978px;
-          width: $image2-width; height: 35px;
-          background-size: $image2-width 35px;
-          background-image: url($image2-url);
-          content: "";
+          @include layout-image($image2-url, 310, 978, $image2-width, 35);
         }
       }
     }
@@ -434,7 +422,7 @@ $selection-color: #fff;
   div.layout-community-about {
     @include no-footer;
     h2 {
-      left: 52px; top: 51px;
+      left: $slide-left-inset; top: 51px;
       width: 1920px; height: 46px;
       line-height: 1.0em;
       font-size: 26px;
@@ -454,7 +442,7 @@ $selection-color: #fff;
           " the separation we all felt from the world outside our windows.");
 
       @include made-with(
-        "../img/image20-38.tif", 220px, "../img/image21-40.tif", 234px);
+        "../img/image20-38.tif", 220, "../img/image21-40.tif", 234);
     }
     &.swopes {
       @include about-art(
@@ -469,7 +457,7 @@ $selection-color: #fff;
           " another entry in her surrealistic series featuring giraffes in"
           " unusual settings.");
       @include made-with(
-        "../img/image20-38.tif", 220px, "../img/image25-45.tif", 332px);
+        "../img/image20-38.tif", 220, "../img/image25-45.tif", 332);
     }
 
     &.sato {
@@ -499,7 +487,7 @@ $selection-color: #fff;
           " what they might wear. The result is a bright, colorful expression"
           " of joy and positivity.");
       @include made-with(
-        "../img/image20-38.tif", 220px, "../img/image27-48.tif", 214px);
+        "../img/image20-38.tif", 220, "../img/image27-48.tif", 214);
     }
   }
 
@@ -536,24 +524,14 @@ $selection-color: #fff;
     }
 
     .background::before {
-      left: 0;
-      top: 0;
-      background-size: $slide-width $slide-height;
-      width: $slide-width;
-      height: $slide-height;;
-      background-image: url("../img/title-standard-1521.png");
-      content: "";
+      @include layout-image(
+        "../img/title-standard-1521.png", 0, 0, $slide-width, $slide-height);
     }
 
     .background::after {
-      left: $community-title-logo-left;
-      top: $community-title-logo-top;
-      background-size:
-        $community-title-logo-width $community-title-logo-height;
-      width: $community-title-logo-width;
-      height: $community-title-logo-height;;
-      background-image: url("../img/image9-23.pdf");
-      content: "";
+      @include layout-image(
+        "../img/image9-23.pdf", $title-logo-left, $title-logo-top,
+        $title-logo-width, $title-logo-height);
     }
   }
 }
