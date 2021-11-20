@@ -271,6 +271,9 @@ $selection-color: #fff;
     }
   }
 
+  // DWA FIXME: some of these constants don't need to be stamped out repeatedly
+  // by these @mixins; instead they could be factored into non-artist-specific
+  // SCSS.
   @mixin community-credit($artist, $country) {
     left: $slide-left-inset;
     width: $slide-inset-width;
@@ -355,26 +358,22 @@ $selection-color: #fff;
 
     &.evans {
       @include title-art(
-        "../img/image12-20.jpeg", 627, -149, 1304, 1301,
-        "Davy Evans", "UK");
+        "../img/image12-20.jpeg", 627, -149, 1304, 1301, "Davy Evans", "UK");
     }
 
     &.swopes {
       @include title-art(
-        "../img/image14-23.jpeg", 975, 0, 1080, 1080,
-        "Elise Swopes", "USA");
+        "../img/image14-23.jpeg", 975, 0, 1080, 1080, "Elise Swopes", "USA");
     }
 
     &.sato {
       @include title-art(
-        "../img/image15-25.jpeg", 960, -14, 1110, 1109,
-        "Momomi Sato", "Japan");
+        "../img/image15-25.jpeg", 960, -14, 1110, 1109, "Momomi Sato", "Japan");
     }
 
     &.zhu {
       @include title-art(
-        "../img/image16-27.jpeg", 544, 0, 1378, 1080,
-        "UV Zhu", "China");
+        "../img/image16-27.jpeg", 544, 0, 1378, 1080, "UV Zhu", "China");
     }
   }
 
@@ -397,24 +396,20 @@ $selection-color: #fff;
           left: $slide-left-inset; top: 438px;
           width: 540px; height: 574px;
           line-height: 1.1em;
-          > span {
-              &:nth-child(1) {
-                  &::before {
-                      display: block;
-                      margin-block-end: 16px;
-                      @include adobe-clean-extrabold;
-                      font-size: 28px;
-                      content: $artist;
-                  }
-                  &::after {
-                      display: block;
-                      @include adobe-clean-regular;
-                      font-size: 24px;
-                      content: $story;
-                  }
-              }
-              &:nth-child(2) {
-              }
+          > span:first-child {
+            &::before {
+              display: block;
+              margin-block-end: 16px;
+              @include adobe-clean-extrabold;
+              font-size: 28px;
+              content: $artist;
+            }
+            &::after {
+              display: block;
+              @include adobe-clean-regular;
+              font-size: 24px;
+              content: $story;
+            }
           }
       }
     }
