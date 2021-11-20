@@ -62,14 +62,18 @@ $background-color: #fff;
   font-weight: 800;
 }
 
-@mixin layout-image($url, $left, $top, $width, $height) {
+@mixin layout-image-placement($left, $top, $width, $height) {
   position:absolute;
   padding: 0px;
   left: px($left); top: px($top);
   width: px($width); height: px($height);
-  background-size: px($width); height: px($height);
-  background-image: url($url);
+  background-size: px($width) px($height);
   content: "";
+}
+
+@mixin layout-image($url, $left, $top, $width, $height) {
+  background-image: url($url);
+  @include layout-image-placement($left, $top, $width, $height);
 }
 
 $main-color: #000;
@@ -271,6 +275,7 @@ $selection-color: #fff;
     left: $slide-left-inset;
     width: $slide-inset-width;
     height: 39px;
+    @include text-box;
     @include adobe-clean-regular;
     font-size: 20px;
     color: white;
@@ -312,29 +317,18 @@ $selection-color: #fff;
     }
   }
 
-  @mixin community-closer($image-url, $artist, $country) {
-    /*
-    $left: px($left); $top: px($top);
-    $width: px($width); $height: px($height);
+  @mixin community-closer(
+    $image-url, $left, $top, $width, $height, $artist, $country) {
     .background {
-      &::after {
+      &::before {
         @include layout-image($image-url, $left, $top, $width, $height);
-        clip-path: polygon(
-          ($title-bevel-right - $left) (0px - $top),
-          ($slide-width - $left) (0px - $top),
-          ($slide-width - $left) ($slide-height - $top),
-          ($title-bevel-left - $left) ($slide-height - $top));
-        z-index: -1;
       }
-
-      // Credits
-      > div:nth-child(1) {
-        text-align: right;
-        top: 1019px;
+      > div:first-child {
+        text-align: left;
+        top: 958px;
         @include community-credit($artist, $country);
       }
     }
-    */
   }
 
   div.layout-community-title {
@@ -427,12 +421,15 @@ $selection-color: #fff;
   }
 
   @mixin made-with($image1-url, $image1-width, $image2-url, $image2-width) {
-    .background > div:nth-child(2) > span:first-child {
-      &::before {
-        @include layout-image($image1-url, 59, 978, $image1-width, 35);
-      }
-      &::after {
-        @include layout-image($image2-url, 310, 978, $image2-width, 35);
+    .background > div:nth-child(2) {
+      &::before { content: "Made with" }
+      > span:first-child {
+        &::before {
+          @include layout-image($image1-url, 59, 978, $image1-width, 35);
+        }
+        &::after {
+          @include layout-image($image2-url, 310, 978, $image2-width, 35);
+        }
       }
     }
   }
@@ -453,7 +450,6 @@ $selection-color: #fff;
       width: 69px; height: 29px;
       @include adobe-clean-bold;
       font-size: 12px;
-      content: "Made with"
     }
 
     &.evans {
@@ -520,22 +516,48 @@ $selection-color: #fff;
   }
 
   div.layout-community-closer {
+    h1, h2, h3, h4, h5, h6 {
+      display: none;
+    }
+    .background::after {
+      @include layout-image("../img/image22-42.tif", 907, 466, 107, 148);
+    }
+    .background > div:nth-child(2) {
+      &::before { @include layout-image-placement(59, 1001, 36, 35); }
+      &::after { @include layout-image-placement(107, 1001, 36, 35); }
+    }
+
     &.evans {
-      @include community-closer("../img/image12-20.jpeg", "Davy Evans", "UK");
+      @include community-closer(
+        "../img/image12-20.jpeg", -3, -459, 1925, 1925, "Davy Evans", "UK");
+      .background > div:nth-child(2) {
+        &::before { background-image: url("../img/image23-43.tif"); }
+        &::after { background-image: url("../img/image24-44.tif"); }
+      }
     }
 
     &.swopes {
       @include community-closer(
-        "../img/image14-23.jpeg", "Elise Swopes", "USA");
+        "../img/image14-23.jpeg", -58, -467, 1981, 1981, "Elise Swopes", "USA");
+      .background > div:nth-child(2) {
+        &::before { background-image: url("../img/image23-43.tif"); }
+        &::after { background-image: url("../img/image26-47.tif"); }
+      }
     }
 
     &.sato {
       @include community-closer(
-        "../img/image15-25.jpeg", "Momomi Sato", "Japan");
+        "../img/image15-25.jpeg", -15, -422, 1950, 1950, "Momomi Sato", "Japan");
+      .background > div:first-child { top: 997px; }
     }
 
     &.zhu {
-      @include community-closer("../img/image16-27.jpeg", "UV Zhu", "China");
+      @include community-closer(
+        "../img/image16-27.jpeg", 0, -196, 1920, 1509, "UV Zhu", "China");
+      .background > div:nth-child(2) {
+        &::before { background-image: url("../img/image23-43.tif"); }
+        &::after { background-image: url("../img/image28-50.tif"); }
+      }
     }
   }
 
