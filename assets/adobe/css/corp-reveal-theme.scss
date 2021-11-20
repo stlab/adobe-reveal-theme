@@ -11,7 +11,22 @@ section.has-dark-background h6 {
   color: #fff;
 }
 
+{% comment %}---- Primary palette ----{% endcomment %}
 $corporate-red: #EB1000;
+$dark-gray: #2C2C2C;
+$light-gray: #F5F5F5;
+$white: #FFFFFF;
+
+{% comment %}---- Secondary palette ----{% endcomment %}
+$magenta: #E63888;
+$purple: #6349e0;
+$blue: #3273de;
+$light-blue: #2799f6;
+$teal: #21a5a2;
+$green: #009c3b;
+$yellow: #FFCE2E;
+$orange: #e9740a;
+
 $title-bevel-left: 1128;
 $title-bevel-right: 1574;
 $about-bevel-left: 433;
