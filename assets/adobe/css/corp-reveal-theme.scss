@@ -21,6 +21,7 @@ $about-bevel-right: $about-bevel-left + $about-bevel-width;
 $slide-width: 1920px;
 $slide-height: 1080px;
 $slide-left-inset: 52px;
+$slide-inset-width: 1889px - $slide-left-inset;
 
 $title-logo-left: 138px;
 $title-logo-top: 457px;
@@ -266,6 +267,28 @@ $selection-color: #fff;
     }
   }
 
+  @mixin community-credit($artist, $country) {
+    left: $slide-left-inset;
+    width: $slide-inset-width;
+    height: 39px;
+    @include adobe-clean-regular;
+    font-size: 20px;
+    color: white;
+    > span {
+      &:nth-child(1) {
+        &::before { content: "Artwork by "; }
+        &::after {
+          @include adobe-clean-extrabold;
+          content: $artist;
+        }
+      }
+      &:nth-child(2) {
+        &::before { content: " / "; }
+        &::after { content: $country; }
+      }
+    }
+  }
+
   @mixin title-art($image-url, $left, $top, $width, $height, $artist, $country) {
     $left: px($left); $top: px($top);
     $width: px($width); $height: px($height);
@@ -283,28 +306,35 @@ $selection-color: #fff;
       // Credits
       > div:nth-child(1) {
         text-align: right;
-        color: white;
-        left: 0px;
-        width: 1889px;
         top: 1019px;
-        height: 39px;
-        @include adobe-clean-regular;
-        font-size: 20px;
-        > span {
-          &:nth-child(1) {
-            &::before { content: "Artwork by "; }
-            &::after {
-              @include adobe-clean-extrabold;
-              content: $artist;
-            }
-          }
-          &:nth-child(2) {
-            &::before { content: " / "; }
-            &::after { content: $country; }
-          }
-        }
+        @include community-credit($artist, $country);
       }
     }
+  }
+
+  @mixin community-closer($image-url, $artist, $country) {
+    /*
+    $left: px($left); $top: px($top);
+    $width: px($width); $height: px($height);
+    .background {
+      &::after {
+        @include layout-image($image-url, $left, $top, $width, $height);
+        clip-path: polygon(
+          ($title-bevel-right - $left) (0px - $top),
+          ($slide-width - $left) (0px - $top),
+          ($slide-width - $left) ($slide-height - $top),
+          ($title-bevel-left - $left) ($slide-height - $top));
+        z-index: -1;
+      }
+
+      // Credits
+      > div:nth-child(1) {
+        text-align: right;
+        top: 1019px;
+        @include community-credit($artist, $country);
+      }
+    }
+    */
   }
 
   div.layout-community-title {
@@ -488,6 +518,26 @@ $selection-color: #fff;
           " of joy and positivity.");
       @include made-with(
         "../img/image20-38.tif", 220, "../img/image27-48.tif", 214);
+    }
+  }
+
+  div.layout-community-closer {
+    &.evans {
+      @include community-closer("../img/image12-20.jpeg", "Davy Evans", "UK");
+    }
+
+    &.swopes {
+      @include community-closer(
+        "../img/image14-23.jpeg", "Elise Swopes", "USA");
+    }
+
+    &.sato {
+      @include community-closer(
+        "../img/image15-25.jpeg", "Momomi Sato", "Japan");
+    }
+
+    &.zhu {
+      @include community-closer("../img/image16-27.jpeg", "UV Zhu", "China");
     }
   }
 
