@@ -427,24 +427,12 @@ $selection-color: #fff;
   }
 
   @mixin made-with($image1-url, $image1-width, $image2-url, $image2-width) {
-    .background > div:nth-child(2) {
+    .background > div:nth-child(2) > span:first-child {
       &::before {
-        position: absolute;
-        @include text-box;
-        left: $slide-left-inset; top: 946px;
-        width: 69px; height: 29px;
-        @include adobe-clean-bold;
-        font-size: 12px;
-        content: "Made with"
+        @include layout-image($image1-url, 59, 978, $image1-width, 35);
       }
-
-      > span:first-child {
-        &::before {
-          @include layout-image($image1-url, 59, 978, $image1-width, 35);
-        }
-        &::after {
-          @include layout-image($image2-url, 310, 978, $image2-width, 35);
-        }
+      &::after {
+        @include layout-image($image2-url, 310, 978, $image2-width, 35);
       }
     }
   }
@@ -456,6 +444,16 @@ $selection-color: #fff;
       width: 1920px; height: 46px;
       line-height: 1.0em;
       font-size: 26px;
+    }
+
+    .background > div:nth-child(2)::before {
+      position: absolute;
+      @include text-box;
+      left: $slide-left-inset; top: 946px;
+      width: 69px; height: 29px;
+      @include adobe-clean-bold;
+      font-size: 12px;
+      content: "Made with"
     }
 
     &.evans {
