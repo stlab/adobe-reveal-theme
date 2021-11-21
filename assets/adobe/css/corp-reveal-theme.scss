@@ -252,8 +252,8 @@ $selection-color: #fff;
 
   .background::after {
     @include text-box;
-    left: 1472px; top: 1033px;
-    width: 395px; height: 34px;
+    left: 1372px; top: 1033px;
+    width: 495px; height: 34px;
     content: "©2021 Adobe. All Rights Reserved. Adobe Confidential.";
     font-family: adobe-clean, sans-serif;
     font-size: 16px;
