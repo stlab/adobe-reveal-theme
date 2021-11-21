@@ -670,7 +670,7 @@ $selection-color: #fff;
   margin-left: 37px;
   list-style-type: none;
   position: relative;
-  :not(:first-child) {
+  &:not(:first-child) {
       margin-block-start: 36px;
   }
 }
