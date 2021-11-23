@@ -215,64 +215,58 @@ $selection-color: #fff;
     left: 46px; top: 220px;
     width: 1814px; height: 730px;
 
-    ol,
-    dl,
-    ul {
-        display: inline-block;
-        width: 100%;
-        text-align: left;
-    }
-
     ol {
-        list-style-type: decimal;
+      list-style-type: decimal;
     }
 
-    ul {
-        font-size: 44px;
-        margin-block-start: 0;
-        padding: 0;
+    ol, dl, ul {
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+      font-size: 44px;
+      margin-block-start: 0;
+
+      ul {
+        margin-block-start: 36px;
+      }
+
+      ol, dl, ul {
+        font-size: 40px;
+        display: block;
+        margin-left: 0px;
+
+        ol, dl, ul {
+          font-size: 36px;
+        }
+      }
     }
 
-    .reveal dt {
+    dt {
         @include adobe-clean-extrabold;
     }
 
-    .reveal dd {
+    dd {
         margin-left: 40px;
     }
 
     // Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
-    ul li {
-        margin-left: 37px;
-        list-style-type: none;
-        position: relative;
-        &:not(:first-child) {
-            margin-block-start: 36px;
+    ul {
+        padding: 0;
+        li {
+            margin-left: 37px;
+            list-style-type: none;
+            position: relative;
+            &:not(:first-child) {
+                margin-block-start: 36px;
+            }
+            &::before {
+                content: "•";
+                position: absolute;
+                left: -37px;
+                top: .2em;
+                font-size: 0.7em;
+            }
         }
-        &::before {
-            content: "•";
-            position: absolute;
-            left: -37px;
-            top: .2em;
-            font-size: 0.7em;
-        }
-    }
-
-    ul ul {
-      font-size: 40px;
-      margin-block-start: 36px;
-    }
-
-    ul ul ul {
-      font-size: 36px;
-    }
-
-    ul ul,
-    ul ol,
-    ol ol,
-    ol ul {
-      display: block;
-      margin-left: 0px;
     }
   }
 
