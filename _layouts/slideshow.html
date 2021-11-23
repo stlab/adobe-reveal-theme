@@ -118,10 +118,12 @@ Adobe Fonts
           plugins: [ RevealSweetJekyll, RevealNotes, RevealMenu, RevealMark/*, RevealFullscreen*/ ],
       });
         Reveal.addKeyBinding(
-            { keyCode: 82, key: 'R', description: 'View speaker notes' },
+            { keyCode: 82, key: 'R', description: 'Toggle audience speaker notes' },
             () => {
                 Reveal.configure(
-                    { showNotes: !Reveal.getConfig().showNotes });}
+                    { showNotes: !Reveal.getConfig().showNotes });
+                Reveal.sync(); // force layout to adjust.
+            }
         )
     </script>
   </body>
