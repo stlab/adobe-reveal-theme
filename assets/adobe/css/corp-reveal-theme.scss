@@ -92,16 +92,12 @@ $background-color: #fff;
 }
 
 @mixin keynote-line-height($n) {
-  line-height: $n * 1.3em;
+  line-height: $n * 1.25em;
 }
 
 $main-color: #000;
 $block-margin: 20px;
 $heading-margin: 0 0 20px 0;
-$heading1-size: 72px;
-$heading2-size: 56px;
-$heading3-size: 40px;
-$heading4-size: 34px;
 $code-font: source-sans-pro, monospace;
 $link-color: #5F5F5F;
 $link-color-dark: #1a53a1;
@@ -127,11 +123,6 @@ $selection-color: #fff;
     margin-block-start: 36px;
     &:first-child { margin-block-start: 0px; }
     &:last-child { margin-block-end: 0px; }
-
-    // DWA TODO: apply to other textual elements, like headers.
-    // Corresponds to "Text Inset" in Keynote.
-    padding-left: 7px;
-    padding-right: 7px;
   }
   p > img { margin-block-end: 0; }
 }
@@ -160,33 +151,29 @@ $selection-color: #fff;
   font-weight: inherit;
 }
 
-/*********************************************
- * HEADERS
- *********************************************/
-.reveal h1,
-.reveal h2,
-.reveal h3,
-.reveal h4,
-.reveal h5,
-.reveal h6 {
-  margin: $heading-margin;
-  @include adobe-clean-extrabold;
-  word-wrap: break-word;
-  color: $corporate-red;
-}
-
-.reveal h1 {
-  font-size: $heading1-size;
-}
-
-.reveal h2 {
-  font-size: $heading2-size;
-}
-
-@mixin text-box {
+@mixin keynote-object {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
   position: absolute;
-  padding-left: 7px;
-  padding-right: 7px;
+}
+
+@mixin text-box-font-size($n, $text-inset: 4px) {
+  font-size: $n * 1px;
+  padding: $text-inset;
+  // Keynote seems to add a little extra space on top depending on the size of
+  // the font.
+  // 72pt -> +8.5 px, 36pt -> +6px, 18pt -> 3.4px, 9 - 1px
+  // n        n/9    log2(n/9)   log2(n/9)*2.5+1
+  // 9        1      0           1
+  // 18       2      1           3.5
+  // 36       4      2           6
+  // 72       8      3           8.5
+  margin-top: log2($n / 9) * 2.5px + 1px;
+}
+
+@function log2($n) {
+    @if $n <= 1 { @return 0; }
+    @return 1 + log2($n / 2);
 }
 
 // Returns $n if it has units, and $n * 1px otherwise.
@@ -195,16 +182,32 @@ $selection-color: #fff;
   @return $n;
 }
 
+/*********************************************
+ * HEADERS
+ *********************************************/
 // All things at the top level of the layout div are given absolute position.
 .reveal .slides section > div > * {
-    @include text-box;
+  position: absolute;
 }
 
 .reveal .slides section {
+  h1, h2, h3, h4, h5, h6 {
+    @include keynote-object;
+    @include adobe-clean-extrabold;
+    word-wrap: break-word;
+    color: $corporate-red;
+  }
+
+  h1 { @include text-box-font-size(72); }
   h2 {
+    @include text-box-font-size(56);
     left: 49px; top: 52px;
     width: 1810px; height: 102px;
+    @include keynote-line-height(0.8);
   }
+  h3 { @include text-box-font-size(40); }
+  h4 { @include text-box-font-size(34); }
+
 
    h2 ~ h3.subtitle {
     left: 49px; top: 108px;
@@ -249,31 +252,34 @@ $selection-color: #fff;
         margin-left: 40px;
     }
 
+    li {
+      &:not(:first-child) {
+        margin-block-start: 36px;
+      }
+    }
+
     // Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
     ul {
-        padding: 0;
-        li {
-            margin-left: 37px;
-            list-style-type: none;
-            position: relative;
-            &:not(:first-child) {
-                margin-block-start: 36px;
-            }
-            &::before {
-                content: "•";
-                position: absolute;
-                left: -37px;
-                top: .2em;
-                font-size: 0.7em;
-            }
+      $bullet-offset: 30.5px;
+      > li {
+        &::before {
+          content: "•";
+          position: absolute;
+          left: -$bullet-offset - 2px;
+          font-size: 0.7em;
         }
+        margin-left: $bullet-offset;
+        list-style-type: none;
+        position: relative;
+      }
     }
   }
 
   .background {
     z-index: -1000;
     left: 0px; top: 0px;
-    padding: 0;
+    padding: 0px;
+    margin: 0px;
     width: $slide-width; height: $slide-height;
     > * {
       width: $slide-width; height: $slide-height;
@@ -288,7 +294,7 @@ $selection-color: #fff;
   }
 
   .background::after {
-    @include text-box;
+    @include keynote-object;
     left: 1372px; top: 1033px;
     width: 495px; height: 34px;
     content: "©2021 Adobe. All Rights Reserved. Adobe Confidential.";
@@ -339,9 +345,9 @@ $selection-color: #fff;
     left: $slide-left-inset;
     width: $slide-inset-width;
     height: 39px;
-    @include text-box;
+    @include keynote-object;
     @include adobe-clean-regular;
-    font-size: 20px;
+    @include text-box-font-size(20);
     color: white;
     > span {
       &:nth-child(1) {
@@ -401,13 +407,13 @@ $selection-color: #fff;
       left: 348px; top: 441px;
       width: 932px; height: 192px;
       @include keynote-line-height(1);
-      font-size: 72px;
+      @include text-box-font-size(72);
     }
     h2 {
       left: 348px; top: 649px;
       width: 930px; height: 170px;
       @include keynote-line-height(1);
-      font-size: 40px;
+      @include text-box-font-size(40);
     }
 
     .background::before {
@@ -453,7 +459,7 @@ $selection-color: #fff;
       }
 
       > div:nth-child(1) {
-          @include text-box;
+          @include keynote-object;
           left: $slide-left-inset; top: 438px;
           width: 540px; height: 574px;
           @include keynote-line-height(1.1);
@@ -462,13 +468,13 @@ $selection-color: #fff;
               display: block;
               margin-block-end: 16px;
               @include adobe-clean-extrabold;
-              font-size: 28px;
+              @include text-box-font-size(28);
               content: $artist;
             }
             &::after {
               display: block;
               @include adobe-clean-regular;
-              font-size: 24px;
+              @include text-box-font-size(24);
               content: $story;
             }
           }
@@ -496,16 +502,16 @@ $selection-color: #fff;
       left: $slide-left-inset; top: 51px;
       width: 1920px; height: 46px;
       @include keynote-line-height(1);
-      font-size: 26px;
+      @include text-box-font-size(26);
     }
 
     .background > div:nth-child(2)::before {
       position: absolute;
-      @include text-box;
+      @include keynote-object;
       left: $slide-left-inset; top: 946px;
       width: 69px; height: 29px;
       @include adobe-clean-bold;
-      font-size: 12px;
+      @include text-box-font-size(12);
     }
 
     &.evans {
@@ -638,13 +644,13 @@ $selection-color: #fff;
     .body { left:0; top: 0; width: $slide-width; height: $slide-height }
     table {
       position: absolute; left: 126px; top: 303px; width: 1261px; height: 594px;
-      font-size: 42px;
+      @include text-box-font-size(42);
     }
     h2 {
       left: 126px; top: 144px;
       width: 1261px; height: 92px;
       @include keynote-line-height(1);
-      font-size: 72px;
+      @include text-box-font-size(72);
     }
   }
 
@@ -655,13 +661,13 @@ $selection-color: #fff;
       left: 347px; top: 440px;
       width: 932px; height: 191px;
       @include keynote-line-height(0.9);
-      font-size: 72px;
+      @include text-box-font-size(72);
     }
     h2 {
       left: 347px; top: 649px;
       width: 931px; height: 542px;
       @include keynote-line-height(1);
-      font-size: 40px;
+      @include text-box-font-size(40);
     }
 
     .background::before {
@@ -675,14 +681,6 @@ $selection-color: #fff;
         $title-logo-width, $title-logo-height);
     }
   }
-}
-
-.reveal h3 {
-  font-size: $heading3-size;
-}
-
-.reveal h4 {
-  font-size: $heading4-size;
 }
 
 /*********************************************
