@@ -235,6 +235,7 @@ $selection-color: #fff;
   }
 
   .background {
+    z-index: -1000;
     left: 0px; top: 0px;
     padding: 0;
     width: $slide-width; height: $slide-height;
