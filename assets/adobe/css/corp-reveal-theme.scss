@@ -322,7 +322,16 @@ $selection-color: #fff;
     @include no-footer;
     .background::before {
       @include layout-image(
-        "../img/image5-13.png", 0, 0, $slide-width, $slide-height);
+        "../img/divider-std-white-alt-1553.png",
+        0, 0, $slide-width, $slide-height);
+    }
+  }
+
+  @mixin section-divider-background {
+    @include no-footer;
+    .background::before {
+      @include layout-image(
+        "../img/divider-std-white-1544.png", 0, 0, $slide-width, $slide-height);
     }
   }
 
@@ -611,9 +620,23 @@ $selection-color: #fff;
     }
   }
 
-  div.layout-agenda {
-    @include no-footer;
+  div.layout-section-divider, div.layout-section-divider-alt {
+    h1 {
+      left: 123px; top: 446px;
+      width: 1146px; height: 351px;
+      line-height: 0.8em;
+    }
+  }
+
+  div.layout-section-divider {
+    @include section-divider-background;
+  }
+
+  div.layout-section-divider-alt, div.layout-agenda {
     @include section-divider-alt-background;
+  }
+
+  div.layout-agenda {
     .body { left:0; top: 0; width: $slide-width; height: $slide-height }
     table {
       position: absolute; left: 126px; top: 303px; width: 1261px; height: 594px;
