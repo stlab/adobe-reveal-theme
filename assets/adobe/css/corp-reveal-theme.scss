@@ -47,7 +47,7 @@ $canvas-color: #E5E5E5; // Color of area around slide.
 $background-color: #fff;
 
 @mixin standard-text {
-  line-height: 1.3em; // Appears to correspond to Keynote's 1 line height
+  @include keynote-line-height(1);
   letter-spacing: normal;
   text-shadow: none;
   text-transform: none;
@@ -91,10 +91,13 @@ $background-color: #fff;
   @include layout-image-placement($left, $top, $width, $height);
 }
 
+@mixin keynote-line-height($n) {
+  line-height: $n * 1.3em;
+}
+
 $main-color: #000;
 $block-margin: 20px;
 $heading-margin: 0 0 20px 0;
-$heading-line-height: 0.9em;
 $heading1-size: 72px;
 $heading2-size: 56px;
 $heading3-size: 40px;
@@ -119,7 +122,7 @@ $selection-color: #fff;
 .reveal div.slides {
   text-align: left;
   p {
-    line-height: 1.3em; // appears to match single-line spacing per keynote.
+    @include keynote-line-height(1);
     margin-block-end: 36px;
     margin-block-start: 36px;
     &:first-child { margin-block-start: 0px; }
@@ -403,13 +406,13 @@ $selection-color: #fff;
     h1 {
       left: 348px; top: 441px;
       width: 932px; height: 192px;
-      line-height: 1.0em;
+      @include keynote-line-height(1);
       font-size: 72px;
     }
     h2 {
       left: 348px; top: 649px;
       width: 930px; height: 170px;
-      line-height: 1.0em;
+      @include keynote-line-height(1);
       font-size: 40px;
     }
 
@@ -459,7 +462,7 @@ $selection-color: #fff;
           @include text-box;
           left: $slide-left-inset; top: 438px;
           width: 540px; height: 574px;
-          line-height: 1.1em;
+          @include keynote-line-height(1.1);
           > span:first-child {
             &::before {
               display: block;
@@ -498,7 +501,7 @@ $selection-color: #fff;
     h2 {
       left: $slide-left-inset; top: 51px;
       width: 1920px; height: 46px;
-      line-height: 1.0em;
+      @include keynote-line-height(1);
       font-size: 26px;
     }
 
@@ -624,8 +627,9 @@ $selection-color: #fff;
     h1 {
       left: 123px; top: 446px;
       width: 1146px; height: 351px;
-      line-height: 0.8em;
+      @include keynote-line-height(0.8);
     }
+    .body { width: 0; height: 0; }
   }
 
   div.layout-section-divider {
@@ -645,7 +649,7 @@ $selection-color: #fff;
     h2 {
       left: 126px; top: 144px;
       width: 1261px; height: 92px;
-      line-height: 1.0em;
+      @include keynote-line-height(1);
       font-size: 72px;
     }
   }
@@ -656,13 +660,13 @@ $selection-color: #fff;
     h1 {
       left: 347px; top: 440px;
       width: 932px; height: 191px;
-      line-height: 0.9em;
+      @include keynote-line-height(0.9);
       font-size: 72px;
     }
     h2 {
       left: 347px; top: 649px;
       width: 931px; height: 542px;
-      line-height: 1.0em;
+      @include keynote-line-height(1);
       font-size: 40px;
     }
 
