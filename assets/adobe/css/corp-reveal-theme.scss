@@ -207,13 +207,47 @@ $selection-color: #fff;
     left: 46px; top: 220px;
     width: 1814px; height: 730px;
 
-    // Bullet lists.
-    ul li::before {
-      content: "•";
-      position: absolute;
-      left: -37px;
-      top: .2em;
-      font-size: 0.7em;
+    ol,
+    dl,
+    ul {
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    ul {
+        font-size: 44px;
+        margin-block-start: 0;
+        padding: 0;
+    }
+
+    .reveal dt {
+        @include adobe-clean-extrabold;
+    }
+
+    .reveal dd {
+        margin-left: 40px;
+    }
+
+    // Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
+    ul li {
+        margin-left: 37px;
+        list-style-type: none;
+        position: relative;
+        &:not(:first-child) {
+            margin-block-start: 36px;
+        }
+        &::before {
+            content: "•";
+            position: absolute;
+            left: -37px;
+            top: .2em;
+            font-size: 0.7em;
+        }
     }
 
     ul ul {
@@ -646,42 +680,6 @@ $selection-color: #fff;
 
 .reveal em {
   font-style: italic;
-}
-
-.reveal ol,
-.reveal dl,
-.reveal ul {
-  display: inline-block;
-  width: 100%;
-  text-align: left;
-}
-
-.reveal ol {
-  list-style-type: decimal;
-}
-
-.reveal ul {
-  font-size: 44px;
-  margin-block-start: 0;
-  padding: 0;
-}
-
-// Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
-.reveal ul li {
-  margin-left: 37px;
-  list-style-type: none;
-  position: relative;
-  &:not(:first-child) {
-      margin-block-start: 36px;
-  }
-}
-
-.reveal dt {
-  @include adobe-clean-extrabold;
-}
-
-.reveal dd {
-  margin-left: 40px;
 }
 
 .reveal blockquote {
