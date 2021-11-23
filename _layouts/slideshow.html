@@ -117,6 +117,12 @@ Adobe Fonts
           },
           plugins: [ RevealSweetJekyll, RevealNotes, RevealMenu, RevealMark/*, RevealFullscreen*/ ],
       });
+        Reveal.addKeyBinding(
+            { keyCode: 82, key: 'R', description: 'View speaker notes' },
+            () => {
+                Reveal.configure(
+                    { showNotes: !Reveal.getConfig().showNotes });}
+        )
     </script>
   </body>
 </html>
