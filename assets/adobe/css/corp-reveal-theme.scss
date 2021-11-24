@@ -115,19 +115,6 @@ $selection-color: #fff;
   color: $main-color;
 }
 
-.reveal div.slides {
-  text-align: left;
-  p {
-    @include keynote-line-height(1);
-    margin-block-end: 36px;
-    margin-block-start: 36px;
-    &:first-child { margin-block-start: 0px; }
-    &:last-child { margin-block-end: 0px; }
-  }
-  p > img { margin-block-end: 0; }
-}
-
-
 .reveal ::selection {
   color: $selection-color;
   background: $selection-background-color;
@@ -183,15 +170,24 @@ $selection-color: #fff;
   @return $n;
 }
 
-/*********************************************
- * HEADERS
- *********************************************/
-// All things at the top level of the layout div are given absolute position.
-.reveal .slides section > div > * {
-  position: absolute;
-}
-
+// Rendering for slide content (i.e. not things like speaker notes).
 .reveal .slides section {
+  text-align: left;
+
+  // All things at the top level of the layout div are given absolute position.
+  div.layout > * {
+    position: absolute;
+  }
+
+  p {
+    @include keynote-line-height(1);
+    margin-block-end: 36px;
+    margin-block-start: 36px;
+    &:first-child { margin-block-start: 0px; }
+    &:last-child { margin-block-end: 0px; }
+  }
+  p > img { margin-block-end: 0; }
+
   h1, h2, h3, h4, h5, h6 {
     @include keynote-object;
     @include adobe-clean-extrabold;
