@@ -38,10 +38,10 @@ $slide-height: 1080px;
 $slide-left-inset: 52px;
 $slide-inset-width: 1889px - $slide-left-inset;
 
-$title-logo-left: 138px;
-$title-logo-top: 457px;
-$title-logo-width: 112px;
-$title-logo-height: 154px;
+$title-logo-left: 137px;
+$title-logo-top: 460px;
+$title-logo-width: 111px;
+$title-logo-height: 153px;
 $canvas-color: #E5E5E5; // Color of area around slide.
 
 $background-color: #fff;
@@ -157,18 +157,19 @@ $selection-color: #fff;
   position: absolute;
 }
 
-@mixin text-box-font-size($n, $text-inset: 4px) {
+@mixin text-box-font-size($n, $text-inset: 3.8px) {
   font-size: $n * 1px;
   padding: $text-inset;
   // Keynote seems to add a little extra space on top depending on the size of
   // the font.
   // 72pt -> +8.5 px, 36pt -> +6px, 18pt -> 3.4px, 9 - 1px
   // n        n/9    log2(n/9)   log2(n/9)*2.5+1
-  // 9        1      0           1
-  // 18       2      1           3.5
-  // 36       4      2           6
-  // 72       8      3           8.5
-  margin-top: log2($n / 9) * 2.5px + 1px;
+  // 9        1      0           1                     0
+  // 18       2      1           3.5                   1.4
+  // 36       4      2           6                     2.8
+  // 72       8      3           8.5                   4.2
+  padding-top: log2($n / 9) * 2.5px + 1px + $text-inset;
+  // margin-top: log2($n / 9) * 1.4px + 6px;
 }
 
 @function log2($n) {
@@ -215,8 +216,9 @@ $selection-color: #fff;
   }
 
   .body {
-    left: 46px; top: 220px;
-    width: 1814px; height: 730px;
+    @include text-box-font-size(44);
+    left: 49px; top: 225px;
+    width: 1822px; height: 793px;
 
     ol {
       list-style-type: decimal;
@@ -228,6 +230,7 @@ $selection-color: #fff;
       text-align: left;
       font-size: 44px;
       margin-block-start: 0;
+      padding-inline-start: 0;
 
       ul {
         margin-block-start: 36px;
@@ -260,12 +263,12 @@ $selection-color: #fff;
 
     // Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
     ul {
-      $bullet-offset: 30.5px;
+      $bullet-offset: 37px;
       > li {
         &::before {
           content: "•";
           position: absolute;
-          left: -$bullet-offset - 2px;
+          left: -$bullet-offset;
           font-size: 0.7em;
         }
         margin-left: $bullet-offset;
@@ -655,17 +658,17 @@ $selection-color: #fff;
   }
 
   div.layout-title-standard {
+    .body { width: 0; height: 0; }
     @include no-footer;
     * { color: white; }
     h1 {
-      left: 347px; top: 440px;
-      width: 932px; height: 191px;
+      left: 346px; top: 443px;
+      width: 965px; height: 186px;
       @include keynote-line-height(0.9);
-      @include text-box-font-size(72);
     }
     h2 {
-      left: 347px; top: 649px;
-      width: 931px; height: 542px;
+      left: 351px; top: 654px;
+      width: 982px; height: 303px;
       @include keynote-line-height(1);
       @include text-box-font-size(40);
     }
@@ -677,7 +680,7 @@ $selection-color: #fff;
 
     .background::after {
       @include layout-image(
-        "../img/image9-23.pdf", $title-logo-left, $title-logo-top,
+        "../img/pasted-image-8952.pdf", $title-logo-left, $title-logo-top,
         $title-logo-width, $title-logo-height);
     }
   }
