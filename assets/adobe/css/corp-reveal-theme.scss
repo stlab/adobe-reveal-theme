@@ -1,6 +1,38 @@
 ---
 ---
-@import url(../../fonts/source-sans-pro/source-sans-pro.css);
+{% include common.liquid %}
+//
+// Adobe corporate palette:
+//
+$corporate-red: #EB1000;
+$dark-gray: #2C2C2C;
+$light-gray: #F5F5F5;
+$white: #FFFFFF;
+// secondary colors:
+$magenta: #E63888;
+$purple: #6349e0;
+$blue: #3273de;
+$light-blue: #2799f6;
+$teal: #21a5a2;
+$green: #009c3b;
+$yellow: #FFCE2E;
+$orange: #e9740a;
+
+// ================ Base reveal.js-style theme specification. ==================
+// It doesn't do everything we need, but sets some things that are crucial for
+// proper interop with the reveal.js ecosystem.  For example, the menu plugin
+// plucks style information from the theme and reuses it, so we should have all
+// the standard bits in place.
+
+// Default mixins and settings -----------------
+@import 'theme/template/mixins';
+@import 'theme/template/settings';
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url({{assets}}js/reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css);
+
 section.has-dark-background,
 section.has-dark-background h1,
 section.has-dark-background h2,
@@ -11,21 +43,47 @@ section.has-dark-background h6 {
   color: #fff;
 }
 
-{% comment %}---- Primary palette ----{% endcomment %}
-$corporate-red: #EB1000;
-$dark-gray: #2C2C2C;
-$light-gray: #F5F5F5;
-$white: #FFFFFF;
 
-{% comment %}---- Secondary palette ----{% endcomment %}
-$magenta: #E63888;
-$purple: #6349e0;
-$blue: #3273de;
-$light-blue: #2799f6;
-$teal: #21a5a2;
-$green: #009c3b;
-$yellow: #FFCE2E;
-$orange: #e9740a;
+// Override theme settings (see {{assets}}js/reveal.js/css/theme/template/settings.scss)
+$backgroundColor: $white;
+
+$mainColor: $dark-gray;
+$headingColor: $corporate-red;
+
+$mainFontSize: 44px;
+$mainFont: 'adobe-clean-semilight', sans-serif;
+$headingFont: 'adobe-clean', sans-serif;
+$headingFontWeight: 800;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$linkColor: #5F5F5F;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: #B3D7FF; // standard Keynote selection background.
+$heading1Size: 72px;
+$heading2Size: 56px;
+$heading3Size: 40px;
+$heading4Size: 34px;
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color($white);
+
+// Theme template ------------------------------
+@import 'theme/template/theme';
+// ---------------------------------------------
+// ================ End base reveal.js-style theme specification. ==============
+
+// Standard reveal themes hardcode the main font's weight to normal, so add a
+// variable and use it wherever the main font is set by the reveal theme.  The
+// definition of a plain CSS root variable is unnecessary, but that's how reveal
+// does things.
+$mainFontWeight: 300;
+:root {
+  --r-main-font-weight: $mainFontWeight;
+}
+.reveal {
+  font-weight: var(--r-main-font-weight);
+}
 
 $title-bevel-left: 1128;
 $title-bevel-right: 1574;
@@ -356,21 +414,21 @@ $selection-color: #fff;
   }
 
   @mixin title-art($image-url, $left, $top, $width, $height, $artist, $country) {
-    $left: px($left); $top: px($top);
-    $width: px($width); $height: px($height);
+    // Give measurements px units if not otherwise specified
+    $left: px($left); $top: px($top); $width: px($width); $height: px($height);
     .background {
       &::after {
         @include layout-image($image-url, $left, $top, $width, $height);
         clip-path: polygon(
-          ($title-bevel-right - $left) (0px - $top),
-          ($slide-width - $left) (0px - $top),
+          ($title-bevel-right - $left) (-$top),
+          ($slide-width - $left) (-$top),
           ($slide-width - $left) ($slide-height - $top),
           ($title-bevel-left - $left) ($slide-height - $top));
         z-index: -1;
       }
 
       // Credits
-      > div:nth-child(1) {
+      > div:first-child(1) {
         text-align: right;
         top: 1019px;
         @include community-credit($artist, $country);
@@ -380,9 +438,15 @@ $selection-color: #fff;
 
   @mixin community-closer(
     $image-url, $left, $top, $width, $height, $artist, $country) {
+    // Give measurements px units if not otherwise specified
+    $left: px($left); $top: px($top); $width: px($width); $height: px($height);
     .background {
       &::before {
         @include layout-image($image-url, $left, $top, $width, $height);
+        clip-path: inset(
+          (-$top) (-$left)
+          ($height + $top - $slide-height) ($width + $left - $slide-width)
+        );
       }
       > div:first-child {
         text-align: left;
