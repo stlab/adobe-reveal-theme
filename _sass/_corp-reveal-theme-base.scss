@@ -1,0 +1,50 @@
+@import 'corp-palette';
+
+// Default mixins and settings -----------------
+@import 'theme/template/mixins';
+@import 'theme/template/settings';
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(#{$assets}/js/reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css);
+
+section.has-dark-background,
+section.has-dark-background h1,
+section.has-dark-background h2,
+section.has-dark-background h3,
+section.has-dark-background h4,
+section.has-dark-background h5,
+section.has-dark-background h6 {
+  color: #fff;
+}
+
+// Override theme settings (see {{assets}}js/reveal.js/css/theme/template/settings.scss)
+$backgroundColor: $white;
+
+$backgroundColor: $corp-white;
+
+$mainColor: black;
+$headingColor: $corp-red;
+
+$mainFontSize: 44px;
+$mainFont: 'adobe-clean-semilight', sans-serif;
+$headingFont: 'adobe-clean', sans-serif;
+$headingFontWeight: 800;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$linkColor: #5F5F5F;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: #B3D7FF; // standard Keynote selection background.
+$heading1Size: 72px;
+$heading2Size: 56px;
+$heading3Size: 40px;
+$heading4Size: 34px;
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color($white);
+
+// Theme template ------------------------------
+@import 'theme/template/theme';
+// ---------------------------------------------
