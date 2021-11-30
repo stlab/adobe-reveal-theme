@@ -8,17 +8,13 @@ $assets: {{"assets" | relative_url}};
 // from the theme and reuses it
 @import 'corp-reveal-theme-base';
 
-// Standard reveal themes hardcode the main font's weight to normal, so add a
-// variable and use it wherever the main font is set by the reveal theme.  The
-// definition of a plain CSS root variable is unnecessary, but that's how reveal
-// does things.
-$mainFontWeight: 300;
-:root {
-  --r-main-font-weight: $mainFontWeight;
+// Put a box shadow around the actual slide boundary.
+.reveal .slides {
+  background-color: $backgroundColor;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-.reveal {
-  font-weight: var(--r-main-font-weight);
-}
+
+@import 'adobe-clean';
 
 $title-bevel-left: 1128;
 $title-bevel-right: 1574;
@@ -38,37 +34,6 @@ $title-logo-height: 153px;
 $canvas-color: #E5E5E5; // Color of area around slide.
 
 $background-color: #fff;
-
-@mixin adobe-clean-common {
-  line-height: 127.5%;
-  letter-spacing: normal;
-  text-shadow: none;
-  text-transform: none;
-}
-
-@mixin adobe-clean-semilight {
-  @include adobe-clean-common;
-  font-family: adobe-clean-semilight, sans-serif;
-  font-weight: 300;
-}
-
-@mixin adobe-clean-regular {
-  @include adobe-clean-common;
-  font-family: adobe-clean, sans-serif;
-  font-weight: 400;
-}
-
-@mixin adobe-clean-bold {
-  @include adobe-clean-common;
-  font-family: adobe-clean, sans-serif;
-  font-weight: 700;
-}
-
-@mixin adobe-clean-extrabold {
-  @include adobe-clean-common;
-  font-family: adobe-clean, sans-serif;
-  font-weight: 800;
-}
 
 @mixin layout-image-placement($left, $top, $width, $height) {
   position:absolute;
@@ -113,11 +78,6 @@ $selection-color: #fff;
   color: $selection-color;
   background: $selection-background-color;
   text-shadow: none;
-}
-
-.reveal .slides {
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  background-color: $background-color;
 }
 
 .reveal .slides section,
@@ -167,7 +127,7 @@ $selection-color: #fff;
     @include keynote-object;
     @include adobe-clean-extrabold;
     word-wrap: break-word;
-    color: $corporate-red;
+    color: $corp-red;
     padding: 4px; // keynote "text inset".
   }
 

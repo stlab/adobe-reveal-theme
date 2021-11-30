@@ -1,3 +1,5 @@
+// This file defines all the basic elements of an ordinary reveal theme,
+// but consistently with the corporate theme.
 @import 'corp-palette';
 
 // Default mixins and settings -----------------
@@ -20,7 +22,6 @@ section.has-dark-background h6 {
 }
 
 // Override theme settings (see {{assets}}js/reveal.js/css/theme/template/settings.scss)
-$backgroundColor: $white;
 
 $backgroundColor: $corp-white;
 
@@ -43,8 +44,20 @@ $heading3Size: 40px;
 $heading4Size: 34px;
 
 // Change text colors against dark slide backgrounds
-@include dark-bg-text-color($white);
+@include dark-bg-text-color($corp-white);
 
 // Theme template ------------------------------
 @import 'theme/template/theme';
 // ---------------------------------------------
+
+// Standard reveal themes hardcode the main font's weight to normal, so add a
+// variable and use it wherever the main font is set by the reveal theme.  The
+// definition of a plain CSS root variable is unnecessary, but that's how reveal
+// does things.
+$mainFontWeight: 300;
+:root {
+  --r-main-font-weight: $mainFontWeight;
+}
+.reveal {
+  font-weight: var(--r-main-font-weight);
+}
