@@ -14,8 +14,6 @@ $assets: {{"assets" | relative_url}};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-@import 'adobe-clean';
-
 // When a thing has explicit width or height, override the theme's limits.
 // see https://github.com/hakimel/reveal.js/pull/3084.
 .reveal *[width] {
@@ -65,7 +63,6 @@ $canvas-color: #E5E5E5; // Color of area around slide.
 }
 
 $main-color: #000;
-$block-margin: 20px;
 $heading-margin: 0 0 20px 0;
 $code-font: source-sans-pro, monospace;
 $link-color: #5F5F5F;
@@ -125,8 +122,9 @@ $selection-color: #fff;
   p {
     @include keynote-line-spacing(1);
     margin-top: 36px;
+    margin-bottom: 36px;
     &:first-child { margin-top: 0px; }
-    margin-bottom: 0px;
+    &:last-child { margin-bottom: 0px; }
   }
   p > img { margin-bottom: 0; }
 
@@ -639,138 +637,6 @@ $selection-color: #fff;
     }
   }
 }
-
-/*********************************************
- * OTHER
- *********************************************/
-
-/* Remove trailing margins after titles */
-.reveal h1:last-child,
-.reveal h2:last-child,
-.reveal h3:last-child,
-.reveal h4:last-child,
-.reveal h5:last-child,
-.reveal h6:last-child {
-  margin-bottom: 0;
-}
-
-.reveal strong,
-.reveal b {
-  @include adobe-clean-extrabold;
-}
-
-.reveal em {
-  font-style: italic;
-}
-
-.reveal blockquote {
-  display: block;
-  position: relative;
-  width: 70%;
-  margin: $block-margin auto;
-  padding: 5px;
-  font-style: italic;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
-}
-
-.reveal blockquote p:first-child,
-.reveal blockquote p:last-child {
-  display: inline-block;
-}
-
-.reveal q {
-  font-style: italic;
-}
-
-.reveal pre {
-  display: block;
-  position: relative;
-  width: 90%;
-  margin: $block-margin auto;
-  text-align: left;
-  font-size: 0.55em;
-  font-family: $code-font;
-  line-height: 1.2em;
-  word-wrap: break-word;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-.reveal code {
-  font-family: $code-font;
-  text-transform: none;
-  tab-size: 2;
-}
-
-.reveal pre code {
-  display: block;
-  padding: 5px;
-  overflow: auto;
-  max-height: 400px;
-  word-wrap: normal;
-}
-
-.reveal .code-wrapper {
-  white-space: normal;
-}
-
-.reveal .code-wrapper code {
-  white-space: pre;
-}
-
-.reveal table {
-  margin: auto;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.reveal table th {
-  @include adobe-clean-extrabold;
-}
-
-.reveal table th,
-.reveal table td {
-  text-align: left;
-  padding: 0.2em 0.5em 0.2em 0.5em;
-  border-bottom: 1px solid;
-}
-
-.reveal table th[align=center],
-.reveal table td[align=center] {
-  text-align: center;
-}
-
-.reveal table th[align=right],
-.reveal table td[align=right] {
-  text-align: right;
-}
-
-.reveal table tbody tr:last-child th,
-.reveal table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.reveal sup {
-  vertical-align: super;
-  font-size: smaller;
-}
-
-.reveal sub {
-  vertical-align: sub;
-  font-size: smaller;
-}
-
-.reveal small {
-  display: inline-block;
-  font-size: 0.6em;
-  line-height: 1.2em;
-  vertical-align: top;
-}
-
-.reveal small * {
-  vertical-align: top;
-}
-
 
 // Local Variables:
 // css-indent-offset: 2

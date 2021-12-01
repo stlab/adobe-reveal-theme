@@ -10,6 +10,7 @@
 
 // Include theme-specific fonts
 @import url(#{$assets}/js/reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css);
+@import 'adobe-clean';
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -23,25 +24,41 @@ section.has-dark-background h6 {
 
 // Override theme settings (see {{assets}}js/reveal.js/css/theme/template/settings.scss)
 
+// Background of the presentation
 $backgroundColor: $corp-white;
 
-$mainColor: black;
-$headingColor: $corp-red;
-
+// Primary/body text
 $mainFontSize: 44px;
 $mainFont: 'adobe-clean-semilight', sans-serif;
+$mainColor: black;
+
+// Vertical spacing between blocks of text
+$blockMargin: 36px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
 $headingFont: 'adobe-clean', sans-serif;
-$headingFontWeight: 800;
-$headingTextShadow: none;
+$headingColor: $corp-red;
+$headingLineHeight: 0.9;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
-$linkColor: #5F5F5F;
-$linkColorHover: lighten( $linkColor, 15% );
-$selectionBackgroundColor: #B3D7FF; // standard Keynote selection background.
+$headingTextShadow: none;
+$headingFontWeight: 800;
+
 $heading1Size: 72px;
 $heading2Size: 56px;
 $heading3Size: 40px;
 $heading4Size: 34px;
+
+$codeFont: Source Sans Pro, monospace;
+
+// Links and actions
+$linkColor: #5F5F5F;
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #B3D7FF; // standard Keynote selection background.
+$selectionColor: black;
 
 // Change text colors against dark slide backgrounds
 @include dark-bg-text-color($corp-white);
@@ -62,6 +79,40 @@ $mainFontWeight: 300;
   font-weight: var(--r-main-font-weight);
 }
 
+// ------------------------------------------------------------
+// Override things that come from the standard theme framework.
+// ------------------------------------------------------------
 .reveal .slides {
     text-align: left;
+}
+
+.reveal strong,
+.reveal b {
+  @include adobe-clean-extrabold;
+}
+
+.reveal blockquote {
+  margin: $blockMargin auto;
+}
+
+.reveal pre {
+  margin: $blockMargin auto;
+  font-family: $codeFont;
+}
+
+.reveal code {
+  font-family: $codeFont;
+}
+
+.reveal table th {
+  @include adobe-clean-extrabold;
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+  display: inline-block;
+}
+
+.reveal q {
+  font-style: italic;
 }
