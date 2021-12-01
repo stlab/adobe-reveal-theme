@@ -16,6 +16,18 @@ $assets: {{"assets" | relative_url}};
 
 @import 'adobe-clean';
 
+// When a thing has explicit width or height, override the theme's limits.
+// see https://github.com/hakimel/reveal.js/pull/3084.
+.reveal *[width] {
+  max-width: initial;
+}
+.reveal *[height] {
+  max-height: initial;
+}
+
+// Never stretch images by default.
+img { object-fit: cover; }
+
 $title-bevel-left: 1128;
 $title-bevel-right: 1574;
 $about-bevel-left: 433;
@@ -32,8 +44,6 @@ $title-logo-top: 460px;
 $title-logo-width: 111px;
 $title-logo-height: 153px;
 $canvas-color: #E5E5E5; // Color of area around slide.
-
-$background-color: #fff;
 
 @mixin layout-image-placement($left, $top, $width, $height) {
   position:absolute;
@@ -105,10 +115,7 @@ $selection-color: #fff;
 
 // Rendering for slide content (i.e. not things like speaker notes).
 .reveal .slides section {
-  @include adobe-clean-semilight;
-  font-size: 44px;
-  color: $main-color;
-  text-align: left;
+//  @include adobe-clean-semilight;
 
   // All things at the top level of the layout div are given absolute position.
   div.layout > * {
@@ -764,71 +771,6 @@ $selection-color: #fff;
   vertical-align: top;
 }
 
-.reveal img {
-  margin: 0;
-  object-fit: cover;
-}
-
-/*********************************************
- * LINKS
- *********************************************/
-.reveal a {
-  color: $link-color;
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.reveal a:hover {
-  color: $link-color-hover;
-  text-shadow: none;
-  border: none;
-}
-
-.reveal .roll span:after {
-  color: #fff;
-  background: $link-color-dark;
-}
-
-/*********************************************
- * Frame helper
- *********************************************/
-.reveal .r-frame {
-  border: 4px solid $main-color;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-}
-
-.reveal a .r-frame {
-  transition: all 0.15s linear;
-}
-
-.reveal a:hover .r-frame {
-  border-color: $link-color;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
-}
-
-/*********************************************
- * NAVIGATION CONTROLS
- *********************************************/
-.reveal .controls {
-  color: $link-color;
-}
-
-/*********************************************
- * PROGRESS BAR
- *********************************************/
-.reveal .progress {
-  background: rgba(0, 0, 0, 0.2);
-  color: $link-color;
-}
-
-/*********************************************
- * PRINT BACKGROUND
- *********************************************/
-@media print {
-  .backgrounds {
-    background-color: $background-color;
-  }
-}
 
 // Local Variables:
 // css-indent-offset: 2

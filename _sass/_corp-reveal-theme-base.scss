@@ -61,3 +61,7 @@ $mainFontWeight: 300;
 .reveal {
   font-weight: var(--r-main-font-weight);
 }
+
+.reveal .slides {
+    text-align: left;
+}
