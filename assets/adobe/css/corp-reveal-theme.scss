@@ -123,6 +123,8 @@ $selection-color: #fff;
     @include keynote-line-spacing(1);
     margin-top: 36px;
     margin-bottom: 36px;
+  }
+  .body > p {
     &:first-child { margin-top: 0px; }
     &:last-child { margin-bottom: 0px; }
   }
@@ -174,7 +176,6 @@ $selection-color: #fff;
     }
 
     ol, dl, ul {
-      width: 100%;
       text-align: left;
       margin-top: 0px;
       margin-bottom: 0px;

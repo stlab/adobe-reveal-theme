@@ -120,3 +120,12 @@ $mainFontWeight: 300;
 .reveal dl, .reveal ul {
     margin: 0px;
 }
+
+.reveal .speaker-notes {
+    ul, ol {
+        ul, ol {
+            margin-left: 0px;
+            padding: .5em;
+        }
+    }
+}
