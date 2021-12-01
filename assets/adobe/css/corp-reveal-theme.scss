@@ -212,6 +212,7 @@ $selection-color: #fff;
           content: "•";
           position: absolute;
           left: -$bullet-offset;
+          top: 0.25em;
           font-size: 0.7em;
         }
         margin-left: $bullet-offset;
