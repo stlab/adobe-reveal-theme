@@ -85,54 +85,49 @@ $mainFontWeight: 300;
 .reveal {
   .slides {
     text-align: left;
-  }
 
-  strong,
-  b {
-    @include adobe-clean-extrabold;
-  }
+    strong,
+    b {
+      @include adobe-clean-extrabold;
+    }
 
-  blockquote {
-    margin: $blockMargin auto;
-  }
+    blockquote {
+      margin: $blockMargin auto;
+    }
 
-  pre {
-    margin: $blockMargin auto;
-    font-family: $codeFont;
-  }
+    pre {
+      margin: $blockMargin auto;
+      font-family: $codeFont;
+    }
 
-  code {
-    font-family: $codeFont;
-  }
+    code {
+      font-family: $codeFont;
+    }
 
-  table th {
-    @include adobe-clean-extrabold;
-  }
+    table th {
+      @include adobe-clean-extrabold;
+    }
 
-  blockquote p:first-child,
-  blockquote p:last-child {
-    display: inline-block;
-  }
+    blockquote p:first-child,
+    blockquote p:last-child {
+      display: inline-block;
+    }
 
-  q {
-    font-style: italic;
-  }
+    q {
+      font-style: italic;
+    }
 
-  dl, ul {
-    margin: 0px;
-  }
+    dl, ul {
+      margin: 0px;
+    }
 
-  div { margin: 0px; padding: 0px; }
+    div { margin: 0px; padding: 0px; }
+  }
 
   // Undo things that shouldn't apply to speaker notes.
   // See https://github.com/hakimel/reveal.js/issues/3085
   .speaker-notes {
-    ul, ol {
-      ul, ol {
-        margin-left: 0px;
-        padding: .5em;
-      }
-    }
+    * { all: revert; }
   }
 }
 // Local Variables:
