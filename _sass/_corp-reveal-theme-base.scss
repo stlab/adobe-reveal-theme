@@ -82,50 +82,60 @@ $mainFontWeight: 300;
 // ------------------------------------------------------------
 // Override things that come from the standard theme framework.
 // ------------------------------------------------------------
-.reveal .slides {
+.reveal {
+  .slides {
     text-align: left;
-}
+  }
 
-.reveal strong,
-.reveal b {
-  @include adobe-clean-extrabold;
-}
+  strong,
+  b {
+    @include adobe-clean-extrabold;
+  }
 
-.reveal blockquote {
-  margin: $blockMargin auto;
-}
+  blockquote {
+    margin: $blockMargin auto;
+  }
 
-.reveal pre {
-  margin: $blockMargin auto;
-  font-family: $codeFont;
-}
+  pre {
+    margin: $blockMargin auto;
+    font-family: $codeFont;
+  }
 
-.reveal code {
-  font-family: $codeFont;
-}
+  code {
+    font-family: $codeFont;
+  }
 
-.reveal table th {
-  @include adobe-clean-extrabold;
-}
+  table th {
+    @include adobe-clean-extrabold;
+  }
 
-.reveal blockquote p:first-child,
-.reveal blockquote p:last-child {
-  display: inline-block;
-}
+  blockquote p:first-child,
+  blockquote p:last-child {
+    display: inline-block;
+  }
 
-.reveal q {
-  font-style: italic;
-}
+  q {
+    font-style: italic;
+  }
 
-.reveal dl, .reveal ul {
+  dl, ul {
     margin: 0px;
-}
+  }
 
-.reveal .speaker-notes {
+  div { margin: 0px; padding: 0px; }
+
+  // Undo things that shouldn't apply to speaker notes.
+  // See https://github.com/hakimel/reveal.js/issues/3085
+  .speaker-notes {
     ul, ol {
-        ul, ol {
-            margin-left: 0px;
-            padding: .5em;
-        }
+      ul, ol {
+        margin-left: 0px;
+        padding: .5em;
+      }
     }
+  }
 }
+// Local Variables:
+// css-indent-offset: 2
+// smie-indent-basic: 2
+// End:
