@@ -1,17 +1,22 @@
 ---
 ---
 $assets: {{"assets" | relative_url}};
+//$assets: '/Users/dave/src/adobe-internal-presentations/assets';
 @import 'corp-palette';
 
 // A basic standard reveal theme is crucial for proper interop with the
 // reveal.js ecosystem.  For example, the menu plugin plucks style information
 // from the theme and reuses it
 @import 'corp-reveal-theme-base';
+@import 'keynote';
 
-// Put a box shadow around the actual slide boundary.
+// Have the slide cast a shadow, and gray the surroundings.
 .reveal .slides {
   background-color: $backgroundColor;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.reveal-viewport {
+  background-color: #E5E5E5; // Color of area around slide.
 }
 
 // When a thing has explicit width or height, override the theme's limits.
@@ -26,187 +31,49 @@ $assets: {{"assets" | relative_url}};
 // Never stretch images by default.
 img { object-fit: cover; }
 
-$titleBevelLeft: 1128;
-$titleBevelRight: 1574;
-$aboutBevelLeft: 433;
-$aboutBevelWidth: 453;
-$aboutBevelRight: $aboutBevelLeft + $aboutBevelWidth;
-
-$slideWidth: 1920px;
-$slideHeight: 1080px;
-$slideLeftInset: 52px;
-$slideInsetWidth: 1889px - $slideLeftInset;
-
-$titleLogoLeft: 137px;
-$titleLogoTop: 460px;
-$titleLogoWidth: 111px;
-$titleLogoHeight: 153px;
-$canvasColor: #E5E5E5; // Color of area around slide.
-
-@mixin layout-image-placement($left, $top, $width, $height) {
-  position:absolute;
-  padding: 0px;
-  left: px($left); top: px($top);
-  width: px($width); height: px($height);
-  background-size: px($width) px($height);
-  content: "";
+%text-box {
+  @extend %keynote-object;
+  @include keynote-text-inset(4);
 }
 
-@mixin layout-image($url, $left, $top, $width, $height) {
-  background-image: url($url);
-  @include layout-image-placement($left, $top, $width, $height);
-}
-
-@mixin keynote-line-spacing($n) {
-  // DWA - Don't yet know how to do this properly, because it doesn't affect the
-  // position of the first line in a text box.
-}
-
-$mainColor: #000;
-$headingMargin: 0 0 20px 0;
-$codeFont: source-sans-pro, monospace;
-$linkColor: #5F5F5F;
-$linkColorDark: #1a53a1;
-$linkColorHover: #6ca0e8;
-$selectionBackgroundColor: #98bdef;
-$selectionColor: #fff;
-
-.reveal-viewport {
-  background-color: $canvasColor;
-}
-
-.reveal ::selection {
-  color: $selectionColor;
-  background: $selectionBackgroundColor;
-  text-shadow: none;
-}
-
-.reveal ::-moz-selection {
-  color: $selectionColor;
-  background: $selectionBackgroundColor;
-  text-shadow: none;
-}
-
-.reveal .slides section,
-.reveal .slides section > section {
-  font-weight: inherit;
-}
-
-@mixin keynote-object {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  position: absolute;
-  box-sizing: border-box;
-}
-
-@function log2($n) {
-    @if $n <= 1 { @return 0; }
-    @return 1 + log2($n / 2);
-}
-
-// Returns $n if it has units, and $n * 1px otherwise.
-@function px($n) {
-  @if unitless($n) { @return $n * 1px; }
-  @return $n;
-}
-
-// Rendering for slide content (i.e. not things like speaker notes).
-.reveal .slides section {
-//  @include adobe-clean-semilight;
-
-  // All things at the top level of the layout div are given absolute position.
-  div.layout > * {
-    position: absolute;
+.reveal .slides {
+  h1, h2, h3 {
+    @extend %text-box;
   }
-
-  p {
-    @include keynote-line-spacing(1);
-    margin-top: 36px;
-    margin-bottom: 36px;
-  }
-  .body > p {
-    &:first-child { margin-top: 0px; }
-    &:last-child { margin-bottom: 0px; }
-  }
-  p > img { margin-bottom: 0; }
-
-  h1, h2, h3, h4, h5, h6 {
-    @include keynote-object;
-    @include adobe-clean-extrabold;
-    word-wrap: break-word;
-    color: $corporateRed;
-    padding: 4px; // keynote "text inset".
-  }
-
-  h1 { font-size: 72px; }
   h2 {
-    font-size: 56px;
-    left: 49px; top: 52px;
-    width: 1810px; height: 102px;
-    @include keynote-line-spacing(0.8);
+    @include keynote-box(49, 52, 1810, 102);
+    @include keynote-text-inset(4);
+    @include adobe-clean('extrabold', 56, $lineSpacing: 0.8);
   }
-  h3 { font-size: 40px; }
-  h4 { font-size: 34px; }
-
-
-   h2 ~ h3.subtitle {
-    left: 49px; top: 108px;
-    width: 1810px; height: 59px;
-  }
-
   .body {
-    padding: 4px; // keynote "text inset".
-    font-size: 44;
-    left: 49px; top: 225px;
-    width: 1822px; height: 793px;
+    @include keynote-box(49, 225, 1822, 793);
+    @include keynote-text-inset(4);
+    @include keynote-before-paragraph-spacing(36);
 
-    ol {
-      list-style-type: decimal;
+    %block-level-text {
+      padding: 0px;
+      @include adobe-clean('semilight', 44, $lineSpacing: 1);
     }
 
-    li, dd, dt {
-      font-size: 44px;
-      li, dd, dt {
-        font-size: 40px;
-        li, dd, dt {
-          font-size: 36px;
-          line-height: 121%; // DWA this is a hack.
+    :is(ul, ol, dl) {
+      @include adobe-clean('semilight', 44, $lineSpacing: 1);
+      :is(ul, ol, dl) {
+        @include adobe-clean('semilight', 40, $lineSpacing: 1);
+        :is(ul, ol, dl) {
+          @include adobe-clean('semilight', 36, $lineSpacing: 1);
         }
       }
     }
 
-    ol, dl, ul {
-      text-align: left;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      padding-inline-start: 0;
-
-      ul {
-        margin-top: 36px;
-      }
-
-      ol, dl, ul {
-        display: block;
-        margin-left: 0px;
-      }
-    }
-
-    dt {
-        @include adobe-clean-extrabold;
-    }
-
-    dd {
-        margin-left: 40px;
-    }
-
-    li {
-      &:not(:first-child) {
-        margin-top: 36px;
+    :is(li, dd, dt) :is(li, dd, dt) {
+      :is(li, dd, dt) {
+        @include adobe-clean('semilight', 36, $lineSpacing: 1);
       }
     }
 
     // Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
     ul {
+      padding-inline-start: 0;
       $bulletOffset: 37px;
       > li {
         &::before {
@@ -220,422 +87,6 @@ $selectionColor: #fff;
         list-style-type: none;
         position: relative;
       }
-    }
-  }
-
-  .background {
-    @include adobe-clean-regular;
-    font-size: 16px;
-    z-index: -1000;
-    left: 0px; top: 0px;
-    padding: 0px;
-    margin: 0px;
-    width: $slideWidth; height: $slideHeight;
-    > * {
-      width: $slideWidth; height: $slideHeight;
-      position: absolute;
-    }
-  }
-
-  .background::before {
-    @include layout-image(
-      "../img/Adobe_Corporate_Horizontal_Lockup_NEW-Red_RGB-1894.png",
-      61, 1036, 89, 23);
-  }
-
-  .background::after {
-    @include keynote-object;
-    left: 1373px; top: 1033px;
-    width: 495px; height: 34px;
-    padding: 7px;
-    content: "© 2021 Adobe. All Rights Reserved. Adobe Confidential.";
-    text-align: right;
-    color: #6E6E6E;
-  }
-
-  div.layout-manual {
-    .body {
-      padding: 0px;
-      left: 0px; top: 0px;
-      width: $slideWidth; height: $slideHeight;
-      > * { position: absolute; }
-      > div.text-box {
-        padding: 4px; // keynote "text inset".
-      }
-    }
-  }
-
-  @mixin no-footer {
-    .background::before, .background::after {
-      content: none;
-      background-image: none;
-    }
-  }
-
-  @mixin section-divider-alt-background {
-    @include no-footer;
-    .background::before {
-      @include layout-image(
-        "../img/divider-std-white-alt-1553.png",
-        0, 0, $slideWidth, $slideHeight);
-    }
-  }
-
-  @mixin section-divider-background {
-    @include no-footer;
-    .background::before {
-      @include layout-image(
-        "../img/divider-std-white-1544.png", 0, 0, $slideWidth, $slideHeight);
-    }
-  }
-
-  // DWA FIXME: some of these constants don't need to be stamped out repeatedly
-  // by these @mixins; instead they could be factored into non-artist-specific
-  // SCSS.
-  @mixin community-credit($artist, $country) {
-    left: $slideLeftInset;
-    width: $slideInsetWidth;
-    height: 39px;
-    @include keynote-object;
-    @include adobe-clean-regular;
-    font-size: 20px;
-    color: white;
-    > span {
-      &:nth-child(1) {
-        &::before { content: "Artwork by "; }
-        &::after {
-          @include adobe-clean-extrabold;
-          content: $artist;
-        }
-      }
-      &:nth-child(2) {
-        &::before { content: " / "; }
-        &::after { content: $country; }
-      }
-    }
-  }
-
-  @mixin title-art($imageUrl, $left, $top, $width, $height, $artist, $country) {
-    // Give measurements px units if not otherwise specified
-    $left: px($left); $top: px($top); $width: px($width); $height: px($height);
-    .background {
-      &::after {
-        @include layout-image($imageUrl, $left, $top, $width, $height);
-        clip-path: polygon(
-          ($titleBevelRight - $left) (-$top),
-          ($slideWidth - $left) (-$top),
-          ($slideWidth - $left) ($slideHeight - $top),
-          ($titleBevelLeft - $left) ($slideHeight - $top));
-        z-index: -1;
-      }
-
-      // Credits
-      > div:first-child(1) {
-        text-align: right;
-        top: 1019px;
-        @include community-credit($artist, $country);
-      }
-    }
-  }
-
-  @mixin community-closer(
-    $imageUrl, $left, $top, $width, $height, $artist, $country) {
-    // Give measurements px units if not otherwise specified
-    $left: px($left); $top: px($top); $width: px($width); $height: px($height);
-    .background {
-      &::before {
-        @include layout-image($imageUrl, $left, $top, $width, $height);
-        clip-path: inset(
-          (-$top) (-$left)
-          ($height + $top - $slideHeight) ($width + $left - $slideWidth)
-        );
-      }
-      > div:first-child {
-        text-align: left;
-        top: 958px;
-        @include community-credit($artist, $country);
-      }
-    }
-  }
-
-  div.layout-community-title {
-    @include no-footer;
-    h1 {
-      left: 348px; top: 441px;
-      width: 932px; height: 192px;
-      @include keynote-line-spacing(1);
-      font-size: 72px;
-    }
-    h2 {
-      left: 348px; top: 649px;
-      width: 930px; height: 170px;
-      @include keynote-line-spacing(1);
-      font-size: 40px;
-    }
-
-    .background::before {
-      @include layout-image(
-        "../img/image13-22.tif",
-        $titleLogoLeft, $titleLogoTop,
-        $titleLogoWidth, $titleLogoHeight);
-    }
-
-    &.evans {
-      @include title-art(
-        "../img/image12-20.jpeg", 627, -149, 1304, 1301, "Davy Evans", "UK");
-    }
-
-    &.swopes {
-      @include title-art(
-        "../img/image14-23.jpeg", 975, 0, 1080, 1080, "Elise Swopes", "USA");
-    }
-
-    &.sato {
-      @include title-art(
-        "../img/image15-25.jpeg", 960, -14, 1110, 1109, "Momomi Sato", "Japan");
-    }
-
-    &.zhu {
-      @include title-art(
-        "../img/image16-27.jpeg", 544, 0, 1378, 1080, "UV Zhu", "China");
-    }
-  }
-
-  @mixin about-art($imageUrl, $left, $top, $width, $height, $artist, $story) {
-    $left: px($left); $top: px($top);
-    $width: px($width); $height: px($height);
-
-    .background {
-      &::before {
-        @include layout-image($imageUrl, $left, $top, $width, $height);
-        clip-path: polygon(
-          ($aboutBevelLeft - $left) (0 - $top),
-          ($slideWidth - $left) (0 - $top),
-          ($slideWidth - $left) ($slideHeight - $top),
-          ($aboutBevelRight - $left) ($slideHeight - $top));
-      }
-
-      > div:nth-child(1) {
-          @include keynote-object;
-          left: $slideLeftInset; top: 438px;
-          width: 540px; height: 574px;
-          @include keynote-line-spacing(1.1);
-          > span:first-child {
-            &::before {
-              display: block;
-              margin-bottom: 16px;
-              @include adobe-clean-extrabold;
-              font-size: 28px;
-              content: $artist;
-            }
-            &::after {
-              display: block;
-              @include adobe-clean-regular;
-              font-size: 24px;
-              content: $story;
-            }
-          }
-      }
-    }
-  }
-
-  @mixin made-with($image1Url, $image1Width, $image2Url, $image2Width) {
-    .background > div:nth-child(2) {
-      &::before { content: "Made with" }
-      > span:first-child {
-        &::before {
-          @include layout-image($image1Url, 59, 978, $image1Width, 35);
-        }
-        &::after {
-          @include layout-image($image2Url, 310, 978, $image2Width, 35);
-        }
-      }
-    }
-  }
-
-  div.layout-community-about {
-    @include no-footer;
-    h2 {
-      left: $slideLeftInset; top: 51px;
-      width: 1920px; height: 46px;
-      @include keynote-line-spacing(1);
-      font-size: 26px;
-    }
-
-    .background > div:nth-child(2)::before {
-      position: absolute;
-      @include keynote-object;
-      left: $slideLeftInset; top: 946px;
-      width: 69px; height: 29px;
-      @include adobe-clean-bold;
-      font-size: 12px;
-    }
-
-    &.evans {
-      @include about-art(
-        "../img/image12-20.jpeg", 249px, -433px, 1711px, 1711px, "Davy Evans",
-        "UK-based digital artist and motion designer Davy Evans fuses analog"
-          " and digital techniques to create ethereal, abstract imagery"
-          " inspired by nature. Experimenting with photography, light, and"
-          " liquid, he uses Adobe Photoshop and Adobe After Effects to compose"
-          " otherworldly scenes. As communities faced the isolation of 2020,"
-          " Evans saw the importance of maintaining a connection to natural"
-          " phenomena in this piece. He used Adobe Camera Raw and Adobe"
-          " Photoshop to create beautiful floral compositions that represent"
-          " the separation we all felt from the world outside our windows.");
-
-      @include made-with(
-        "../img/image20-38.tif", 220, "../img/image21-40.tif", 234);
-    }
-    &.swopes {
-      @include about-art(
-        "../img/image14-23.jpeg", 431px, -143px, 1489px, 1489px, "Elise Swopes",
-        "New York City-based photographer and graphic designer Elise Swopes"
-          " manipulates the everyday into unexpected works of art. With her"
-          " mobile phone, Adobe Photoshop, and Adobe Photoshop Lightroom, she"
-          " creates whimsical, weird, dreamlike scenes. This piece was"
-          " inspired from a recent visit to Copenhagen, where the bold colors"
-          " and shapes of Danish architecture made quite an impression. A"
-          " brilliant yellow apartment building inspired Swopes to create"
-          " another entry in her surrealistic series featuring giraffes in"
-          " unusual settings.");
-      @include made-with(
-        "../img/image20-38.tif", 220, "../img/image25-45.tif", 332);
-    }
-
-    &.sato {
-      @include about-art(
-        "../img/image15-25.jpeg", 431px, -182px, 1658px, 1658px, "Momomi Sato",
-        "Tokyo-based artist Momomi Sato meticulously applies paint using"
-          " toothpicks to create fanciful, pointillistic works of animals,"
-          " patterns, and other colorful subjects. With a style that ranges"
-          " from abstract to kawaii, Sato’s paintings are as charming as they"
-          " are beautiful. For this piece, a train ride prompted an"
-          " exploration of systems that influence daily life. As she stared"
-          " intently at the pattern on the seats, the lines and shapes seemed"
-          " to move and draw Sato into another dimension. She recreated the"
-          " sensation by hand with acrylic paint on canvas.");
-    }
-
-    &.zhu {
-      @include about-art(
-        "../img/image16-27.jpeg", 386px, -40px, 1535px, 1206px, "UV Zhu",
-        "With an eye for the abstract, Chinese artist UV Zhu remixes patterns,"
-          " textures, and colors to explore the future of fashion. Using Adobe"
-          " Photoshop, Adobe Illustrator, and Maxon Cinema 4D, he blends"
-          " surreal settings, organic shapes, and even favorite foods to"
-          " challenge convention. Inspired by his travels—around the Internet"
-          " and in real life—for this piece, UV fantasized about characters"
-          " moving through an imaginary world, the things they might do, and"
-          " what they might wear. The result is a bright, colorful expression"
-          " of joy and positivity.");
-      @include made-with(
-        "../img/image20-38.tif", 220, "../img/image27-48.tif", 214);
-    }
-  }
-
-  div.layout-community-closer {
-    h1, h2, h3, h4, h5, h6 {
-      display: none;
-    }
-    .background::after {
-      @include layout-image("../img/image22-42.tif", 907, 466, 107, 148);
-    }
-    .background > div:nth-child(2) {
-      &::before { @include layout-image-placement(59, 1001, 36, 35); }
-      &::after { @include layout-image-placement(107, 1001, 36, 35); }
-    }
-
-    &.evans {
-      @include community-closer(
-        "../img/image12-20.jpeg", -3, -459, 1925, 1925, "Davy Evans", "UK");
-      .background > div:nth-child(2) {
-        &::before { background-image: url("../img/image23-43.tif"); }
-        &::after { background-image: url("../img/image24-44.tif"); }
-      }
-    }
-
-    &.swopes {
-      @include community-closer(
-        "../img/image14-23.jpeg", -58, -467, 1981, 1981, "Elise Swopes", "USA");
-      .background > div:nth-child(2) {
-        &::before { background-image: url("../img/image23-43.tif"); }
-        &::after { background-image: url("../img/image26-47.tif"); }
-      }
-    }
-
-    &.sato {
-      @include community-closer(
-        "../img/image15-25.jpeg", -15, -422, 1950, 1950, "Momomi Sato", "Japan");
-      .background > div:first-child { top: 997px; }
-    }
-
-    &.zhu {
-      @include community-closer(
-        "../img/image16-27.jpeg", 0, -196, 1920, 1509, "UV Zhu", "China");
-      .background > div:nth-child(2) {
-        &::before { background-image: url("../img/image23-43.tif"); }
-        &::after { background-image: url("../img/image28-50.tif"); }
-      }
-    }
-  }
-
-  div.layout-section-divider, div.layout-section-divider-alt {
-    h1 {
-      left: 123px; top: 446px;
-      width: 1146px; height: 351px;
-      @include keynote-line-spacing(0.8);
-    }
-    .body { width: 0; height: 0; }
-  }
-
-  div.layout-section-divider {
-    @include section-divider-background;
-  }
-
-  div.layout-section-divider-alt, div.layout-agenda {
-    @include section-divider-alt-background;
-  }
-
-  div.layout-agenda {
-    .body { left:0; top: 0; width: $slideWidth; height: $slideHeight }
-    table {
-      position: absolute; left: 126px; top: 303px; width: 1261px; height: 594px;
-      font-size: 42px;
-    }
-    h2 {
-      left: 126px; top: 144px;
-      width: 1261px; height: 92px;
-      @include keynote-line-spacing(1);
-      font-size: 72px;
-    }
-  }
-
-  div.layout-title-standard {
-    .body { width: 0; height: 0; }
-    @include no-footer;
-    * { color: white; }
-    h1 {
-      left: 346px; top: 443px;
-      width: 965px; height: 186px;
-      @include keynote-line-spacing(0.9);
-    }
-    h2 {
-      left: 351px; top: 654px;
-      width: 982px; height: 303px;
-      @include keynote-line-spacing(1);
-      font-size: 40px;
-    }
-
-    .background::before {
-      @include layout-image(
-        "../img/title-standard-1521.png", 0, 0, $slideWidth, $slideHeight);
-    }
-
-    .background::after {
-      @include layout-image(
-        "../img/pasted-image-8952.pdf", $titleLogoLeft, $titleLogoTop,
-        $titleLogoWidth, $titleLogoHeight);
     }
   }
 }
