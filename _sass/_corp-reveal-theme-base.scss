@@ -38,7 +38,9 @@ $blockMargin: 36px;
 $headingMargin: 0 0 $blockMargin 0;
 $headingFont: 'adobe-clean', sans-serif;
 $headingColor: $corporateRed;
-$headingLineHeight: 0.9;
+// 0.9 keynote lines of adobe clean. 1.252 is calculated per math in
+// corp-reveal-theme.scss.
+$headingLineHeight: 0.9 * 1.252;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
 $headingTextShadow: none;
@@ -104,6 +106,10 @@ $mainFontWeight: 300;
 .reveal {
   .slides {
     text-align: left;
+
+    p {
+      line-height: inherit;
+    }
 
     strong,
     b {

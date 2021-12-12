@@ -30,8 +30,9 @@ $assets: {{"assets" | relative_url}};
 // Never stretch images by default.
 img { object-fit: cover; }
 
-
-// --------------- FontMetrics ------------------
+// --------------- Font Definitions ------------------
+// A valid font is a map with keys, 'family', 'weight', 'unitsPerEm',
+// 'hheaAscender', 'hheaDescender', and 'hheaLineGap'.
 
 $adobeCleanVariants: (
   semilight:  (capsHeight: 677, familySuffix: '-semilight', weight: 300),
@@ -39,70 +40,62 @@ $adobeCleanVariants: (
   bold: (capsHeight: 666, familySuffix: '', weight: 700),
   extrabold: (capsHeight: 662, familySuffix: '', weight: 800));
 
-@function adobe-clean-metrics($typeface) {
-  @return (
-    capsHeight: map-get(map-get($adobeCleanVariants, $typeface), 'capsHeight'),
-    unitsPerEm: 1000,
-    hheaAscender: 1013,
-    hheaDescender: -239,
-    hheaLineGap: 0);
+@function adobe-clean-font($typeface) {
+  $variant: map-get($adobeCleanVariants, $typeface);
+  @return map-merge(
+    $variant, (
+      family: 'adobe-clean#{map-get($variant, "familySuffix")}',
+      unitsPerEm: 1000,
+      hheaAscender: 1013,
+      hheaDescender: -239,
+      hheaLineGap: 0));
 }
 
-$adobeCleanSemilight: adobe-clean-metrics('semilight');
-$adobeCleanRegular: adobe-clean-metrics('regular');
-$adobeCleanBold: adobe-clean-metrics('bold');
-$adobeCleanExtrabold: adobe-clean-metrics('extrabold');
+$adobeCleanSemilight: adobe-clean-font('semilight');
+$adobeCleanRegular: adobe-clean-font('regular');
+$adobeCleanBold: adobe-clean-font('bold');
+$adobeCleanExtrabold: adobe-clean-font('extrabold');
 
-// ---------------------------------
+// -------- Global constants ------------
+$slideWidth: 1920px;
+$slideHeight: 1080px;
+
+// ------- Keynote-specific translation -----------
+// Dimensional parameters to Keynote mixins/functions are always in px, and
+// placement is always expressed as (left, top, width, height), in that order.
+
 @mixin keynote-text-inset($n) {
   padding: $n * 1px;
+  box-sizing: border-box;
 }
 
 // Things that correspond to objects in keynote, positioned absolutely on the
 // slide.
-%keynote-object {
-  margin: 0px;
+@mixin keynote-object($left, $top, $width, $height) {
+  box-sizing: border-box;
   position: absolute;
-}
-
-@mixin keynote-box($left, $top, $width, $height) {
-  @extend %keynote-object;
+  margin: 0px;
+  padding: 0px;
   left: $left * 1px;
   top: $top * 1px;
   width: $width * 1px;
   height: $height * 1px;
 }
 
-%text-box {
-  @extend %keynote-object;
-  @include keynote-text-inset(4);
+@mixin keynote-text-box($left, $top, $width, $height, $inset: 4) {
+  @include keynote-object($left, $top, $width, $height);
+  @include keynote-text-inset($inset);
 }
 
-// Sets font size, line height, and baseline adjustment accordingly.
-@mixin keynote-text($fontSize, $fontMetrics, $lineSpacing: 1.0) {
+// Returns $font enhanced with keynote info for the given line spacing.
+@function linespaced-font($font, $lineSpacing: 1.0) {
   // Each line of height $h will be vertically centered by the browser in an
   // area of line-height.
-  $h: map-get($fontMetrics, 'hheaAscender')
-                  - map-get($fontMetrics, 'hheaDescender');
-  $unitsPerEm: map-get($fontMetrics, 'unitsPerEm');
-  $gap: map-get($fontMetrics, 'hheaLineGap');
+  $h: map-get($font, 'hheaAscender')
+                  - map-get($font, 'hheaDescender');
+  $unitsPerEm: map-get($font, 'unitsPerEm');
+  $gap: map-get($font, 'hheaLineGap');
   $s: $lineSpacing;
-
-  // Intentionally unitless line height.
-  line-height: $s * ($h + $gap) / $unitsPerEm;
-  font-size: $fontSize * 1px;
-
-  $t: ($s - 1) * $h;
-  &::before {
-    content: '';
-    margin-bottom: ($t + $s * $gap) * -.5em / $unitsPerEm;
-    display: table;
-  }
-  &::after {
-    content: '';
-    margin-top: ($t + (2 - $s) * $gap) * -.5em / $unitsPerEm;
-    display: table;
-  }
   // Using these ::before/::after adjustments for nested lists with variable
   // font size will only work out perfectly if we are using a font with an “hhea
   // line gap” of zero (like Adobe Clean); otherwise when two nested lists are
@@ -112,6 +105,54 @@ $adobeCleanExtrabold: adobe-clean-metrics('extrabold');
   //   - A
   //     - 1 <==== HERE
   // - II
+  $t: ($s - 1) * $h;
+  @return map-merge(
+    $font, (
+      // Intentionally unitless line height.
+      lineHeight: $s * ($h + $gap) / $unitsPerEm,
+      trimTop: ($t + $s * $gap) * 0.5em / $unitsPerEm,
+      trimBottom: ($t + (2 - $s) * $gap) * 0.5em / $unitsPerEm));
+}
+
+@mixin text-style($spacedFont, $fontSize) {
+  line-height: map-get($spacedFont, 'lineHeight');
+  font-size: $fontSize * 1px;
+  font-family: map-get($spacedFont, 'family');
+  font-weight: map-get($spacedFont, 'weight');
+}
+
+@mixin basekick($spacedFont) {
+  &::before {
+    content: '';
+    margin-bottom: -1 * map-get($spacedFont, 'trimTop');
+    display: table;
+  }
+  &::after {
+    content: '';
+    margin-top: -1 * map-get($spacedFont, 'trimBottom');
+    display: table;
+  }
+}
+
+@mixin pseudo-basekick($spacedFont) {
+  border-top: map-get($spacedFont, 'trimTop') solid transparent;
+  border-bottom: map-get($spacedFont, 'trimBottom') solid transparent;
+}
+
+// Sets font size, line height, and baseline adjustment accordingly.
+//
+// If useBorder is true, baseline adjustment will be done with transparent
+// borders instead of with pseudo-elements, which is useful when the text is
+// itself being CSS-injected on a pseudo-element.
+@mixin keynote-text($font, $fontSize, $lineSpacing: 1.0, $useBorder: false) {
+  $font: linespaced-font($font, $lineSpacing);
+  @include text-style($font, $fontSize);
+  @if $useBorder {
+    @include pseudo-basekick($font);
+  }
+  @else {
+    @include basekick($font);
+  }
 }
 
 // -----------------
@@ -154,28 +195,29 @@ $adobeCleanExtrabold: adobe-clean-metrics('extrabold');
 }
 
 .reveal .slides {
+  * { box-sizing: border-box; }
+  // Default layouts
   h1, h2, h3 {
-    @extend %text-box;
+    @include keynote-text-box(49, 52, 1810, 102);
   }
   h2 {
-    @include keynote-box(49, 52, 1810, 102);
-    @include keynote-text-inset(4);
-    @include keynote-text(56, $adobeCleanExtrabold, $lineSpacing: 0.8);
+    @include keynote-text($adobeCleanExtrabold, 56, $lineSpacing: 0.8);
   }
   .body {
-    @include keynote-box(49, 225, 1822, 793);
-    @include keynote-text-inset(4);
-    @include keynote-before-paragraph-spacing(36); // 36.5 looks closer
+    $adobeCleanSemilight10: linespaced-font($adobeCleanSemilight);
+    @include keynote-text-box(49, 225, 1822, 793);
+    @include keynote-before-paragraph-spacing(36); // 36.5 looks closer.
+    @include text-style($adobeCleanSemilight10, 44);
 
     %body-text {
-      @include keynote-text(44, $adobeCleanSemilight);
+      @include basekick($adobeCleanSemilight10);
       padding: 0px;
     }
 
     :is(ul, ol, dl) :is(ul, ol, dl) {
-      @include keynote-text(40, $adobeCleanSemilight);
+      @include keynote-text($adobeCleanSemilight, 40);
       :is(ul, ol, dl) {
-        @include keynote-text(36, $adobeCleanSemilight);
+        @include keynote-text($adobeCleanSemilight, 36);
       }
     }
 
@@ -195,6 +237,61 @@ $adobeCleanExtrabold: adobe-clean-metrics('extrabold');
         list-style-type: none;
         position: relative;
       }
+    }
+  }
+}
+
+@mixin keynote-image-object($left, $top, $width, $height) {
+  @include keynote-object($left, $top, $width, $height);
+  background-size: $width * 1px $height * 1px;
+  content: "";
+}
+
+@mixin keynote-image($url, $left, $top, $width, $height) {
+  background-image: url($url);
+  @include keynote-image-object($left, $top, $width, $height);
+}
+
+// Background defaults
+.reveal .slides .background {
+  font-size: 16px;
+  z-index: -1000;
+  left: 0px; top: 0px;
+  padding: 0px;
+  margin: 0px;
+  width: $slideWidth; height: $slideHeight;
+  > * {
+    width: 0; height: 0;
+    position: absolute;
+  }
+
+  &::before {
+    @include keynote-image(
+      "../img/Adobe_Corporate_Horizontal_Lockup_NEW-Red_RGB-1894.png",
+      63, 1036, 89, 23);
+  }
+
+  &::after {
+    @include keynote-text-box(1473, 1033, 395, 34, $inset: 7);
+    @include keynote-text($adobeCleanRegular, 16, $useBorder: true);
+    content: "© 2021 Adobe. All Rights Reserved. Adobe Confidential.";
+    text-align: right;
+    color: #6E6E6E;
+  }
+}
+
+.reveal .slides .layout.layout-manual {
+  .body {
+    // With manual layout, the body div acts like a background and covers
+    // everything.  Move it backwards so it doesn't, e.g. prevent the header from
+    // being selected.
+    z-index: -1;
+    left: 0px; top: 0px;
+    padding: 0px; margin: 0px;
+    width: $slideWidth; height: $slideHeight;
+    > * {
+      position: absolute;
+      margin: 0px;
     }
   }
 }
