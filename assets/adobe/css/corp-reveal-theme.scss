@@ -57,8 +57,8 @@ $adobeCleanBold: adobe-clean-font('bold');
 $adobeCleanExtrabold: adobe-clean-font('extrabold');
 
 // -------- Global constants ------------
-$slideWidth: 1920px;
-$slideHeight: 1080px;
+$slideWidth: 1920;
+$slideHeight: 1080;
 
 // ------- Keynote-specific translation -----------
 // Dimensional parameters to Keynote mixins/functions are always in px, and
@@ -114,6 +114,8 @@ $slideHeight: 1080px;
       trimBottom: ($t + (2 - $s) * $gap) * 0.5em / $unitsPerEm));
 }
 
+// Sets font size, family, weight, and line-height according to the given
+// parameters.
 @mixin text-style($spacedFont, $fontSize) {
   line-height: map-get($spacedFont, 'lineHeight');
   font-size: $fontSize * 1px;
@@ -121,6 +123,8 @@ $slideHeight: 1080px;
   font-weight: map-get($spacedFont, 'weight');
 }
 
+// Trims the top and bottom of the current block element in the standard way to
+// make text line up as it would in a Keynote text box.
 @mixin basekick($spacedFont) {
   &::before {
     content: '';
@@ -134,6 +138,8 @@ $slideHeight: 1080px;
   }
 }
 
+// Same as basekick, but useful for pseudo-elements injected via CSS;
+// hijacks borders instead of before/after.
 @mixin pseudo-basekick($spacedFont) {
   border-top: map-get($spacedFont, 'trimTop') solid transparent;
   border-bottom: map-get($spacedFont, 'trimBottom') solid transparent;
@@ -141,13 +147,13 @@ $slideHeight: 1080px;
 
 // Sets font size, line height, and baseline adjustment accordingly.
 //
-// If useBorder is true, baseline adjustment will be done with transparent
+// If $inPseudo is true, baseline adjustment will be done with transparent
 // borders instead of with pseudo-elements, which is useful when the text is
 // itself being CSS-injected on a pseudo-element.
-@mixin keynote-text($font, $fontSize, $lineSpacing: 1.0, $useBorder: false) {
+@mixin keynote-text($font, $fontSize, $lineSpacing: 1.0, $inPseudo: false) {
   $font: linespaced-font($font, $lineSpacing);
   @include text-style($font, $fontSize);
-  @if $useBorder {
+  @if $inPseudo {
     @include pseudo-basekick($font);
   }
   @else {
@@ -204,7 +210,7 @@ $slideHeight: 1080px;
     @include keynote-text($adobeCleanExtrabold, 56, $lineSpacing: 0.8);
   }
   .body {
-    $adobeCleanSemilight10: linespaced-font($adobeCleanSemilight);
+    $adobeCleanSemilight10: linespaced-font($adobeCleanSemilight, 1.0);
     @include keynote-text-box(49, 225, 1822, 793);
     @include keynote-before-paragraph-spacing(36); // 36.5 looks closer.
     @include text-style($adobeCleanSemilight10, 44);
@@ -272,14 +278,24 @@ $slideHeight: 1080px;
 
   &::after {
     @include keynote-text-box(1473, 1033, 395, 34, $inset: 7);
-    @include keynote-text($adobeCleanRegular, 16, $useBorder: true);
+    @include keynote-text($adobeCleanRegular, 16, $inPseudo: true);
     content: "© 2021 Adobe. All Rights Reserved. Adobe Confidential.";
     text-align: right;
     color: #6E6E6E;
   }
 }
 
-.reveal .slides .nolayout {
+%no-footer {
+  .background::before, .background::after {
+    content: none;
+    background-image: none;
+  }
+}
+
+// ============== Layouts ==============
+$titleLogoPosition: (137, 460, 111, 153);
+
+.reveal .slides .layout.nolayout {
   .body {
     left: 0px; top: 0px;
     padding: 0px; margin: 0px;
@@ -289,6 +305,216 @@ $slideHeight: 1080px;
     }
   }
 }
+
+$slideLeftInset: 52;
+$slideInsetWidth: 1889 - $slideLeftInset;
+
+// Injects credits for the given artist and country at the given top coordinate
+// into the layout.
+@mixin community-credit($artist, $country, $top) {
+  @include keynote-text-box(
+    $slideLeftInset, $top, $slideInsetWidth, 39, $inset: 0);
+  @include keynote-text($adobeCleanRegular, 20);
+  color: white;
+  > span {
+    &:nth-child(1) {
+      &::before { content: "Artwork by "; }
+      &::after {
+        @include text-style(linespaced-font($adobeCleanExtrabold), 20);
+        content: $artist;
+      }
+    }
+    &:nth-child(2) {
+      &::before { content: " / "; }
+      &::after { content: $country; }
+    }
+  }
+}
+
+// Community art title slides
+.reveal .slides .layout.community-title-slide {
+  @extend %no-footer;
+  h1 {
+    @include keynote-text-box(348, 441, 932, 192, $inset: 0);
+    @include keynote-text($adobeCleanExtrabold, 72);
+  }
+  h2 {
+    @include keynote-text-box(348, 649, 930, 170, $inset: 0);
+    @include keynote-text($adobeCleanExtrabold, 40);
+  }
+
+  .background::before {
+    @include keynote-image("../img/image13-22.tif", $titleLogoPosition...);
+  }
+
+  @mixin title-art($imageUrl, $left, $top, $width, $height, $artist, $country) {
+    .background {
+      &::after {
+        @include keynote-image($imageUrl, $left, $top, $width, $height);
+        $bevelLeft: 1128;
+        $bevelRight: 1574;
+        clip-path: polygon(
+          ($bevelRight - $left)*1px (-$top)*1px,
+          ($slideWidth - $left)*1px (-$top)*1px,
+          ($slideWidth - $left)*1px ($slideHeight - $top)*1px,
+          ($bevelLeft - $left)*1px ($slideHeight - $top)*1px);
+      }
+
+      // Credits
+      > div:first-child(1) {
+        text-align: right;
+        @include community-credit($artist, $country, $top: 1019);
+      }
+    }
+  }
+
+  &.evans {
+    @include title-art(
+      "../img/image12-20.jpeg", 627, -149, 1304, 1301, "Davy Evans", "UK");
+  }
+
+  &.swopes {
+    @include title-art(
+      "../img/image14-23.jpeg", 975, 0, 1080, 1080, "Elise Swopes", "USA");
+  }
+
+  &.sato {
+    @include title-art(
+      "../img/image15-25.jpeg", 960, -14, 1110, 1109, "Momomi Sato", "Japan");
+  }
+
+  &.zhu {
+    @include title-art(
+      "../img/image16-27.jpeg", 544, 0, 1378, 1080, "UV Zhu", "China");
+  }
+}
+
+// Community art "About the artist" slides.
+.reveal .slides .layout.community-about-slide {
+  @extend %no-footer;
+  h2 {
+    @include keynote-text-box($slideLeftInset, 51, 1920, 46, $inset: 7);
+    @include keynote-text($adobeCleanExtrabold, 26);
+  }
+
+  // "Made with", when appropriate
+  .background > div:nth-child(2)::before {
+    @include keynote-text-box($slideLeftInset, 946, 69, 29, $inset: 7);
+    @include keynote-text($adobeCleanBold, 12);
+  }
+
+  @mixin about-art($imageUrl, $left, $top, $width, $height, $artist, $story) {
+    $bevelLeft: 433;
+    $bevelWidth: 453;
+    $bevelRight: $bevelLeft + $bevelWidth;
+
+    .background {
+      &::before {
+        @include keynote-image($imageUrl, $left, $top, $width, $height);
+        clip-path: polygon(
+          ($bevelLeft - $left)*1px  (0 - $top)*1px,
+          ($slideWidth - $left)*1px (0 - $top)*1px,
+          ($slideWidth - $left)*1px ($slideHeight - $top)*1px,
+          ($bevelRight - $left)*1px ($slideHeight - $top)*1px);
+      }
+
+      > div:nth-child(1) {
+        @include keynote-text-box($slideLeftInset, 438, 540, 574, $inset: 7);
+        > span:first-child {
+          &::before {
+            display: block;
+            margin-bottom: 16px;
+            @include keynote-text($adobeCleanExtrabold, 28, $inPseudo: true);
+            content: $artist;
+          }
+          &::after {
+            display: block;
+            @include keynote-text(
+              $adobeCleanRegular, 24, $lineSpacing: 1.1, $inPseudo: true);
+            content: $story;
+          }
+        }
+      }
+    }
+  }
+
+  @mixin made-with($image1Url, $image1Width, $image2Url, $image2Width) {
+    .background > div:nth-child(2) {
+      &::before { content: "Made with" }
+      > span:first-child {
+        &::before {
+          @include keynote-image($image1Url, 59, 978, $image1Width, 35);
+        }
+        &::after {
+          @include keynote-image($image2Url, 310, 978, $image2Width, 35);
+        }
+      }
+    }
+  }
+
+  &.evans {
+    @include about-art(
+      "../img/image12-20.jpeg", 249, -433, 1711, 1711, "Davy Evans",
+      "UK-based digital artist and motion designer Davy Evans fuses analog"
+        " and digital techniques to create ethereal, abstract imagery"
+        " inspired by nature. Experimenting with photography, light, and"
+        " liquid, he uses Adobe Photoshop and Adobe After Effects to compose"
+        " otherworldly scenes. As communities faced the isolation of 2020,"
+        " Evans saw the importance of maintaining a connection to natural"
+        " phenomena in this piece. He used Adobe Camera Raw and Adobe"
+        " Photoshop to create beautiful floral compositions that represent"
+        " the separation we all felt from the world outside our windows.");
+
+    @include made-with(
+      "../img/image20-38.tif", 220, "../img/image21-40.tif", 234);
+  }
+  &.swopes {
+    @include about-art(
+      "../img/image14-23.jpeg", 431, -143, 1489, 1489, "Elise Swopes",
+      "New York City-based photographer and graphic designer Elise Swopes"
+        " manipulates the everyday into unexpected works of art. With her"
+        " mobile phone, Adobe Photoshop, and Adobe Photoshop Lightroom, she"
+        " creates whimsical, weird, dreamlike scenes. This piece was"
+        " inspired from a recent visit to Copenhagen, where the bold colors"
+        " and shapes of Danish architecture made quite an impression. A"
+        " brilliant yellow apartment building inspired Swopes to create"
+        " another entry in her surrealistic series featuring giraffes in"
+        " unusual settings.");
+    @include made-with(
+      "../img/image20-38.tif", 220, "../img/image25-45.tif", 332);
+  }
+
+  &.sato {
+    @include about-art(
+      "../img/image15-25.jpeg", 431, -182, 1658, 1658, "Momomi Sato",
+      "Tokyo-based artist Momomi Sato meticulously applies paint using"
+        " toothpicks to create fanciful, pointillistic works of animals,"
+        " patterns, and other colorful subjects. With a style that ranges"
+        " from abstract to kawaii, Sato’s paintings are as charming as they"
+        " are beautiful. For this piece, a train ride prompted an"
+        " exploration of systems that influence daily life. As she stared"
+        " intently at the pattern on the seats, the lines and shapes seemed"
+        " to move and draw Sato into another dimension. She recreated the"
+        " sensation by hand with acrylic paint on canvas.");
+  }
+
+  &.zhu {
+    @include about-art(
+      "../img/image16-27.jpeg", 386, -40, 1535, 1206, "UV Zhu",
+      "With an eye for the abstract, Chinese artist UV Zhu remixes patterns,"
+        " textures, and colors to explore the future of fashion. Using Adobe"
+        " Photoshop, Adobe Illustrator, and Maxon Cinema 4D, he blends"
+        " surreal settings, organic shapes, and even favorite foods to"
+        " challenge convention. Inspired by his travels—around the Internet"
+        " and in real life—for this piece, UV fantasized about characters"
+        " moving through an imaginary world, the things they might do, and"
+        " what they might wear. The result is a bright, colorful expression"
+        " of joy and positivity.");
+    @include made-with(
+      "../img/image20-38.tif", 220, "../img/image27-48.tif", 214);
+  }
+}
+
 
 // Local Variables:
 // css-indent-offset: 2
