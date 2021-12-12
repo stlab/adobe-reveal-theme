@@ -272,6 +272,10 @@ $slideHeight: 1080;
     position: absolute;
   }
 
+  &::before, &::after, *::before, *::after {
+    z-index: -1000;
+  }
+
   &::before {
     @include layout-image(
       "../img/Adobe_Corporate_Horizontal_Lockup_NEW-Red_RGB-1894.png",
@@ -582,6 +586,63 @@ $slideInsetWidth: 1889 - $slideLeftInset;
       &::before { background-image: url("../img/image23-43.tif"); }
       &::after { background-image: url("../img/image28-50.tif"); }
     }
+  }
+}
+
+.reveal .slides .layout.title-slide {
+  @extend %no-footer;
+  .body { width: 0; height: 0; }
+  * { color: white; }
+  h1 {
+    @include keynote-text-box(346, 443, 965, 186);
+    @include keynote-text($adobeCleanExtrabold, 72, $lineSpacing: 0.9);
+  }
+  h2 {
+    @include keynote-text-box(351, 654, 982, 303);
+    @include keynote-text($adobeCleanExtrabold, 40);
+  }
+
+  .background::before {
+    @include layout-image(
+      "../img/title-standard-1521.png", 0, 0, $slideWidth, $slideHeight);
+  }
+
+  .background::after {
+    @include layout-image("../img/pasted-image-8952.pdf", $titleLogoPosition...);
+  }
+}
+
+%section-divider-alt-background {
+  @extend %no-footer;
+  .background::before {
+    @include layout-image(
+      "../img/divider-std-white-alt-1553.png", 0, 0, $slideWidth, $slideHeight);
+  }
+}
+
+%section-divider-background {
+  @extend %no-footer;
+  .background::before {
+    @include layout-image(
+      "../img/divider-std-white-1544.png", 0, 0, $slideWidth, $slideHeight);
+  }
+}
+
+.reveal .slides {
+  .layout.section-divider-slide, .layout.section-divider-alt-slide {
+    h1 {
+      @include keynote-text-box(123, 446, 1146, 351);
+      @include keynote-text($adobeCleanExtrabold, 72, $lineSpacing: 0.8);
+    }
+    .body { width: 0; height: 0; }
+  }
+
+  .layout.section-divider-slide {
+    @extend %section-divider-background;
+  }
+
+  .layout.section-divider-alt-slide, div.layout-agenda {
+    @extend %section-divider-alt-background;
   }
 }
 
