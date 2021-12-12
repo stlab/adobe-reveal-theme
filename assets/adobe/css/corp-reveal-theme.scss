@@ -620,31 +620,46 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   }
 }
 
-%section-divider-background {
+.reveal .slides .layout.section-divider-slide {
   @extend %no-footer;
+  h1 {
+    @include keynote-text-box(123, 446, 1146, 351);
+    @include keynote-text($adobeCleanExtrabold, 72, $lineSpacing: 0.8);
+  }
   .background::before {
     @include layout-image(
       "../img/divider-std-white-1544.png", 0, 0, $slideWidth, $slideHeight);
   }
-}
-
-.reveal .slides {
-  .layout.section-divider-slide, .layout.section-divider-alt-slide {
-    h1 {
-      @include keynote-text-box(123, 446, 1146, 351);
-      @include keynote-text($adobeCleanExtrabold, 72, $lineSpacing: 0.8);
-    }
-    .body { width: 0; height: 0; }
-  }
-
-  .layout.section-divider-slide {
-    @extend %section-divider-background;
-  }
-
-  .layout.section-divider-alt-slide, div.layout-agenda {
-    @extend %section-divider-alt-background;
+  &.alt .background::before {
+    @include layout-image(
+      "../img/divider-std-white-alt-1553.png", 0, 0, $slideWidth, $slideHeight);
   }
 }
+
+.reveal .slides .layout.agenda-slide {
+  @extend %no-footer;
+  h2 {
+    @include keynote-text-box(123, 141, 1330, 108);
+    @include keynote-text($adobeCleanExtrabold, 72);
+  }
+  .background::before {
+    @include layout-image(
+      "../img/divider-std-white-alt-1553.png", 0, 0, $slideWidth, $slideHeight);
+  }
+  .body { left:0; top: 0; width: $slideWidth; height: $slideHeight }
+  table {
+    @include keynote-object(126, 303, 1261, 594);
+  }
+  th {
+    @include keynote-text-inset(4);
+    @include keynote-text($adobeCleanExtrabold, 42);
+  }
+  td {
+    @include keynote-text-inset(4);
+    @include keynote-text($adobeCleanSemilight, 42);
+  }
+}
+
 
 // Local Variables:
 // css-indent-offset: 2
