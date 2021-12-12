@@ -279,12 +279,8 @@ $slideHeight: 1080px;
   }
 }
 
-.reveal .slides .layout.layout-manual {
+.reveal .slides .nolayout {
   .body {
-    // With manual layout, the body div acts like a background and covers
-    // everything.  Move it backwards so it doesn't, e.g. prevent the header from
-    // being selected.
-    z-index: -1;
     left: 0px; top: 0px;
     padding: 0px; margin: 0px;
     > * {
