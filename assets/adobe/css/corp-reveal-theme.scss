@@ -259,7 +259,6 @@ $slideHeight: 1080px;
   left: 0px; top: 0px;
   padding: 0px;
   margin: 0px;
-  width: $slideWidth; height: $slideHeight;
   > * {
     width: 0; height: 0;
     position: absolute;
@@ -288,7 +287,6 @@ $slideHeight: 1080px;
     z-index: -1;
     left: 0px; top: 0px;
     padding: 0px; margin: 0px;
-    width: $slideWidth; height: $slideHeight;
     > * {
       position: absolute;
       margin: 0px;
