@@ -107,6 +107,8 @@ $mainFontWeight: 300;
   .slides {
     text-align: left;
 
+    a { text-decoration: underline; }
+
     p {
       line-height: inherit;
     }
