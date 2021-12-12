@@ -10,7 +10,6 @@
 
 // Include theme-specific fonts
 @import url(#{$assets}/js/reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css);
-@import 'adobe-clean';
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -79,6 +78,26 @@ $mainFontWeight: 300;
   font-weight: var(--r-main-font-weight);
 }
 
+%adobe-clean-semilight {
+  font-family: $mainFont;
+  font-weight: $mainFontWeight;
+}
+
+%adobe-clean-regular {
+  font-family: adobe-clean, sans-serif;
+  font-weight: 400;
+}
+
+%adobe-clean-bold {
+  font-family: adobe-clean, sans-serif;
+  font-weight: 700;
+}
+
+%adobe-clean-extrabold {
+  font-family: $headingFont;
+  font-weight: $headingFontWeight;
+}
+
 // ------------------------------------------------------------
 // Override things that come from the standard theme framework.
 // ------------------------------------------------------------
@@ -88,7 +107,7 @@ $mainFontWeight: 300;
 
     strong,
     b {
-      @include adobe-clean-extrabold;
+      @extend %adobe-clean-extrabold;
     }
 
     blockquote {
@@ -105,7 +124,7 @@ $mainFontWeight: 300;
     }
 
     table th {
-      @include adobe-clean-extrabold;
+      @extend %adobe-clean-extrabold;
     }
 
     blockquote p:first-child,

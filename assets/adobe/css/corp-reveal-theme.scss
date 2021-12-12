@@ -8,7 +8,6 @@ $assets: {{"assets" | relative_url}};
 // reveal.js ecosystem.  For example, the menu plugin plucks style information
 // from the theme and reuses it
 @import 'corp-reveal-theme-base';
-@import 'keynote';
 
 // Have the slide cast a shadow, and gray the surroundings.
 .reveal .slides {
@@ -31,9 +30,127 @@ $assets: {{"assets" | relative_url}};
 // Never stretch images by default.
 img { object-fit: cover; }
 
+
+// --------------- FontMetrics ------------------
+
+$adobeCleanVariants: (
+  semilight:  (capsHeight: 677, familySuffix: '-semilight', weight: 300),
+  regular: (capsHeight: 673, familySuffix: '', weight: 400),
+  bold: (capsHeight: 666, familySuffix: '', weight: 700),
+  extrabold: (capsHeight: 662, familySuffix: '', weight: 800));
+
+@function adobe-clean-metrics($typeface) {
+  @return (
+    capsHeight: map-get(map-get($adobeCleanVariants, $typeface), 'capsHeight'),
+    unitsPerEm: 1000,
+    hheaAscender: 1013,
+    hheaDescender: -239,
+    hheaLineGap: 0);
+}
+
+$adobeCleanSemilight: adobe-clean-metrics('semilight');
+$adobeCleanRegular: adobe-clean-metrics('regular');
+$adobeCleanBold: adobe-clean-metrics('bold');
+$adobeCleanExtrabold: adobe-clean-metrics('extrabold');
+
+// ---------------------------------
+@mixin keynote-text-inset($n) {
+  padding: $n * 1px;
+}
+
+// Things that correspond to objects in keynote, positioned absolutely on the
+// slide.
+%keynote-object {
+  margin: 0px;
+  position: absolute;
+}
+
+@mixin keynote-box($left, $top, $width, $height) {
+  @extend %keynote-object;
+  left: $left * 1px;
+  top: $top * 1px;
+  width: $width * 1px;
+  height: $height * 1px;
+}
+
 %text-box {
   @extend %keynote-object;
   @include keynote-text-inset(4);
+}
+
+// Sets font size, line height, and baseline adjustment accordingly.
+@mixin keynote-text($fontSize, $fontMetrics, $lineSpacing: 1.0) {
+  // Each line of height $h will be vertically centered by the browser in an
+  // area of line-height.
+  $h: map-get($fontMetrics, 'hheaAscender')
+                  - map-get($fontMetrics, 'hheaDescender');
+  $unitsPerEm: map-get($fontMetrics, 'unitsPerEm');
+  $gap: map-get($fontMetrics, 'hheaLineGap');
+  $s: $lineSpacing;
+
+  // Intentionally unitless line height.
+  line-height: $s * ($h + $gap) / $unitsPerEm;
+  font-size: $fontSize * 1px;
+
+  $t: ($s - 1) * $h;
+  &::before {
+    content: '';
+    margin-bottom: ($t + $s * $gap) * -.5em / $unitsPerEm;
+    display: table;
+  }
+  &::after {
+    content: '';
+    margin-top: ($t + (2 - $s) * $gap) * -.5em / $unitsPerEm;
+    display: table;
+  }
+  // Using these ::before/::after adjustments for nested lists with variable
+  // font size will only work out perfectly if we are using a font with an “hhea
+  // line gap” of zero (like Adobe Clean); otherwise when two nested lists are
+  // closed we'll get an extra vertical offset that corresponds to the line gap:
+  //
+  // - I
+  //   - A
+  //     - 1 <==== HERE
+  // - II
+}
+
+// -----------------
+// Placeholder selector for all block-level elements that are designed to
+// contain text directly.
+%block-level-text {
+  /* dummy content required by ruby SASS */
+}
+
+:is(address, article, aside, blockquote, dialog, dd, dt, figcaption,
+    h1, h2, h3, h4, h5, h6, li, p, pre)
+{
+  @extend %block-level-text;
+}
+
+// Adds keynote-style before paragraph spacing of $d px to any block level text
+// in the invoking selector context.
+@mixin keynote-before-paragraph-spacing($d) {
+  %block-level-text {
+    margin-top: $d * 1px;
+  }
+  %block-level-text:first-child:not(:empty) {
+    margin-top: 0px;
+  }
+  :not(:first-child):not(:empty) %block-level-text:first-child:not(:empty) {
+    margin-top: $d * 1px;
+  }
+}
+
+// Placeholder selector for body-level things that should be treated as text
+// blocks with possible font transitions.
+%body-text {
+  /* dummy content required by ruby SASS */
+}
+
+:is(address, article, aside, blockquote, dialog, dl, ol, figcaption,
+    h1, h2, h3, h4, h5, h6, p, pre, ul)
+{
+  @extend %body-text;
 }
 
 .reveal .slides {
@@ -43,31 +160,22 @@ img { object-fit: cover; }
   h2 {
     @include keynote-box(49, 52, 1810, 102);
     @include keynote-text-inset(4);
-    @include adobe-clean('extrabold', 56, $lineSpacing: 0.8);
+    @include keynote-text(56, $adobeCleanExtrabold, $lineSpacing: 0.8);
   }
   .body {
     @include keynote-box(49, 225, 1822, 793);
     @include keynote-text-inset(4);
-    @include keynote-before-paragraph-spacing(36);
+    @include keynote-before-paragraph-spacing(36); // 36.5 looks closer
 
-    %block-level-text {
+    %body-text {
+      @include keynote-text(44, $adobeCleanSemilight);
       padding: 0px;
-      @include adobe-clean('semilight', 44, $lineSpacing: 1);
     }
 
-    :is(ul, ol, dl) {
-      @include adobe-clean('semilight', 44, $lineSpacing: 1);
+    :is(ul, ol, dl) :is(ul, ol, dl) {
+      @include keynote-text(40, $adobeCleanSemilight);
       :is(ul, ol, dl) {
-        @include adobe-clean('semilight', 40, $lineSpacing: 1);
-        :is(ul, ol, dl) {
-          @include adobe-clean('semilight', 36, $lineSpacing: 1);
-        }
-      }
-    }
-
-    :is(li, dd, dt) :is(li, dd, dt) {
-      :is(li, dd, dt) {
-        @include adobe-clean('semilight', 36, $lineSpacing: 1);
+        @include keynote-text(36, $adobeCleanSemilight);
       }
     }
 
