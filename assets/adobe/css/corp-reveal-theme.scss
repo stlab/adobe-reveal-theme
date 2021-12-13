@@ -525,10 +525,16 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   }
 }
 
+%no-title {
+  // Hide the headers
+  h1, h2, h3, h4, h5, h6 {
+    display: none;
+  }
+}
+
 // Community art end-of-presentation slides
 .reveal .slides .layout.community-closer-slide {
-  // Hide the headers
-  h1, h2, h3, h4, h5, h6 { display: none; }
+  @extend %no-title;
 
   .background::after {
     @include layout-image("../img/image22-42.tif", 907, 466, 107, 148);
@@ -662,13 +668,55 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
 .reveal .slides .layout.closer-slide {
   @extend %no-footer;
-  h1, h2, h3, h4, h5, h6 { display: none; }
+  @extend %no-title;
   .background {
     background-color: $corporateRed;
     @include keynote-object(0, 0, $slideWidth, $slideHeight);
   }
   .background::before {
     @include layout-image("../img/image5-9347.png", 884, 435, 153, 211);
+  }
+}
+
+// =====================================
+// Grid layouts
+// =====================================
+
+// Position half the title's cap height above its baseline, assuming it has one
+// line, for center alignment
+$titleCenter: 98;
+
+// Equivalent first-line positioning for the top of a 56px (font-size) title box.
+$topAlignedTitleTop: 57;
+
+$leftGutter: 49;
+$rightGutter: 47;
+$interiorGutter: 47.5;
+
+$contentAreaTop: 188;
+$superGutter: 36;
+$topGutter: 40;
+$bottomGutter: 33;
+$footerAreaTop: 1014;
+
+$contentHeight: $footerAreaTop - $contentAreaTop;
+
+.reveal .slides .layout.single-image-with-title {
+  @extend .layout.nolayout;
+  img {
+    max-height: none;
+    max-width: none;
+    @include keynote-object(0, $contentAreaTop, $slideWidth, $contentHeight);
+  }
+}
+
+.reveal .slides .layout.full-bleed-image {
+  @extend .layout.nolayout;
+  @extend %no-title;
+  img {
+    max-height: none;
+    max-width: none;
+    @include keynote-object(0, 0, $slideWidth, $footerAreaTop);
   }
 }
 
