@@ -703,7 +703,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
 
 .reveal .slides .layout.single-image-with-title {
   @extend .layout.nolayout;
-  img {
+  .body > img, p img:only-child {
     max-height: none;
     max-width: none;
     @include keynote-object(0, $contentAreaTop, $slideWidth, $contentHeight);
@@ -713,10 +713,33 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
 .reveal .slides .layout.full-bleed-image {
   @extend .layout.nolayout;
   @extend %no-title;
-  img {
+  .body > img, p img:only-child {
     max-height: none;
     max-width: none;
     @include keynote-object(0, 0, $slideWidth, $footerAreaTop);
+  }
+}
+
+.reveal .slides .layout.image-on-right {
+  .body {
+    max-width: ($slideWidth / 2 - $leftGutter - $interiorGutter) * 1px;
+  }
+  .body > img, p img:only-child {
+    max-height: none;
+    max-width: none;
+    // Offset relative to the .body div, where this resides.
+    @include keynote-object(
+      $slideWidth / 2 - $leftGutter,
+      $contentAreaTop - ($contentAreaTop + $superGutter),
+      $slideWidth / 2, $contentHeight);
+  }
+}
+
+.reveal .slides .layout.tall-column-image-on-right {
+  @extend .layout.image-on-right;
+  .body > img, p img:only-child {
+    top: ($contentAreaTop + $superGutter) * -1px;
+    height: $footerAreaTop * 1px;
   }
 }
 
