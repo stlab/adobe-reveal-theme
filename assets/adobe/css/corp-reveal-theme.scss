@@ -743,6 +743,11 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
   }
 }
 
+.reveal .slides .layout.images-with-headers {
+  @extend .layout.nolayout;
+}
+
+
 // Local Variables:
 // css-indent-offset: 2
 // smie-indent-basic: 2
