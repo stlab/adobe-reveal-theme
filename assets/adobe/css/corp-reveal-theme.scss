@@ -304,7 +304,8 @@ $slideHeight: 1080;
 // ============== Layouts ==============
 $titleLogoPosition: (137, 460, 111, 153);
 
-.reveal .slides .layout.nolayout {
+
+%nolayout {
   .body {
     left: 0px; top: 0px;
     padding: 0px; margin: 0px;
@@ -313,6 +314,9 @@ $titleLogoPosition: (137, 460, 111, 153);
       margin: 0px;
     }
   }
+}
+.reveal .slides .layout.nolayout {
+  @extend %nolayout
 }
 
 $slideLeftInset: 52;
@@ -705,7 +709,7 @@ $footerAreaTop: 1014;
 $contentHeight: $footerAreaTop - $contentAreaTop;
 
 .reveal .slides .layout.single-image-with-title {
-  @extend .layout.nolayout;
+  @extend %nolayout;
   .body > img, p img:only-child {
     max-height: none;
     max-width: none;
@@ -714,7 +718,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
 }
 
 .reveal .slides .layout.full-bleed-image {
-  @extend .layout.nolayout;
+  @extend %nolayout;
   @extend %no-title;
   .body > img, p img:only-child {
     max-height: none;
@@ -799,7 +803,6 @@ section.images-with-headers div.layout.images-with-headers {
       margin: 0;
     }
   }
-
 
   .body > ul > li > ul > li:nth-of-type(2) {
     padding: 35px $interiorGutter * 1px 0 $textIndent + 7px;
