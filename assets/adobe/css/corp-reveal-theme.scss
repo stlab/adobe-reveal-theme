@@ -200,6 +200,10 @@ $slideHeight: 1080;
   @extend %body-text;
 }
 
+.reveal .body {
+  @include keynote-before-paragraph-spacing(36); // 36.5 looks closer.
+}
+
 .reveal .slides {
   * { box-sizing: border-box; }
   // Default layouts
@@ -212,7 +216,6 @@ $slideHeight: 1080;
   .body {
     $adobeCleanSemilight10: linespaced-font($adobeCleanSemilight, 1.0);
     @include keynote-text-box(49, 225, 1822, 793);
-    @include keynote-before-paragraph-spacing(36); // 36.5 looks closer.
     @include text-style($adobeCleanSemilight10, 44);
 
     %body-text {
@@ -743,8 +746,66 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
   }
 }
 
-.reveal .slides .layout.images-with-headers {
-  @extend .layout.nolayout;
+.reveal .slides
+// Extra specificity here to override before-paragraph spacing hack.
+section.images-with-headers div.layout.images-with-headers {
+  $descriptionHeight: 245px;
+  $columnTitleInset: 7px;
+  $textIndent: 50px + $columnTitleInset;
+  .body {
+    left: 0px; width: $slideWidth * 1px;
+    top: 184px;
+    padding: 0;
+    padding-top: $columnTitleInset;
+    max-width: none; max-height: none;
+  }
+
+  .body > ul {
+    display: grid;
+    grid-auto-flow: column;
+    height: ($footerAreaTop - $contentAreaTop) * 1px;
+    grid-auto-columns: 1fr;
+    &::before, &::after { content: none; }
+  }
+
+  .body > ul > li {
+    margin: 0;
+    padding-left: $textIndent;
+    @include keynote-text($adobeCleanExtrabold, 34);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    &::before, &::after { content: none; }
+  }
+
+  .body > ul > li > ul {
+    padding: 0;
+    margin-left: -$textIndent;
+    &::before, &::after { content: none; }
+
+    display: grid;
+    grid-template-rows: 1fr;
+    > li:first-child {
+      margin-top: 26px;
+      img {
+        margin: 0;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        max-width: none; max-height: none;
+      }
+    }
+    > li {
+      &::before { content: none; }
+      margin: 0;
+    }
+  }
+
+
+  .body > ul > li > ul > li:nth-of-type(2) {
+    padding: 35px $interiorGutter * 1px 0 $textIndent + 7px;
+    height: $descriptionHeight;
+    @include keynote-text($adobeCleanSemilight, 32);
+  }
 }
 
 
