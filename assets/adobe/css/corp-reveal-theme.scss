@@ -161,6 +161,7 @@ $slideHeight: 1080;
   }
 }
 
+$adobeCleanSemilight1LineSpace: linespaced-font($adobeCleanSemilight, 1.0);
 // -----------------
 // Placeholder selector for all block-level elements that are designed to
 // contain text directly.
@@ -191,16 +192,16 @@ $slideHeight: 1080;
 // Placeholder selector for body-level things that should be treated as text
 // blocks with possible font transitions.
 %body-text {
-  /* dummy content required by ruby SASS */
+  @extend %block-level-text;
 }
 
-:is(address, article, aside, blockquote, dialog, dl, ol, figcaption,
+:is(address, article, aside, blockquote, dialog, dd, dt, ol, figcaption,
     h1, h2, h3, h4, h5, h6, p, pre, ul)
 {
   @extend %body-text;
 }
 
-.reveal .body {
+.body {
   @include keynote-before-paragraph-spacing(36); // 36.5 looks closer.
 }
 
@@ -214,12 +215,11 @@ $slideHeight: 1080;
     @include keynote-text($adobeCleanExtrabold, 56, $lineSpacing: 0.8);
   }
   .body {
-    $adobeCleanSemilight10: linespaced-font($adobeCleanSemilight, 1.0);
     @include keynote-text-box(49, 225, 1822, 793);
-    @include text-style($adobeCleanSemilight10, 44);
+    @include text-style($adobeCleanSemilight1LineSpace, 44);
 
     %body-text {
-      @include basekick($adobeCleanSemilight10);
+      @include basekick($adobeCleanSemilight1LineSpace);
       padding: 0px;
     }
 
@@ -753,64 +753,55 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
 .reveal .slides
 // Extra specificity here to override before-paragraph spacing hack.
 section.images-with-headers div.layout.images-with-headers {
-  $descriptionHeight: 245px;
-  $columnTitleInset: 7px;
-  $textIndent: 50px + $columnTitleInset;
   .body {
     left: 0px; width: $slideWidth * 1px;
     top: 184px;
     padding: 0;
-    padding-top: $columnTitleInset;
-    max-width: none; max-height: none;
   }
 
-  .body > ul {
+  .body > dl {
     display: grid;
     grid-auto-flow: column;
     height: ($footerAreaTop - $contentAreaTop) * 1px;
-    grid-auto-columns: 1fr;
-    &::before, &::after { content: none; }
-  }
-
-  .body > ul > li {
-    margin: 0;
-    padding-left: $textIndent;
-    @include keynote-text($adobeCleanExtrabold, 34);
-    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
     grid-template-rows: auto 1fr;
-    &::before, &::after { content: none; }
-  }
 
-  .body > ul > li > ul {
-    padding: 0;
-    margin-left: -$textIndent;
-    &::before, &::after { content: none; }
+    > dt {
+      @include keynote-text($adobeCleanExtrabold, 34);
+      @include basekick(linespaced-font($adobeCleanExtrabold, 1));
+      @include keynote-text-inset(7);
+      margin: 0;
+      margin-left: 50px;
+    }
 
-    display: grid;
-    grid-template-rows: 1fr;
-    > li:first-child {
-      margin-top: 26px;
-      img {
-        margin: 0;
-        object-fit: cover;
-        height: 100%;
+    > dd {
+      margin: 0;
+      grid-row: 2;
+      display: flex;
+      flex-direction: column;
+
+      > img:first-child {
+        flex: 1;
         width: 100%;
-        max-width: none; max-height: none;
+        object-fit: cover;
+        max-height: 100%; max-width: 100%;
+        margin: 0;
+        margin-top: 23px;
+      }
+
+      > p:first-of-type {
+        @include keynote-text($adobeCleanSemilight, 32);
+        @include basekick($adobeCleanSemilight1LineSpace);
+        @include keynote-text-inset(7);
+        margin-left: 57px;
+        margin-top: 29px;
+        margin-right: $interiorGutter * 1px;
+        margin-bottom: 0;
+        height: 216px;
       }
     }
-    > li {
-      &::before { content: none; }
-      margin: 0;
-    }
-  }
-
-  .body > ul > li > ul > li:nth-of-type(2) {
-    padding: 35px $interiorGutter * 1px 0 $textIndent + 7px;
-    height: $descriptionHeight;
-    @include keynote-text($adobeCleanSemilight, 32);
   }
 }
-
 
 // Local Variables:
 // css-indent-offset: 2
