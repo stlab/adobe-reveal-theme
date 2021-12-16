@@ -621,7 +621,8 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   }
 
   .background::after {
-    @include layout-image("../img/pasted-image-8952.png", $titleLogoPosition...);
+    @include layout-image(
+        "../img/pasted-image-8952.png", $titleLogoPosition...);
   }
 }
 
