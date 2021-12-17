@@ -744,7 +744,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
 }
 
 .reveal .slides .layout.tall-column-image-on-right {
-  @extend .layout.image-on-right;
+  @extend .layout, .image-on-right;
   .body > img, p img:only-child {
     top: ($contentAreaTop + $superGutter) * -1px;
     height: $footerAreaTop * 1px;
