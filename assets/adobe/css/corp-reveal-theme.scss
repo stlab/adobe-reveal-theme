@@ -288,7 +288,11 @@ $adobeCleanSemilight1LineSpace: linespaced-font($adobeCleanSemilight, 1.0);
   &::after {
     @include keynote-text-box(1473, 1033, 395, 34, $inset: 7);
     @include keynote-text($adobeCleanRegular, 16, $inPseudo: true);
-    content: "© 2021 Adobe. All Rights Reserved. Adobe Confidential.";
+    content: '© 2021 Adobe. All Rights Reserved.'
+    {% unless site.not_adobe_confidential %}
+    ' Adobe Confidential.'
+    {% endunless %}
+    ;
     text-align: right;
     color: #6E6E6E;
   }
