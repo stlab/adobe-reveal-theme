@@ -231,21 +231,21 @@ $adobeCleanSemilight1LineSpace: linespaced-font($adobeCleanSemilight, 1.0);
     }
 
     // Scaled-down list bullets. See https://stackoverflow.com/a/41491657/125349
+    $bulletOffset: 37px;
     ul {
       padding-inline-start: 0;
-      $bulletOffset: 37px;
-      > li {
-        &::before {
-          content: "•";
-          position: absolute;
-          left: -$bulletOffset;
-          top: 0.25em;
-          font-size: 0.7em;
-        }
-        margin-left: $bulletOffset;
-        list-style-type: none;
-        position: relative;
+    }
+    li {
+      &::before {
+        content: "•";
+        position: absolute;
+        left: -$bulletOffset;
+        top: 0.25em;
+        font-size: 0.7em;
       }
+      margin-left: $bulletOffset;
+      list-style-type: none;
+      position: relative;
     }
   }
 }
@@ -755,9 +755,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
   }
 }
 
-.reveal .slides
-// Extra specificity here to override before-paragraph spacing hack.
-section.images-with-headers div.layout.images-with-headers {
+.reveal .slides .layout.images-with-headers {
   .body {
     left: 0px; width: $slideWidth * 1px;
     top: 184px;
@@ -803,6 +801,63 @@ section.images-with-headers div.layout.images-with-headers {
         margin-right: $interiorGutter * 1px;
         margin-bottom: 0;
         height: 216px;
+      }
+    }
+  }
+}
+
+.reveal .slides .layout.icon-bullets {
+  .body { padding: 0; top: $contentAreaTop * 1px; }
+  .body > dl {
+    display: grid;
+    grid-auto-flow: column;
+    height: ($footerAreaTop - $contentAreaTop) * 1px;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+
+    > dt {
+      @include keynote-text($adobeCleanExtrabold, 36);
+      @include basekick(linespaced-font($adobeCleanExtrabold, 1));
+      @include keynote-text-inset(7);
+      margin: 0;
+    }
+
+    > dd {
+      margin: 0;
+      grid-row: 2;
+
+      @include keynote-text($adobeCleanSemilight, 34);
+      @include basekick($adobeCleanSemilight1LineSpace);
+      @include keynote-text-inset(7);
+      > ul {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      > ul > li {
+        flex: 1;
+        margin-left: 0;
+        &::before { content: none; }
+      }
+
+      > ul > li > dl {
+        display: flex;
+        flex-direction: row;
+        > dt {
+          display:inline-block;
+          vertical-align:middle;
+          margin: 0;
+          img {
+            margin: 0;
+            width: 72px; height: 72px;
+          }
+        }
+        > dd {
+          flex: 1;
+          margin: 0 208px 0 $interiorGutter * 1px;
+          display:inline-block;
+          vertical-align:middle;
+        }
       }
     }
   }
