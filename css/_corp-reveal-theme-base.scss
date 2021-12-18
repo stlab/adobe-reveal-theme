@@ -2,14 +2,19 @@
 // but consistently with the corporate theme.
 @import 'corp-palette';
 
+@if not global-variable-exists('revealJS') {
+  @error 'set the scss variable $revealJS: a path to reveal.js sources'
+  ' and add its value in the scss import path';
+}
+
 // Default mixins and settings -----------------
-@import 'theme/template/mixins';
-@import 'theme/template/settings';
+@import 'css/theme/template/mixins';
+@import 'css/theme/template/settings';
 // ---------------------------------------------
 
 
 // Include theme-specific fonts
-@import url(#{$assets}/js/reveal.js/dist/theme/fonts/source-sans-pro/source-sans-pro.css);
+@import url('#{$revealJS}dist/theme/fonts/source-sans-pro/source-sans-pro.css');
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -65,7 +70,7 @@ $selectionColor: black;
 @include dark-bg-text-color($corporateWhite);
 
 // Theme template ------------------------------
-@import 'theme/template/theme';
+@import 'css/theme/template/theme';
 // ---------------------------------------------
 
 // Standard reveal themes hardcode the main font's weight to normal, so add a
