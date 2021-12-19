@@ -1,4 +1,4 @@
-export default () => {
+const config = {
   width: 1920, height: 1080,
   transition: 'fade',
   backgroundTransition: 'fade',
@@ -11,6 +11,8 @@ export default () => {
   // than the default 0.04. We could expand just the bottom in CSS.
   margin: 0
 };
+
+export default () => config;
 
 // Local Variables:
 // js-indent-level: 2

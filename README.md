@@ -80,12 +80,12 @@ otherwise specified titles are expected to be `<h2>`.
   [js/reveal-config.js](js/reveal-config.js).  For example:
     
   ```js
-  import adobeRevealConfig from "path/to/adobe-reveal-theme/reveal-config.js";
+  import adobeRevealConfig from "path/to/adobe-reveal-theme/js/reveal-config.js";
   Reveal.initialize({
         controls: false,
         progress: true,
         // etc.
-      }
-      ... adobeRevealConfig); // <== here
+        ... adobeRevealConfig // <== here
+      });       
   ```
 

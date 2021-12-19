@@ -10,7 +10,7 @@
 
 // Include theme-specific fonts
 @import url(https://use.typekit.net/gxh7blj.css);
-@import url(../font/source-sans/source-sans-3.css);
+@import '../font/source-sans/source-sans-3.css';
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -22,7 +22,7 @@ section.has-dark-background h6 {
   color: #fff;
 }
 
-// Override theme settings (see {{assets}}js/reveal.js/css/theme/template/settings.scss)
+// Override theme settings (see reveal.js/css/theme/template/settings.scss)
 
 // Background of the presentation
 $backgroundColor: $corporateWhite;
