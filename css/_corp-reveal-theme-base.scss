@@ -2,11 +2,6 @@
 // but consistently with the corporate theme.
 @import 'corp-palette';
 
-@if not global-variable-exists('revealJS') {
-  @error 'set the scss variable $revealJS: a path to reveal.js sources'
-  ' and add its value in the scss import path';
-}
-
 // Default mixins and settings -----------------
 @import 'css/theme/template/mixins';
 @import 'css/theme/template/settings';
@@ -14,7 +9,7 @@
 
 
 // Include theme-specific fonts
-@import url('#{$revealJS}dist/theme/fonts/source-sans-pro/source-sans-pro.css');
+@import '../font/source-sans/source-sans-3.css';
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -56,7 +51,7 @@ $heading2Size: 56px;
 $heading3Size: 40px;
 $heading4Size: 34px;
 
-$codeFont: Source Sans Pro, monospace;
+$codeFont: Source Sans 3, monospace;
 
 // Links and actions
 $linkColor: #5F5F5F;
