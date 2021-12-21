@@ -1,6 +1,7 @@
 # Adobe Corporate reveal.js theme
 
-Demo: http://stlab.cc/adobe-reveal-theme/
+Live demo: http://stlab.cc/adobe-reveal-theme/
+Demo sources: https://github.com/stlab/adobe-reveal-theme/tree/gh-pages
 
 ## HTML
 
