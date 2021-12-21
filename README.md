@@ -1,5 +1,7 @@
 # Adobe Corporate reveal.js theme
 
+Demo: http://stlab.cc/adobe-reveal-theme/
+
 ## HTML
 
 Slides are expected to have the following HTML structure:
