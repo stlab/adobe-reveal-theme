@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="./theme.css">
+    <script src="./reveal.js/dist/reveal.js"></script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <div class='layout community-title-slide evans'>
+
+            <h1>This is the title</h1>
+            <h2>And the subtitle</h2>
+            <div class='body'>
+            </div>
+
+            <div class='background'>
+              <div><span></span><span></span></div>
+              <div><span></span><span></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class='layout'>
+
+            <h2>Sample slide</h2>
+
+            <div class='body'>
+              <p>Not much here</p>
+              <ul>
+                <li>Except a</li>
+                <li>Simple
+                  <ul>
+                    <li>bulleted list</li>
+                    <li>yup.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class='background'>
+              <div><span></span><span></span></div>
+              <div><span></span><span></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class='layout community-about-slide zhu'>
+            <div class='body'>
+            </div>
+
+            <div class='background'>
+              <div><span></span><span></span></div>
+              <div><span></span><span></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class='layout community-closer-slide swopes'>
+            <div class='body'>
+            </div>
+
+            <div class='background'>
+              <div><span></span><span></span></div>
+              <div><span></span><span></span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module">
+      import adobeRevealConfig from "./self/js/reveal-config.js";
+      console.log(adobeRevealConfig);
+      Reveal.initialize({
+          controls: false,
+          progress: true,
+          // etc.
+          ... adobeRevealConfig
+      });
+    </script>
+  </body>
+</html>
