@@ -256,9 +256,13 @@ $adobeCleanSemilight1LineSpace: linespaced-font($adobeCleanSemilight, 1.0);
   content: "";
 }
 
+@function image-url($tail) {
+  @return '#{$adobeRevealThemeDirectory}/img/#{$tail}';
+}
+
 // Inject the image at $url into this pseudo-element at the given position.
 @mixin layout-image($url, $left, $top, $width, $height) {
-  background-image: url($url);
+  background-image: url(image-url($url));
   @include layout-image-object($left, $top, $width, $height);
 }
 
@@ -280,7 +284,7 @@ $adobeCleanSemilight1LineSpace: linespaced-font($adobeCleanSemilight, 1.0);
 
   &::before {
     @include layout-image(
-      "../img/corp-logo/horizontal-lockup-red.svg", 63, 1036, 89, 23);
+      "corp-logo/horizontal-lockup-red.svg", 63, 1036, 89, 23);
   }
 
   &::after {
@@ -363,7 +367,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   }
 
   .background::before {
-    @include layout-image("../img/corp-logo/white.svg", $titleLogoPosition...);
+    @include layout-image("corp-logo/white.svg", $titleLogoPosition...);
   }
 
   @mixin title-art($imageUrl, $left, $top, $width, $height, $artist, $country) {
@@ -390,25 +394,25 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.evans {
     @include title-art(
-      "../img/community-art/davy-evans.jpeg", 627, -149, 1304, 1301,
+      "community-art/davy-evans.jpg", 627, -149, 1304, 1301,
       "Davy Evans", "UK");
   }
 
   &.swopes {
     @include title-art(
-      "../img/community-art/elise-swopes.jpeg", 975, 0, 1080, 1080,
+      "community-art/elise-swopes.jpg", 975, 0, 1080, 1080,
       "Elise Swopes", "USA");
   }
 
   &.sato {
     @include title-art(
-      "../img/momomi-sato.jpeg", 960, -14, 1110, 1109,
+      "momomi-sato.jpg", 960, -14, 1110, 1109,
       "Momomi Sato", "Japan");
   }
 
   &.zhu {
     @include title-art(
-      "../img/uv-zhu.jpeg", 544, 0, 1378, 1080,
+      "uv-zhu.jpg", 544, 0, 1378, 1080,
       "UV Zhu", "China");
   }
 }
@@ -478,7 +482,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.evans {
     @include about-art(
-      "../img/community-art/davy-evans.jpeg", 249, -433, 1711, 1711,
+      "community-art/davy-evans.jpg", 249, -433, 1711, 1711,
       "Davy Evans",
       "UK-based digital artist and motion designer Davy Evans fuses analog"
         " and digital techniques to create ethereal, abstract imagery"
@@ -491,12 +495,12 @@ $slideInsetWidth: 1889 - $slideLeftInset;
         " the separation we all felt from the world outside our windows.");
 
     @include made-with(
-      "../img/product/ps-horizontal-lockup.tif", 220,
-      "../img/product/ae-horizontal-lockup.tif", 234);
+      "product/ps-horizontal-lockup.tif", 220,
+      "product/ae-horizontal-lockup.tif", 234);
   }
   &.swopes {
     @include about-art(
-      "../img/community-art/elise-swopes.jpeg", 431, -143, 1489, 1489,
+      "community-art/elise-swopes.jpg", 431, -143, 1489, 1489,
       "Elise Swopes",
       "New York City-based photographer and graphic designer Elise Swopes"
         " manipulates the everyday into unexpected works of art. With her"
@@ -508,13 +512,13 @@ $slideInsetWidth: 1889 - $slideLeftInset;
         " another entry in her surrealistic series featuring giraffes in"
         " unusual settings.");
     @include made-with(
-      "../img/product/ps-horizontal-lockup.tif", 220,
-      "../img/product/lr-horizontal-lockup.tif", 332);
+      "product/ps-horizontal-lockup.tif", 220,
+      "product/lr-horizontal-lockup.tif", 332);
   }
 
   &.sato {
     @include about-art(
-      "../img/community-art/momomi-sato.jpeg", 431, -182, 1658, 1658,
+      "community-art/momomi-sato.jpg", 431, -182, 1658, 1658,
       "Momomi Sato",
       "Tokyo-based artist Momomi Sato meticulously applies paint using"
         " toothpicks to create fanciful, pointillistic works of animals,"
@@ -529,7 +533,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.zhu {
     @include about-art(
-      "../img/community-art/uv-zhu.jpeg", 386, -40, 1535, 1206, "UV Zhu",
+      "community-art/uv-zhu.jpg", 386, -40, 1535, 1206, "UV Zhu",
       "With an eye for the abstract, Chinese artist UV Zhu remixes patterns,"
         " textures, and colors to explore the future of fashion. Using Adobe"
         " Photoshop, Adobe Illustrator, and Maxon Cinema 4D, he blends"
@@ -540,8 +544,8 @@ $slideInsetWidth: 1889 - $slideLeftInset;
         " what they might wear. The result is a bright, colorful expression"
         " of joy and positivity.");
     @include made-with(
-      "../img/product/ps-horizontal-lockup.tif", 220,
-      "../img/product/ai-horizontal-lockup.tif", 214);
+      "product/ps-horizontal-lockup.tif", 220,
+      "product/ai-horizontal-lockup.tif", 214);
   }
 }
 
@@ -557,7 +561,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   @extend %no-title;
 
   .background::after {
-    @include layout-image("../img/corp-logo/white.svg", 907, 466, 107, 148);
+    @include layout-image("corp-logo/white.svg", 907, 466, 107, 148);
   }
   .background > div:nth-child(2) {
     &::before { @include layout-image-object(59, 1001, 36, 35); }
@@ -583,38 +587,38 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.evans {
     @include community-closer(
-      "../img/community-art/davy-evans", -3, -459, 1925, 1925,
+      "community-art/davy-evans", -3, -459, 1925, 1925,
       "Davy Evans", "UK");
     .background > div:nth-child(2) {
-      &::before { background-image: url("../img/product/ps-logo.tif"); }
-      &::after { background-image: url("../img/product/ae-logo.tif"); }
+      &::before { background-image: url(image-url("product/ps-logo.tif")); }
+      &::after { background-image: url(image-url("product/ae-logo.tif")); }
     }
   }
 
   &.swopes {
     @include community-closer(
-      "../img/community-art/elise-swopes.jpeg", -58, -467, 1981, 1981,
+      "../img/community-art/elise-swopes.jpg", -58, -467, 1981, 1981,
       "Elise Swopes", "USA");
     .background > div:nth-child(2) {
-      &::before { background-image: url("../img/product/ps-logo.tif"); }
-      &::after { background-image: url("../img/product/lr-logo.tif"); }
+      &::before { background-image: url(image-url("product/ps-logo.tif")); }
+      &::after { background-image: url(image-url("product/lr-logo.tif")); }
     }
   }
 
   &.sato {
     @include community-closer(
-      "../img/community-art/momomi-sato.jpeg", -15, -422, 1950, 1950,
+      "../img/community-art/momomi-sato.jpg", -15, -422, 1950, 1950,
       "Momomi Sato", "Japan");
     .background > div:first-child { top: 997px; }
   }
 
   &.zhu {
     @include community-closer(
-      "../img/community-art/uv-zhu.jpeg", 0, -196, 1920, 1509,
+      "../img/community-art/uv-zhu.jpg", 0, -196, 1920, 1509,
       "UV Zhu", "China");
     .background > div:nth-child(2) {
-      &::before { background-image: url("../img/product/ps-logo.tif"); }
-      &::after { background-image: url("../img/product/ai-logo.tif"); }
+      &::before { background-image: url(image-url("product/ps-logo.tif")); }
+      &::after { background-image: url(image-url("product/ai-logo.tif")); }
     }
   }
 }
@@ -634,11 +638,11 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   .background::before {
     @include layout-image(
-      "../img/background/title-slide.png", 0, 0, $slideWidth, $slideHeight);
+      "background/title-slide.png", 0, 0, $slideWidth, $slideHeight);
   }
 
   .background::after {
-    @include layout-image("../img/corp-logo/white.svg", $titleLogoPosition...);
+    @include layout-image("corp-logo/white.svg", $titleLogoPosition...);
   }
 }
 
@@ -646,7 +650,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   @extend %no-footer;
   .background::before {
     @include layout-image(
-      "../img/background/divider-slide-white-alt.png",
+      "background/divider-slide-white-alt.png",
       0, 0, $slideWidth, $slideHeight);
   }
 }
@@ -659,12 +663,12 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   }
   .background::before {
     @include layout-image(
-      "../img/background/divider-slide-white.png",
+      "background/divider-slide-white.png",
       0, 0, $slideWidth, $slideHeight);
   }
   &.alt .background::before {
     @include layout-image(
-      "../img/background/divider-slide-white-alt.png",
+      "background/divider-slide-white-alt.png",
       0, 0, $slideWidth, $slideHeight);
   }
 }
@@ -677,7 +681,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   }
   .background::before {
     @include layout-image(
-      "../img/divider-std-white-alt-1553.png", 0, 0, $slideWidth, $slideHeight);
+      "divider-std-white-alt-1553.png", 0, 0, $slideWidth, $slideHeight);
   }
   .body { left:0; top: 0; width: $slideWidth; height: $slideHeight }
   table {
@@ -701,7 +705,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
     @include keynote-object(0, 0, $slideWidth, $slideHeight);
   }
   .background::before {
-    @include layout-image("../img/corp-logo/white.svg", 884, 435, 153, 211);
+    @include layout-image("corp-logo/white.svg", 884, 435, 153, 211);
   }
 }
 
