@@ -1,6 +1,3 @@
-[submodule "font/source-sans"]
-	path = font/source-sans
-	url = https://github.com/adobe-fonts/source-sans.git
 [submodule "self"]
 	path = self
 	url = https://github.com/stlab/adobe-reveal-theme
