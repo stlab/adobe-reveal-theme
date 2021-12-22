@@ -24,7 +24,7 @@ section.has-dark-background h6 {
 // Override theme settings (see reveal.js/css/theme/template/settings.scss)
 
 // Background of the presentation
-$backgroundColor: $corporateWhite;
+$backgroundColor: $adobeWhite;
 
 // Primary/body text
 $mainFontSize: 44px;
@@ -37,7 +37,7 @@ $blockMargin: 36px;
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
 $headingFont: 'adobe-clean', sans-serif;
-$headingColor: $corporateRed;
+$headingColor: $adobeRed;
 // 0.9 keynote lines of adobe clean. 1.252 is calculated per math in
 // corp-reveal-theme.scss.
 $headingLineHeight: 0.9 * 1.252;
@@ -62,7 +62,7 @@ $selectionBackgroundColor: #B3D7FF; // standard Keynote selection background.
 $selectionColor: black;
 
 // Change text colors against dark slide backgrounds
-@include dark-bg-text-color($corporateWhite);
+@include dark-bg-text-color($adobeWhite);
 
 // Theme template ------------------------------
 @import 'css/theme/template/theme';

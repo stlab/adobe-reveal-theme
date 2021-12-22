@@ -701,7 +701,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   @extend %no-footer;
   @extend %no-title;
   .background {
-    background-color: $corporateRed;
+    background-color: $adobeRed;
     @include keynote-object(0, 0, $slideWidth, $slideHeight);
   }
   .background::before {
