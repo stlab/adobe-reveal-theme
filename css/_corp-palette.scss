@@ -1,14 +1,32 @@
 // Primary colors:
-$corporateRed: #EB1000;
-$corporateDarkGray: #2C2C2C;
-$corporateLightGray: #F5F5F5;
-$corporateWhite: #FFFFFF;
+$adobeRed: #EB1000;
+$adobeDarkGray: #2C2C2C;
+$adobeLightGray: #F5F5F5;
+$adobeWhite: #FFFFFF;
 // Secondary colors:
-$corporateMagenta: #E63888;
-$corporatePurple: #6349e0;
-$corporateBlue: #3273de;
-$corporateLightBlue: #2799f6;
-$corporateTeal: #21a5a2;
-$corporateGreen: #009c3b;
-$corporateYellow: #FFCE2E;
-$corporateOrange: #e9740a;
+$adobeMagenta: #E63888;
+$adobePurple: #6349e0;
+$adobeBlue: #3273de;
+$adobeLightBlue: #2799f6;
+$adobeTeal: #21a5a2;
+$adobeGreen: #009c3b;
+$adobeYellow: #FFCE2E;
+$adobeOrange: #e9740a;
+
+:root {
+  // Primary colors:
+  --r-adobe-red: $adobeRed;
+  --r-adobe-dark-gray: $adobeDarkGray;
+  --r-adobe-light-gray: $adobeLightGray;
+  --r-adobe-white: $adobeWhite;
+
+  // Secondary colors:
+  --r-adobe-magenta: $adobeMagenta;
+  --r-adobe-purple: $adobePurple;
+  --r-adobe-blue: $adobeBlue;
+  --r-adobe-light-blue: $adobeLightBlue;
+  --r-adobe-teal: $adobeTeal;
+  --r-adobe-green: $adobeGreen;
+  --r-adobe-yellow: $adobeYellow;
+  --r-adobe-orange: $adobeOrange;
+}
