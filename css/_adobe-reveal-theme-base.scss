@@ -1,6 +1,6 @@
 // This file defines all the basic elements of an ordinary reveal theme,
 // but consistently with the corporate theme.
-@import 'corp-palette';
+@import 'adobe-palette';
 
 // Default mixins and settings -----------------
 @import 'css/theme/template/mixins';
@@ -39,7 +39,7 @@ $headingMargin: 0 0 $blockMargin 0;
 $headingFont: 'adobe-clean', sans-serif;
 $headingColor: $adobeRed;
 // 0.9 keynote lines of adobe clean. 1.252 is calculated per math in
-// corp-reveal-theme.scss.
+// adobe-reveal-theme.scss.
 $headingLineHeight: 0.9 * 1.252;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;

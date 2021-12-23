@@ -1,12 +1,10 @@
 // Set this variable to false for external presentations.
 $adobeConfidential: true !default;
 
-@import 'corp-palette';
-
 // A basic standard reveal theme is crucial for proper interop with the
 // reveal.js ecosystem.  For example, the menu plugin plucks style information
 // from the theme and reuses it.
-@import 'corp-reveal-theme-base';
+@import 'adobe-reveal-theme-base';
 
 // Have the slide cast a shadow, and gray the surroundings.
 .reveal .slides {
@@ -257,7 +255,7 @@ $adobeCleanSemilight1LineSpace: linespaced-font($adobeCleanSemilight, 1.0);
 }
 
 @function image-url($tail) {
-  @return '#{$adobeRevealThemeDirectory}/img/#{$tail}';
+  @return '../img/#{$tail}';
 }
 
 // Inject the image at $url into this pseudo-element at the given position.
