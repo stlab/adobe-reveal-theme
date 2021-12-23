@@ -51,3 +51,4 @@ sass:
   load_paths:
       - /
       - /reveal.js
+      - /self/css
