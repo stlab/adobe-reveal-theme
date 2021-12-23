@@ -71,36 +71,7 @@ otherwise specified titles are expected to be `<h2>`.
 
 …Etc…
 
-## Configuration
-
-### sass/SCSS
-- The SCSS variable `$adobeRevealThemeDirectory` must be defined to the path
-    to this repository's files before importing
-    [css/corp-reveal-theme.scss](css/corp-reveal-theme.scss):
-    
-    ```scss
-    $adobeRevealThemeDirectory: 'reveal-theme';
-    @import 'reveal-theme/css/corp-reveal-theme';
-    ```
-
-- For presentations outside Adobe, the SCSS variable `$adobeConfidential`
-    should also be defined to be `false`:
-
-    ```scss
-    $adobeRevealThemeDirectory: 'reveal-theme';
-    $adobeConfidential: false;
-    @import 'reveal-theme/css/corp-reveal-theme';
-    ```
-    
-- The [reveal.js sources](https://github.com/hakimel/reveal.js) must be in the
-    sass load path.  For jekyll that would mean adding something like this to
-    your config.yml:
-  
-    ```yaml
-    sass:
-      load_paths:
-          - path/to/reveal.js
-    ```
+## Usage
 
 ### reveal.js
 The  reveal.js initialization should incorporate the settings in
@@ -115,4 +86,29 @@ The  reveal.js initialization should incorporate the settings in
         ... adobeRevealConfig // <== here
       });       
   ```
+
+### sass/SCSS
+
+- For presentations outside Adobe, use
+  [adobe-reveal-theme-external.scss](css/adobe-reveal-theme-external.scss), which
+  eliminates the message “Adobe confidential,” instead of
+  [adobe-reveal-theme.scss](adobe-reveal-theme.scss)
+    
+- The [reveal.js sources](https://github.com/hakimel/reveal.js) must be in the
+  sass load path.  Jekyll users see the next session.
+  
+### Jekyll
+
+- Use the front-matter-enhanced css files in the [jekyll-css/
+  subdirectory](jekyll-css).
+  
+- Add the `/css` subdirectory to the sass load path, e.g.in `_config.yml`:
+  
+    ```yaml
+    sass:
+      load_paths:
+        - path/to/reveal.js
+        - path/to/adobe-reveal-theme/css
+    ```
+
 
