@@ -26,8 +26,11 @@ Slides are expected to have the following HTML structure:
  </section>
 ```
 
-The `div.background` is used for css injection of boilerplate text and
-images, and should be present on every slide in exactly the above form.
+The `div.background` is used for css injection of boilerplate text and images,
+and should be present on every slide in exactly the above form.  The easiest way
+to achieve that structure is to use the [included reveal
+plugin](js/revealize.js), which rewrites simpler HTML.  See its header comment
+for details.
 
 ## Slide layouts
 
