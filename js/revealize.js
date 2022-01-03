@@ -1,9 +1,13 @@
-// Treats headers not having the '.subtitle' class act as slide separators,
-// adding markup necessary for our layout.
+// Revealize - a reveal plugin that restructures almost-ordinary HTML as a
+// reveal.js presentation with additional HTML structure needed by the Adobe
+// reveal theme.
 //
-// If H and I are such slide separators, T is the content between them
-// having class '.subtitle', and B is the remaining content between, H..<I is
-// replaced with:
+// The main restructuring is that headers not having the '.subtitle' class act
+// as slide separators.
+//
+// If H and I are consecutive slide separators, T is the content between them
+// having class '.subtitle', and B is the remaining content between H and I,
+// then H, T, and B are replaced with:
 //
 // <section data-transition='fade' data-transition-speed='slow'>
 //   <div class='layout'>
