@@ -148,13 +148,13 @@ $slideHeight: 1080;
 // borders instead of with pseudo-elements, which is useful when the text is
 // itself being CSS-injected on a pseudo-element.
 @mixin keynote-text($font, $fontSize, $lineSpacing: 1.0, $inPseudo: false) {
-  $font: linespaced-font($font, $lineSpacing);
-  @include text-style($font, $fontSize);
+  $spacedFont: linespaced-font($font, $lineSpacing);
+  @include text-style($spacedFont, $fontSize);
   @if $inPseudo {
-    @include pseudo-basekick($font);
+    @include pseudo-basekick($spacedFont);
   }
   @else {
-    @include basekick($font);
+    @include basekick($spacedFont);
   }
 }
 
