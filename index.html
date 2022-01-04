@@ -17,81 +17,43 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
-          <div class='layout community-title-slide evans'>
 
-            <h1>Adobe reveal theme demonstration</h1>
-            <h2>Just a small fraction of the capability.</h2>
-            <div class='body'>
-            </div>
+        <h1 class='community-title-slide evans'>Adobe reveal theme demonstration</h1>
+        <h2 class='subtitle'>Just a small fraction of the capability.</h2>
 
-            <div class='background'>
-              <div><span></span><span></span></div>
-              <div><span></span><span></span></div>
-            </div>
-          </div>
-        </section>
+        <h2>Title and content<br/>New line stuff</h2>
+        <p>Not much here</p>
+        <ul>
+          <li>Except a</li>
+          <li>Simple<br/>this is how we do it.
+            <ul>
+              <li>bulleted list<br/>of bullets.
+                <ul>
+                  <li>A smaller one even
+                </ul>
+              </li>
+              <li>yup.</li>
+            </ul>
+          </li>
+        </ul>
 
-        <section>
-          <div class='layout'>
+        <p>This is the new 2020 content slide</p>
+        <p>The text area is smaller</p>
 
-            <h2>Sample slide</h2>
+        <h2 class='community-about-slide zhu'>About the artist</h2>
+        <h2 class='community-closer-slide swopes'>The End</h2>
 
-            <div class='body'>
-              <p>Not much here</p>
-              <ul>
-                <li>Except a</li>
-                <li>Simple
-                  <ul>
-                    <li>bulleted list</li>
-                    <li>yup.</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-            <div class='background'>
-              <div><span></span><span></span></div>
-              <div><span></span><span></span></div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class='layout community-about-slide zhu'>
-            <div class='body'>
-            </div>
-
-            <div class='background'>
-              <div><span></span><span></span></div>
-              <div><span></span><span></span></div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class='layout community-closer-slide swopes'>
-            <div class='body'>
-            </div>
-
-            <div class='background'>
-              <div><span></span><span></span></div>
-              <div><span></span><span></span></div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <script type="module">
-      import adobeRevealConfig from "./self/js/reveal-config.js";
-      console.log(adobeRevealConfig);
-      Reveal.initialize({
-          controls: false,
-          progress: true,
-          // etc.
-          ... adobeRevealConfig
-      });
-    </script>
-  </body>
+<script type="module">
+  import adobeRevealConfig from "./self/js/reveal-config.js";
+  import revealize from "./self/js/revealize.js";
+  Reveal.initialize({
+      controls: false,
+      progress: true,
+      hash: true,
+      plugins: [ revealize ],
+      // etc.
+      ... adobeRevealConfig
+  });
+</script>
+</body>
 </html>
