@@ -84,10 +84,10 @@ $slideHeight: 1080;
   @include keynote-text-inset($inset);
 }
 
-// Returns $font enhanced with keynote info for the given line spacing.
+// Returns $font enhanced with CSS values for the given keynote line spacing.
 @function linespaced-font($font, $lineSpacing: 1.0) {
   // Each line of height $h will be vertically centered by the browser in an
-  // area of line-height.
+  // area of the CSS line-height value.
   $h: map-get($font, 'hheaAscender')
                   - map-get($font, 'hheaDescender');
   $unitsPerEm: map-get($font, 'unitsPerEm');
@@ -105,7 +105,8 @@ $slideHeight: 1080;
   $t: ($s - 1) * $h;
   @return map-merge(
     $font, (
-      // Intentionally unitless line height.
+      // Intentionally unitless line height, interpreted as ems relative to
+      // whatever text is displayed.
       lineHeight: $s * ($h + $gap) / $unitsPerEm,
       trimTop: ($t + $s * $gap) * 0.5em / $unitsPerEm,
       trimBottom: ($t + (2 - $s) * $gap) * 0.5em / $unitsPerEm));
