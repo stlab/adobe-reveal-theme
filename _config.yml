@@ -52,3 +52,16 @@ sass:
       - /
       - /reveal.js
       - /self/css
+
+
+# These settings are forced by GH Pages.  As long as Jekyll is being run by GH
+# Pages, they must remain unchanged, and last.
+lsi: false
+safe: true
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
