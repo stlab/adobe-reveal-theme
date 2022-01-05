@@ -113,5 +113,3 @@ The  reveal.js initialization should incorporate the settings in
         - path/to/reveal.js
         - path/to/adobe-reveal-theme/css
     ```
-
-
