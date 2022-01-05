@@ -7,14 +7,14 @@ title: Adobe Corporate Reveal Theme Demo
 ## Layouts and standard graphics
 {:.subtitle}
 
-## Title and content
+## Default Layout  |  Paragraphs
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. 
 
 Dolor sed viverra ipsum nunc aliquet bibendum. 
 
-## Bullets
+## Default Layout  |  Bullets
 
 <!-- DWA FIXME: too much space between bullet levels -->
 
@@ -38,56 +38,6 @@ Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque ha
 # Alternate section divider
 {:.section-divider-slide.alt}
 
-# Community Title - Evans
-{:.community-title-slide .evans}
-## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
-{:.subtitle}
-
-## About the artist
-{:.community-about-slide .evans}
-
-## The End
-{:.community-closer-slide .evans}
-
-# Community Title - Swopes 
-{:.community-title-slide .swopes}
-## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
-{:.subtitle}
-
-## About the artist
-{:.community-about-slide .swopes}
-
-## The End
-{:.community-closer-slide .swopes}
-
-# Community Title - Sato<br/>Lorem ipsum dolor sit amet
-{:.community-title-slide .sato}
-## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
-{:.subtitle}
-
-## About the artist
-{:.community-about-slide .sato}
-
-## The End
-{:.community-closer-slide .sato}
-
-# Community Title - Zhu<br/>Lorem ipsum dolor sit amet
-{:.community-title-slide .zhu}
-## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
-{:.subtitle}
-
-## About the artist
-{:.community-about-slide .zhu}
-
-## The End
-{:.community-closer-slide .zhu}
-
-# Section divider
-{:.section-divider-slide}
-
-# Section divider - alt
-{:.section-divider-slide.alt}
-
 ## Agenda
 {:.agenda-slide style='tr:nth-child(4) &lcub; background-color: #F2F2F2; &rcub;'}
 
@@ -102,12 +52,6 @@ Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque ha
 
 <!-- DWA FIXME: there's no way to gray out a row of the table without dropping into -->
 <!-- HTML or JS. -->
-
-## (closer)
-{:.closer-slide}
-
-## Common Layouts
-{:.section-divider-slide}
 
 ## Single image with title
 {:.single-image-with-title}
@@ -232,18 +176,15 @@ Column Title 4
 # Not Yet Implemented
 {:.subtitle style='top: 500px'}
 
-
 ## Six-up, images with column titles
 
 # Not Yet Implemented
 {:.subtitle style='top: 500px'}
 
-
 ## Six-up, images with titles in the middle
 
 # Not Yet Implemented
 {:.subtitle style='top: 500px'}
-
 
 ## Two columns: Bullets with icons
 {:.icon-bullets}
@@ -321,3 +262,53 @@ $500B
 ~50-60
 : Rhoncus aenean vel elit scelerisque mauris
 ```
+# Alternate community art themes
+{:.section-divider-slide}
+
+# Community Title - Evans
+{:.community-title-slide .evans}
+## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
+{:.subtitle}
+
+## About the artist
+{:.community-about-slide .evans}
+
+## The End
+{:.community-closer-slide .evans}
+
+# Community Title - Swopes 
+{:.community-title-slide .swopes}
+## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
+{:.subtitle}
+
+## About the artist
+{:.community-about-slide .swopes}
+
+## The End
+{:.community-closer-slide .swopes}
+
+# Community Title - Sato<br/>Lorem ipsum dolor sit amet
+{:.community-title-slide .sato}
+## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
+{:.subtitle}
+
+## About the artist
+{:.community-about-slide .sato}
+
+## The End
+{:.community-closer-slide .sato}
+
+# Community Title - Zhu<br/>Lorem ipsum dolor sit amet
+{:.community-title-slide .zhu}
+## Speaker Name  |  Speaker Title<br/>Lorem ipsum dolor sit amet
+{:.subtitle}
+
+## About the artist
+{:.community-about-slide .zhu}
+
+## The End
+{:.community-closer-slide .zhu}
+
+## The actual end
+{:.closer-slide}
+
