@@ -104,15 +104,15 @@ $mainFontWeight: 300;
 // Override things that come from the standard theme framework.
 // ------------------------------------------------------------
 .reveal {
+  p {
+    line-height: inherit;
+    margin: 0;
+  }
+
   .slides {
     text-align: left;
 
     a { text-decoration: underline; }
-
-    p {
-      line-height: inherit;
-      margin: 0;
-    }
 
     strong,
     b {
