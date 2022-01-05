@@ -405,13 +405,13 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.sato {
     @include title-art(
-      "momomi-sato.jpg", 960, -14, 1110, 1109,
+      "community-art/momomi-sato.jpg", 960, -14, 1110, 1109,
       "Momomi Sato", "Japan");
   }
 
   &.zhu {
     @include title-art(
-      "uv-zhu.jpg", 544, 0, 1378, 1080,
+      "community-art/uv-zhu.jpg", 544, 0, 1378, 1080,
       "UV Zhu", "China");
   }
 }
@@ -586,7 +586,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.evans {
     @include community-closer(
-      "community-art/davy-evans", -3, -459, 1925, 1925,
+      "community-art/davy-evans.jpg", -3, -459, 1925, 1925,
       "Davy Evans", "UK");
     .background > div:nth-child(2) {
       &::before { background-image: url(image-url("product/ps-logo.tif")); }
@@ -596,7 +596,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.swopes {
     @include community-closer(
-      "../img/community-art/elise-swopes.jpg", -58, -467, 1981, 1981,
+      "community-art/elise-swopes.jpg", -58, -467, 1981, 1981,
       "Elise Swopes", "USA");
     .background > div:nth-child(2) {
       &::before { background-image: url(image-url("product/ps-logo.tif")); }
@@ -606,14 +606,14 @@ $slideInsetWidth: 1889 - $slideLeftInset;
 
   &.sato {
     @include community-closer(
-      "../img/community-art/momomi-sato.jpg", -15, -422, 1950, 1950,
+      "community-art/momomi-sato.jpg", -15, -422, 1950, 1950,
       "Momomi Sato", "Japan");
     .background > div:first-child { top: 997px; }
   }
 
   &.zhu {
     @include community-closer(
-      "../img/community-art/uv-zhu.jpg", 0, -196, 1920, 1509,
+      "community-art/uv-zhu.jpg", 0, -196, 1920, 1509,
       "UV Zhu", "China");
     .background > div:nth-child(2) {
       &::before { background-image: url(image-url("product/ps-logo.tif")); }
@@ -680,7 +680,7 @@ $slideInsetWidth: 1889 - $slideLeftInset;
   }
   .background::before {
     @include layout-image(
-      "divider-std-white-alt-1553.png", 0, 0, $slideWidth, $slideHeight);
+      "background/divider-slide-white-alt.png", 0, 0, $slideWidth, $slideHeight);
   }
   .body { left:0; top: 0; width: $slideWidth; height: $slideHeight }
   table {
@@ -796,6 +796,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
     }
 
     > dd {
+      height: ($contentHeight - $superGutter) * 1px;
       margin: 0;
       grid-row: 2;
       display: flex;
@@ -808,6 +809,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
         max-height: 100%; max-width: 100%;
         margin: 0;
         margin-top: 23px;
+        overflow: hidden;
       }
 
       > p:first-of-type {
@@ -829,7 +831,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
   .body > dl {
     display: grid;
     grid-auto-flow: column;
-    height: ($footerAreaTop - $contentAreaTop) * 1px;
+    height: $contentHeight * 1px;
     grid-auto-columns: minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);
 
@@ -843,6 +845,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
     > dd {
       margin: 0;
       grid-row: 2;
+      padding: 0;
 
       @include keynote-text($adobeCleanSemilight, 34);
       @include basekick($adobeCleanSemilight1LineSpace);
