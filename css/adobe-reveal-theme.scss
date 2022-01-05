@@ -724,12 +724,14 @@ $rightGutter: 47;
 $interiorGutter: 47.5;
 
 $contentAreaTop: 188;
-$superGutter: 36;
+$superGutter: 36; // a strip at the top of the content area, above the top gutter
 $topGutter: 40;
 $bottomGutter: 33;
 $footerAreaTop: 1014;
 
 $contentHeight: $footerAreaTop - $contentAreaTop;
+$superGutterBottom: $contentAreaTop + $superGutter;
+$topGutterBottom: $superGutterBottom + $topGutter;
 
 .reveal .slides .layout.single-image-with-title {
   @extend %nolayout;
@@ -774,16 +776,17 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
 }
 
 .reveal .slides .layout.images-with-headers {
+  $contentTop: 184;
   .body {
     left: 0px; width: $slideWidth * 1px;
-    top: 184px;
+    top: $contentTop * 1px;
+    height: ($footerAreaTop - $contentTop) * 1px;
     padding: 0;
   }
 
   .body > dl {
     display: grid;
     grid-auto-flow: column;
-    height: ($footerAreaTop - $contentAreaTop) * 1px;
     grid-auto-columns: minmax(0, 1fr);
     grid-template-rows: auto 1fr;
 
@@ -796,7 +799,7 @@ $contentHeight: $footerAreaTop - $contentAreaTop;
     }
 
     > dd {
-      height: ($contentHeight - $superGutter) * 1px;
+      height: ($footerAreaTop - $topGutterBottom) * 1px;
       margin: 0;
       grid-row: 2;
       display: flex;
