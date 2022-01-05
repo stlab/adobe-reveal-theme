@@ -136,8 +136,6 @@ Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque ha
 ## Two columns: Images with headers
 {:.images-with-headers}
 
-<!-- DWA FIXME: First column image vertical overflow -->
-
 Column Title 1
 : ![](self/img/community-art/elise-swopes.jpg)
 
