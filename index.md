@@ -112,47 +112,47 @@ Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque ha
 ## Single image with title
 {:.single-image-with-title}
 
-![](self/img/community-art/elise-swopes.jpg)
+![]({{site.baseurl}}/self/img/community-art/elise-swopes.jpg)
 
 ## Full bleed image
 {:.full-bleed-image}
 
-![](self/img/community-art/momomi-sato.jpg)
+![]({{site.baseurl}}/self/img/community-art/momomi-sato.jpg)
 
 ## Image on right
 {:.image-on-right}
 
 * Text goes here
 
-![](self/img/community-art/elise-swopes.jpg)
+![]({{site.baseurl}}/self/img/community-art/elise-swopes.jpg)
 
 ## Tall column image on right
 {:.tall-column-image-on-right}
 
 * Text goes here
 
-![](self/img/community-art/momomi-sato.jpg)
+![]({{site.baseurl}}/self/img/community-art/momomi-sato.jpg)
 
 ## Two columns: Images with headers
 {:.images-with-headers}
 
 Column Title 1
-: ![](self/img/community-art/elise-swopes.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/elise-swopes.jpg)
 
 Column Title 2
-: ![](self/img/community-art/uv-zhu.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/uv-zhu.jpg)
 
 ## Two columns: Images with headers and descriptive text
 {:.images-with-headers}
 
 Column Title 1
-: ![](self/img/community-art/momomi-sato.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/momomi-sato.jpg)
 
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
   incididunt ut labore et dolore magna aliqua.
 
 Column Title 2
-: ![](self/img/community-art/davy-evans.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/davy-evans.jpg)
 
   Dolor sed viverra ipsum nunc aliquet bibendum. Tortor at risus viverra adipiscing at in.
 
@@ -160,31 +160,31 @@ Column Title 2
 {:.images-with-headers}
 
 Column Title 1
-: ![](self/img/community-art/elise-swopes.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/elise-swopes.jpg)
 
 Column Title 2
-: ![](self/img/community-art/uv-zhu.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/uv-zhu.jpg)
 
 Column Title 3
-: ![](self/img/community-art/momomi-sato.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/momomi-sato.jpg)
 
 
 ## Three columns: Images with headers and descriptive text
 {:.images-with-headers}
 
 Column Title 1
-: ![](self/img/community-art/elise-swopes.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/elise-swopes.jpg)
 
   Dolor sed viverra ipsum nunc aliquet bibendum. Tortor at risus viverra.
 
 Column Title 2
-: ![](self/img/community-art/davy-evans.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/davy-evans.jpg)
 
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
 
 
 Column Title 3
-: ![](self/img/community-art/momomi-sato.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/momomi-sato.jpg)
 
   Dolor sed viverra ipsum nunc aliquet bibendum. Tortor at risus viverra.
 
@@ -193,37 +193,37 @@ Column Title 3
 {:.images-with-headers}
 
 Column Title 1
-: ![](self/img/community-art/elise-swopes.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/elise-swopes.jpg)
 
 Column Title 2
-: ![](self/img/community-art/uv-zhu.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/uv-zhu.jpg)
 
 Column Title 3
-: ![](self/img/community-art/momomi-sato.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/momomi-sato.jpg)
 
 Column Title 4
-: ![](self/img/community-art/davy-evans.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/davy-evans.jpg)
 
 ## Four columns: Images with headers
 {:.images-with-headers}
 
 Column Title 1
-: ![](self/img/community-art/elise-swopes.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/elise-swopes.jpg)
 
   Dolor sed viverra ipsum nunc.
 
 Column Title 2
-: ![](self/img/community-art/uv-zhu.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/uv-zhu.jpg)
 
   Lorem ipsum dolor sit amet, consectetur.
 
 Column Title 3
-: ![](self/img/community-art/momomi-sato.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/momomi-sato.jpg)
 
   Dolor sed viverra ipsum nunc. Lorem ipsum dolor sit amet.
 
 Column Title 4
-: ![](self/img/community-art/davy-evans.jpg)
+: ![]({{site.baseurl}}/self/img/community-art/davy-evans.jpg)
 
   Dolor sed viverra ipsum nunc.
 
@@ -249,23 +249,23 @@ Column Title 4
 {:.icon-bullets}
 
 Column Title 1
-: - ![](self/icon/send-mail.png)
+: - ![]({{site.baseurl}}/self/icon/send-mail.png)
     : Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
-  - ![](self/icon/paper-clip.png)
+  - ![]({{site.baseurl}}/self/icon/paper-clip.png)
     : Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-  - ![](self/icon/mail-message.png)
+  - ![]({{site.baseurl}}/self/icon/mail-message.png)
     : Dolor sed viverra ipsum nunc aliquet bibendum. 
 
 Column Title 2
-: - ![](self/icon/address-book.png)
+: - ![]({{site.baseurl}}/self/icon/address-book.png)
     : Tortor at risus viverra adipiscing at in.
 
-  - ![](self/icon/person-with-headset.png)
+  - ![]({{site.baseurl}}/self/icon/person-with-headset.png)
     : Quam elementum pulvinar etiam non quam lacus suspendisse faucibus interdum. 
 
-  - ![](self/icon/binoculars-front-perspective.png)
+  - ![]({{site.baseurl}}/self/icon/binoculars-front-perspective.png)
     : Nunc consequat interdum varius sit amet mattis vulputate.
 
 ## Three columns: icons
@@ -276,20 +276,20 @@ Column Title 2
 Possible markdown representation:
 ```markdown
 Column Title 1
-: ![](self/icon/speech-bubbles.png)
+: ![]({{site.baseurl}}/self/icon/speech-bubbles.png)
 
   * Nunc consequat interdum varius sit amet mattis vulputate..
   * Dolor sed viverra ipsum nunc aliquet bibendum. 
 
 Column Title 2
-: ![](self/icon/magnifier-checkmark.png)
+: ![]({{site.baseurl}}/self/icon/magnifier-checkmark.png)
 
   * Lorem ipsum dolor sit amet.
   * Consectetur adipiscing elit.
   * Sed do eiusmod tempor incididunt.
 
 Column Title 3
-: ![](self/icon/idea-flipboard.png)
+: ![]({{site.baseurl}}/self/icon/idea-flipboard.png)
 
   * Nunc consequat interdum varius sit amet mattis vulputate. 
   * Lorem ipsum dolor sit amet, consectetur adipiscing.
