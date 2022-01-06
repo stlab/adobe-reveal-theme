@@ -9,7 +9,7 @@
 // having class '.subtitle', and B is the remaining content between H and I,
 // then H, T, and B are replaced with:
 //
-// <section data-transition='fade' data-transition-speed='slow'>
+// <section>
 //   <div class='layout'>
 //   H
 //   T
@@ -45,8 +45,6 @@ const Plugin = {
     document.querySelectorAll(slideBoundary).forEach(slideTitle => {
 
       const slide = document.createElement('section');
-      slide.setAttribute('data-transition', 'fade');
-      slide.setAttribute('data-transition-speed', 'slow');
       slideTitle.before(slide);
 
       const layout = document.createElement('div');
