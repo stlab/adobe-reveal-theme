@@ -41,10 +41,12 @@ sass:
       - /
       - /reveal.js
       - /self/css
+      - /self/jekyll-css
+
 
 
 # These settings are forced by GH Pages.  As long as Jekyll is being run by GH
-# Pages, they must remain unchanged, and last.
+# Pages, they must remain unchanged, and LAST IN THIS FILE.
 lsi: false
 safe: true
 incremental: false
