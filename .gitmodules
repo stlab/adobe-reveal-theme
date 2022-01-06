@@ -1,3 +1,6 @@
 [submodule "font/source-sans"]
 	path = font/source-sans
 	url = https://github.com/adobe-fonts/source-sans.git
+[submodule "jekyll-css/pygments"]
+	path = jekyll-css/pygments
+	url = https://github.com/jwarby/jekyll-pygments-themes.git
