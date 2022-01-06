@@ -39,7 +39,7 @@ Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque ha
 {:.section-divider-slide.alt}
 
 ## Agenda
-{:.agenda-slide style='tr:nth-child(4) &lcub; background-color: #F2F2F2; &rcub;'}
+{:.agenda-slide}
 
 | Speaker Name      | Section                          | Time          |
 |-------------------|----------------------------------|---------------|
