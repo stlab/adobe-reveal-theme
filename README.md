@@ -105,11 +105,13 @@ The  reveal.js initialization should incorporate the settings in
 - Use the front-matter-enhanced css files in the [jekyll-css/
   subdirectory](jekyll-css).
   
-- Add the `/css` subdirectory to the sass load path, e.g.in `_config.yml`:
+- Add the `/css` and /jekyll-css subdirectories to the sass load path, e.g.in
+  `_config.yml`:
   
     ```yaml
     sass:
       load_paths:
         - path/to/reveal.js
         - path/to/adobe-reveal-theme/css
+        - path/to/adobe-reveal-theme/jekyll-css
     ```
