@@ -124,23 +124,35 @@ $slideHeight: 1080;
 // Trims the top and bottom of the current block element in the standard way to
 // make text line up as it would in a Keynote text box.
 @mixin basekick($spacedFont) {
-  &::before {
-    content: '';
-    margin-bottom: -1 * map-get($spacedFont, 'trimTop');
-    display: table;
+  @if map-get($spacedFont, 'trimTop') != 0 {
+    // It turns out Adobe Clean often has zero trim, so avoid clutter
+    &::before {
+      content: '';
+      margin-bottom: -1 * map-get($spacedFont, 'trimTop');
+      display: table;
+    }
   }
-  &::after {
-    content: '';
-    margin-top: -1 * map-get($spacedFont, 'trimBottom');
-    display: table;
+
+  @if map-get($spacedFont, 'trimBottom') != 0 {
+    // It turns out Adobe Clean often has zero trim, so avoid clutter
+    &::after {
+      content: '';
+      margin-top: -1 * map-get($spacedFont, 'trimBottom');
+      display: table;
+    }
   }
 }
 
 // Same as basekick, but useful for pseudo-elements injected via CSS;
 // hijacks borders instead of before/after.
 @mixin pseudo-basekick($spacedFont) {
-  border-top: map-get($spacedFont, 'trimTop') solid transparent;
-  border-bottom: map-get($spacedFont, 'trimBottom') solid transparent;
+  // It turns out Adobe Clean often has zero trim, so avoid clutter
+  @if map-get($spacedFont, 'trimTop') != 0 {
+    border-top: map-get($spacedFont, 'trimTop') solid transparent;
+  }
+  @if map-get($spacedFont, 'trimBottom') != 0 {
+    border-bottom: map-get($spacedFont, 'trimBottom') solid transparent;
+  }
 }
 
 // Sets font size, line height, and baseline adjustment accordingly.
