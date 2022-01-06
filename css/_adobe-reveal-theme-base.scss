@@ -125,7 +125,9 @@ $mainFontWeight: 300;
     }
 
     pre {
-      margin: $blockMargin auto;
+      margin: auto;
+      width: auto;
+      height: auto;
 
       code {
         max-height: 100%;
