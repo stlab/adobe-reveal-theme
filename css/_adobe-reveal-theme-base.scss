@@ -121,6 +121,7 @@ $mainFontWeight: 300;
 
     blockquote {
       margin: $blockMargin auto;
+      width: 100%;
     }
 
     pre {
@@ -150,6 +151,10 @@ $mainFontWeight: 300;
     }
 
     div { margin: 0px; padding: 0px; }
+  }
+
+  figure img {
+    width: 100%;
   }
 
   // Undo things that shouldn't apply to speaker notes.
