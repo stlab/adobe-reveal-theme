@@ -124,7 +124,7 @@ $slideHeight: 1080;
 // Trims the top and bottom of the current block element in the standard way to
 // make text line up as it would in a Keynote text box.
 @mixin basekick($spacedFont) {
-  @if map-get($spacedFont, 'trimTop') != 0 {
+  @if map-get($spacedFont, 'trimTop') != 0em {
     // It turns out Adobe Clean often has zero trim, so avoid clutter
     &::before {
       content: '';
@@ -133,7 +133,7 @@ $slideHeight: 1080;
     }
   }
 
-  @if map-get($spacedFont, 'trimBottom') != 0 {
+  @if map-get($spacedFont, 'trimBottom') != 0em {
     // It turns out Adobe Clean often has zero trim, so avoid clutter
     &::after {
       content: '';
@@ -147,10 +147,10 @@ $slideHeight: 1080;
 // hijacks borders instead of before/after.
 @mixin pseudo-basekick($spacedFont) {
   // It turns out Adobe Clean often has zero trim, so avoid clutter
-  @if map-get($spacedFont, 'trimTop') != 0 {
+  @if map-get($spacedFont, 'trimTop') != 0em {
     border-top: map-get($spacedFont, 'trimTop') solid transparent;
   }
-  @if map-get($spacedFont, 'trimBottom') != 0 {
+  @if map-get($spacedFont, 'trimBottom') != 0em {
     border-bottom: map-get($spacedFont, 'trimBottom') solid transparent;
   }
 }
