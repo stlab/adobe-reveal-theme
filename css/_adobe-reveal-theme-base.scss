@@ -125,6 +125,11 @@ $mainFontWeight: 300;
 
     pre {
       margin: $blockMargin auto;
+
+      code {
+        max-height: 100%;
+        overflow: scroll;
+      }
     }
 
     table th {
