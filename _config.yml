@@ -43,8 +43,6 @@ sass:
       - /self/css
       - /self/jekyll-css
 
-
-
 # These settings are forced by GH Pages.  As long as Jekyll is being run by GH
 # Pages, they must remain unchanged, and LAST IN THIS FILE.
 lsi: false
