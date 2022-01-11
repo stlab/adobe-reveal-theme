@@ -3,4 +3,4 @@
 	url = https://github.com/stlab/adobe-reveal-theme
 [submodule "reveal.js"]
 	path = reveal.js
-	url = https://github.com/stlab/reveal.js
+	url = https://github.com/hakimel/reveal.js.git
