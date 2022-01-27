@@ -14,6 +14,17 @@ incididunt ut labore et dolore magna aliqua.
 
 Dolor sed viverra ipsum nunc aliquet bibendum. 
 
+%speaker
+: Speaker notes for the default layout.
+
+  - Here's a nested list
+    - inner
+  - Item 2
+
+%speaker
+: Speaker notes again
+  
+
 ## Default Layout  |  Bullets
 
 <!-- DWA FIXME: too much space between bullet levels -->

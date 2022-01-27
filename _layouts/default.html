@@ -10,6 +10,8 @@
     <link rel="stylesheet"
           href="self/jekyll-css/adobe-jekyll-reveal-theme-external.css">
     <script src="./reveal.js/dist/reveal.js"></script>
+    <script src="./reveal.js/plugin/notes/notes.js"></script>
+
   </head>
 
   <body>
@@ -27,7 +29,7 @@
       controls: false,
       progress: true,
       hash: true,
-      plugins: [ revealize ],
+      plugins: [ revealize, RevealNotes ],
       // etc.
       ... adobeRevealConfig
   });
