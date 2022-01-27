@@ -2,8 +2,8 @@
 // reveal.js presentation with additional HTML structure needed by the Adobe
 // reveal theme.
 //
-// The main restructuring is that headers not having the '.subtitle' class act
-// as slide separators.
+// The main restructuring is that `<h1>` and `<h2>` elements not having the
+// '.subtitle' class act as slide separators.
 //
 // If H and I are consecutive slide separators, T is the content between them
 // having class '.subtitle', and B is the remaining content between H and I,
@@ -30,6 +30,10 @@
 //   of the body <div>.
 // - the value of any 'data-body-style=' attribute on H replaces the 'style'
 //   attribute of the body <div>.
+// - Any '<dl>' element whose only '<dt>' starts with '%' is treated specially:
+//   - `%speaker`: all '<dd>' elements become speaker notes, i.e.
+//     they become `<div>`s inside the slide's `<aside class="notes">...</aside>`.
+
 // - Any '<blockquote>' elements not having the '.blockquote' class become
 //   speaker notes.
 const Plugin = {
@@ -41,7 +45,7 @@ const Plugin = {
     // Wrap the content between headers in a div.body, and add an empty footer
     // div on which we can inject content with css.
     const slideBoundary
-          = [1,2,3,4,5,6].map(x => 'h'+x+':not(.subtitle)').join(',');
+          = [1,2].map(x => 'h'+x+':not(.subtitle)').join(',');
     document.querySelectorAll(slideBoundary).forEach(slideTitle => {
 
       const slide = document.createElement('section');
@@ -71,23 +75,33 @@ const Plugin = {
       const bodyStyle = slideTitle.getAttribute('data-body-style');
       if (bodyStyle) { body.setAttribute('style', bodyStyle); }
 
+      var speakerNotes = document.createElement('aside');
       while (n && !elementMatches(n, slideBoundary)) {
         const next = n.nextSibling;
         if (elementMatches(n, '.subtitle')) {
           slideTitle.after(n);
           slideTitle = n;
         }
+        else if (
+          elementMatches(n, 'dl')
+            && elementMatches(n.firstElementChild, 'dt')
+            && n.firstElementChild.innerText == '%speaker')
+        {
+          n.parentNode.removeChild(n);
+          n.querySelectorAll('dd:not(dl dl dd)').forEach(note => {
+            speakerNotes.appendChild(replacingTag(note, 'div'));
+          });
+          speakerNotes.classList.add('notes');
+        }
         else {
-          if (elementMatches(n, 'blockquote:not(.blockquote)')) {
-            n.parentNode.removeChild(n);
-            n = replacingTag(n, 'aside');
-            n.classList.add('notes');
-          }
           body.appendChild(n);
         }
         n = next;
       }
       layout.appendChild(body);
+      if (speakerNotes.firstChild) {
+        layout.appendChild(speakerNotes);
+      }
 
       // Add div.background at bottom.
       const background = document.createElement('div');
